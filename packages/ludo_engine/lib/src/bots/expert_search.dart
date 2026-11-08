@@ -69,9 +69,10 @@ ExpertResult expertSearch(
   final clock = Stopwatch()..start();
   final budgetUs = budget.inMicroseconds;
   final totals = List<double>.filled(options.length, 0);
+  final cap = maxRollouts < 1 ? 1 : maxRollouts; // always one round, so the means below are never 0 / 0
   var done = 0;
   var round = 0; // smoothed cost of one round (all options), µs
-  while (done < maxRollouts) {
+  while (done < cap) {
     final t0 = clock.elapsedMicroseconds;
     final diceSeed = seed + done * 0x9E3779B1;
     for (var i = 0; i < options.length; i++) {

@@ -13,6 +13,9 @@ Map<String, Object?> asJsonMap(Object? v) {
 }
 
 /// Typed reads with a fallback, on a decoded JSON object.
+/// The largest millisecond count a [DateTime] accepts (±100 000 000 days).
+const int maxEpochMillis = 8640000000000000;
+
 extension JsonRead on Map<String, Object?> {
   /// An int (a whole double is accepted), else [fallback].
   int intOr(String key, int fallback) {
@@ -44,10 +47,11 @@ extension JsonRead on Map<String, Object?> {
     return v is List ? List<Object?>.from(v) : const <Object?>[];
   }
 
-  /// A timestamp stored as milliseconds since the epoch, or null.
+  /// A timestamp stored as milliseconds since the epoch, or null (also for a value no
+  /// DateTime can hold: a damaged or hand-edited file must not stop the save loading).
   DateTime? dateOrNull(String key) {
     final ms = this[key];
-    if (ms is! int || ms <= 0) return null;
+    if (ms is! int || ms <= 0 || ms > maxEpochMillis) return null;
     return DateTime.fromMillisecondsSinceEpoch(ms);
   }
 

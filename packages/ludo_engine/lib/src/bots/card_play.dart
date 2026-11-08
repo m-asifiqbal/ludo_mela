@@ -57,7 +57,7 @@ double _gain(GameCore core, Seat me, double base, CardUse use, BotPersonality p,
       var onBoard = false;
       for (var i = 0; i < 4; i++) {
         final pr = core.progressOf(me, i);
-        if (pr >= 0 && pr < Board.home) onBoard = true;
+        if (pr >= 0 && pr != Board.home) onBoard = true; // loop, lane or the Master wrap square
       }
       return onBoard ? 13 : 8;
     case PowerCard.reroll:

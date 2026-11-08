@@ -2,7 +2,7 @@
 
 `packages/ludo_engine` is pure Dart (no Flutter). Everything the app needs to *decide* lives here:
 rules for every mode, the turn state machine, events for animation, serialization, move analysis, and —
-in the next wave — bots, daily puzzles and dice-fairness stats. The app only animates and stores.
+in wave 2 — bots, hints, daily puzzles and dice-fairness stats (§5.8). The app only animates and stores.
 
 Source of truth for rules: design board **B · Rules, modes & the Mela engine** (`design/artboards/project/GameRules.dc.html`),
 plus the decisions below. Geometry is fixed in `lib/src/geometry.dart` (do not change coordinates).
@@ -141,7 +141,7 @@ be played; never plays cards).
 
 ## 5. API (names are the contract the app is written against)
 
-Everything below is exported by `package:ludo_engine/ludo_engine.dart`. Types marked *(wave 2)* are not built yet.
+Everything below is exported by `package:ludo_engine/ludo_engine.dart`.
 
 ### 5.1 Config
 
@@ -344,35 +344,134 @@ another piece to move), otherwise the hitting piece must use it. Rivals are assu
 frozen pieces and routes (no hitting a square behind a piece or beyond its lane entry) are respected; rival bonus
 rolls from captures / reaching home are ignored. Exact cases are unit-tested (1/6, 43/216, 86/216, 1/36, 7/216, 11/36).
 
-### 5.8 Wave 2 (planned — built on the API above)
+### 5.8 Bots, hints, puzzles, dice stats
+
+Built on the API above; every name here is exported and touched by `api_contract_test.dart`.
 
 ```dart
-class BotPersonality { String id; double run, safe, hunt; static presets: raja, mitu, tara, golu, nani, neutral }
-class BotBrain { BotBrain(BotLevel level, BotPersonality p);
-  Move chooseMove(GameState s, List<Move> legal, Random rng, {Duration budget});
-  CardUse? chooseCard(GameState s, Random rng);                    // Mayhem
+// Characters and strength (bots/personality.dart)
+class BotPersonality { const BotPersonality(id, {run, safe, hunt, hoard = 0.4, swapLove = 0, onlyAt});
+  String id; double run, safe, hunt, hoard /* 0–1: keeps cards */, swapLove /* extra score for Swap */;
+  BotLevel? onlyAt;  bool offeredAt(BotLevel level);   // Nani: Expert only; the lobby asks before seating a character
+  static const raja, mitu, tara, golu, nani, neutral;  static const presets = [raja, mitu, tara, golu, nani, neutral];
+  static BotPersonality byId(String? id);              // neutral for null / unknown (a human, an old save)
 }
-Move hintFor(GameState s);                                         // Hard evaluation
-MoveRating rateMove(GameState s, Move chosen);                     // matched Expert? score gap → "smart moves %"
-class Puzzle { int number; GameState start; Seat hero; int heroPiece; List<int> rolls; PuzzleGoal goal; ... }
-Puzzle dailyPuzzle(int dayNumber);                                 // deterministic; always solvable
-class PuzzleRun { ...apply(int rollIndex, int piece) → PuzzleStepResult; bool solved; bool failed; ... }
-class DiceStats { counts[1..6]; total; chiSquare; bool looksFair; ... factory DiceStats.of(List<int> rolls) }
-// Isolate-friendly helpers (JSON in, JSON out) for the Expert search: top-level functions.
+extension BotLevelTraits on BotLevel {
+  double mistakeRate;                                  // 0.35 / 0.15 / 0.05 / 0  (easy … expert)
+  bool searches;                                       // hard, expert
+  Duration minThink, maxThink;  Duration thinkTime(Random rng);   // the on-screen pause (table below)
+}
+List<BotPersonality> personalitiesOf(MatchConfig c);   // indexed by Seat.index; neutral for humans / empty seats
+
+// One bot's decisions (bots/bot_brain.dart)
+class BotBrain { BotBrain(BotLevel level, [BotPersonality personality = BotPersonality.neutral]);
+  static const Duration defaultBudget;                 // = defaultExpertBudget, 300 ms
+  Move chooseMove(GameState s, List<Move> legal, Random rng, {Duration budget});   // an element of `legal`; slips included
+  Move bestMove(GameState s, List<Move> legal, Random rng, {Duration budget});     // the same without slips
+  CardUse? chooseCard(GameState s, Random rng);        // Mayhem, seat on turn, before or after its roll; null = keep the cards
+  ExpertResult search(GameState s, List<Move> options, int seed, {Duration budget, int maxRollouts = 200});
+  List<BotPersonality> personalitiesFor(GameState s);  // how each seat is modelled (the bot's own seat = its personality)
+}
+class ExpertResult { List<double> values /* mean equity 0–1 per option */; int rollouts; int get best; }
+const defaultRollouts = 200, rolloutHorizon = 30;  const Duration defaultExpertBudget = 300 ms;
+
+// The shared formula and the position value (bots/move_score.dart, bots/evaluation.dart)
+abstract final class BotScore { progress = 0.5; leaveYard = 50; reachHome = 80; enterLane = 30; landOnStar = 18; capture = 90; threatDelta = 28; }
+double scoreMove(GameCore core, Move m, BotPersonality p, {MoveInsight? insight, bool deep = false});
+List<double> scoreMoves(GameCore core, List<Move> moves, BotPersonality p, {bool deep = false});
+List<Move> distinctMoves(List<Move> moves);            // one of each group of moves that look identical (Move.looksLike)
+double evaluatePosition(GameCore c, Seat me);          // squares; > 0 = me (or my team) ahead; ±1000 when the match is over
+double winEquity(double value);                        // logistic, 0–1 (30 squares ahead ≈ 73 %)
+
+// Reactions (bots/reactions.dart): stickers, captured → angry, capture → cool
+abstract final class StickerIds { happy, laugh, wow, cool, angry, cry; static const all; }
+class BotSticker { Seat seat; String sticker; }
+class BotReactions { BotReactions({cooldownTurns = 3, muted = false});  bool muted;
+  List<BotSticker> react(GameState after, Iterable<GameEvent> events);   // call after every step; only bots speak
+  void reset();
+}
+
+// The player's helpers (bots/hints.dart, bots/smart_moves.dart)
+Move hintFor(GameState s);                             // Hard evaluation, no slips; StateError when there is no move
+MoveRating rateMove(GameState s, Move chosen, {int rollouts = 64});   // vs the Expert search; ArgumentError if illegal
+class MoveRating { Move chosen, expert; bool matchedExpert, forced; double scoreGap /* equity lost, 0–1 */;
+  bool get smart /* matched, or lost < smartGap */;  static const smartGap = 0.01;  toJson / fromJson }
+class SmartMoveTally { SmartMoveTally([Iterable<RatedMove>]);  add(MoveRating r, {required int turn});
+  List<RatedMove> moves; int decisions /* forced moves left out */, matched, smart; double? smartShare; RatedMove? costliest;  toJson / fromJson }
+class RatedMove { int turn; MoveRating rating;  toJson / fromJson }
+
+// Isolate-friendly calls (bots/bot_json.dart): one JSON map in, one out, for Isolate.run
+Map<String, Object?> botMoveRequest(GameState, List<Move> legal, {required BotLevel level, String? personality, required int seed, Duration budget});
+Map<String, Object?> botChooseMoveJson(Map<String, Object?> request);   Move botMoveFromResponse(Map<String, Object?> response, List<Move> legal);
+Map<String, Object?> botStateRequest(GameState, {BotLevel level, String? personality, int seed});
+Map<String, Object?> botChooseCardJson(request);   CardUse? botCardFromResponse(response);
+Map<String, Object?> botHintJson(request);                              // {'move': …} or {'move': null}
+Map<String, Object?> botRateRequest(GameState, Move played, {int rollouts});   Map<String, Object?> botRateMoveJson(request);   // MoveRating.toJson()
+
+// Daily puzzle (puzzles/)
+Puzzle dailyPuzzle(int dayNumber);                     // any integer; deterministic, always solvable; Puzzle.number = dayNumber
+Puzzle curatedPuzzle(int index, {int number = 0});  const curatedPuzzleCount = 3;   // hand-checked fallbacks
+class Puzzle { int number; GameState start /* hero to roll */; Seat hero /* red */; int heroPiece; List<int> rolls /* 3, each used once */;
+  PuzzleGoal goal; PuzzleSolution analysis /* exhaustive, lazy */; List<PuzzleStep> get solution; }
+enum PuzzleGoalKind { homeSafe, captureSafe, rescue, doubleCapture }    class PuzzleGoal { kind; int captures; }
+class PuzzleStep { int rollIndex; int piece; }    class PuzzleSolution { List<List<PuzzleStep>> wins; int plays; bool solvable; double winShare; }
+PuzzleSolution solvePuzzle(Puzzle p);
+enum PuzzleStatus { playing, solved, failed }     enum PuzzleFailure { exposed, missedGoal, stuck }
+class PuzzleRun { PuzzleRun(Puzzle);  factory PuzzleRun.replay(Puzzle, Iterable<PuzzleStep>);
+  GameState state; PuzzleStatus status; PuzzleFailure? failure; bool solved, failed, canStillWin; List<PuzzleStep> steps;
+  List<bool> used; List<int> remaining; int captures;
+  List<Move> movesFor(int rollIndex);                  // destinations of a die before a piece is picked
+  PuzzleStepResult apply(int rollIndex, int piece);    // never throws: an impossible step is just not accepted
+  PuzzleStep? hint();   Map<int, Seat> dangerSquares();   // SHOW DANGER: loop index → a rival seat that could hit it
+  void reset();                                        // START OVER
+}
+class PuzzleStepResult { bool accepted; PuzzleStatus status; PuzzleFailure? failure; Move? move; MoveInsight? insight;
+  List<Seat> threatenedBy; int captured; GameState state; bool solved, failed; }
+
+// Dice fairness (stats/dice_stats.dart)
+class DiceStats { factory DiceStats.of(Iterable<int> rolls);      // values outside 1–6 are ignored (→ ignored)
+  List<int> counts /* [1..6], index 0 unused */; int total, ignored; double expectedPerFace, chiSquare, pValue;  double share(int face);
+  bool enoughData /* ≥ minimumRolls = 30 */, looksFair /* p ≥ alpha = 0.001, or too few rolls */; }
 ```
-Bots (from the design): `score = 0.5·run·to + 50(leave yard) + 80(reach home) + 30(enter lane) + 18·safe(land on a
-star) + 90·hunt(capture) + 28·safe·(threatBefore − threatAfter) + noise`, threat = rival pieces 1–6 squares
-behind that could legally land there next roll (Hard+ also counts 7–12 via 6-then-k at 1/36 each — use
-`threatsOn(..., maxDistance: 12)`). Levels: Easy = weighted random (35 % mistakes); Normal = best score with 15 %
-noise; Hard = expectimax over the next round of rival rolls (5 %); Expert = ~200 Monte-Carlo rollouts per move with
-rival modelling, cut off by a time budget (default 300 ms; run in an isolate by the app). Personalities
-(run/safe/hunt): Raja 1.0/0.6/1.8 (Hunter), Mitu 0.8/1.8/0.7 (Turtle), Tara 1.7/0.7/1.0 (Racer), Golu 1.0/0.9/1.2
-(hoards cards, loves Swap), Nani 1.1/1.3/1.2 (Expert-only). Bots never see future dice.
+
+**Bot formula** (design board B): `score = 0.5·run·to + 50 (leave yard) + 80 (reach home) + 30 (enter lane) + 18·safe (land on a
+star) + 90·hunt (capture) + 28·safe·(threat before − threat after)`; threat = rival pieces 1–6 squares behind that could land
+there next roll. The deep score (Hard, Expert) also counts 7–12 via 6-then-k at 1/36 each, as `6 × hitChance` from the analysis.
+
+| Level | Decides by | Slips | Think pause (`thinkTime`) |
+|---|---|---|---|
+| Easy | softmax over the scores (temperature 22) | 35 % a plain random move | 0.9–1.2 s |
+| Normal | the best score | 15 % (another move, never the best) | 0.6–0.9 s |
+| Hard | expectimax over the next round of rival rolls (every roll 1–6 at 1/6, rivals answer with their own personality, the bot's first bonus roll searched too) + 0.3 × formula + 0.5 × the personality's difference | 5 % | 0.5–0.8 s |
+| Expert | 200 Monte-Carlo rollouts per move (30-turn horizon, the same dice in rollout *r* for every candidate, rivals modelled by personality), stopped at the 300 ms budget (at least 8 rollouts); the personality adds at most 0.05 equity | 0 % | 0.4 s show + up to 0.3 s search |
+
+Personalities (run / safe / hunt): Raja 1.0/0.6/1.8 (Hunter), Mitu 0.8/1.8/0.7 (Turtle), Tara 1.7/0.7/1.0 (Racer), Golu 1.0/0.9/1.2
+(hoards cards: `hoard` 0.9, `swapLove` 18), Nani 1.1/1.3/1.2 (Expert-only in the lobby). Power cards (Mayhem): every legal use gets a
+gain in squares and the best is played when it clears `5 + 14·hoard` (×0.4 with a full hand); Reroll only for an unplayable or poor and
+risky roll (never a playable 6), Double when pieces are on the board, Shield counts double. Bots never see future dice: a decision gets a
+`GameState` (no dice inside) and its own `Random`; every look-ahead rolls `SeededDice` streams or a chosen value, never the match's dice.
+Expert decides inside its 300 ms budget (about 125 ms on a laptop) and is meant for an isolate
+(`Isolate.run(() => botChooseMoveJson(request))`); Hard is milliseconds typically and honours the same budget; `hintFor` is Hard
+without slips (a few milliseconds, never past the 300 ms deadline).
+
+**Stickers**: a bot that captured sends `cool`, a bot that was captured sends `angry`; each bot at most once per 3 turns
+(`GameState.turnNumber`), nobody when muted (Settings → bot stickers); humans and Wi-Fi guests never "speak" through `BotReactions`.
+
+**Smart moves**: `rateMove` seeds its search from a fingerprint of the position, so a position and move always get the same rating
+on every device. The app rates each human decision as it is played (or afterwards, in an isolate) and collects the ratings in a
+`SmartMoveTally` for the report ("26 of 30 moves matched the Expert", "turn 14 cost you most" = `costliest`); forced moves
+(one distinct option) are left out of every count.
+
+**Daily puzzle**: the day picks a goal from a fixed cycle (home-safe twice, capture-safe, rescue, double capture); positions are proposed
+from a SplitMix64 stream seeded by (day, goal, attempt) and kept only when the exhaustive search (`solvePuzzle`, the real engine rules)
+finds a win, there are at least 4 different plays, no more than a third of them win, and (home-safe) playing the rolls left to right as
+shown fails. Rivals never move; "can be hit" means a rival piece 1–6 squares behind on a non-safe loop square. Days 0 … 1095 are tested
+and days 0, 1 and 2 are pinned, so changing the generator re-rolls every phone.
 
 ## 6. Quality bar
 
 * Deterministic with `SeededDice` / `ScriptedDice`; `FairDice` uses `Random.secure()`; no rubber-banding.
-* `cd packages/ludo_engine && dart test` — ~285 tests (`api_contract_test.dart` touches every name in section 5, so this
+* `cd packages/ludo_engine && dart test` — ~450 tests (`api_contract_test.dart` touches every name in section 5, so this
   document cannot drift from the code unnoticed): every rule above (classic, each house rule, each mode, each
   card and Mela event, tiles, roll-off), JSON round trips of configs, states, actions, moves and all 29 event types,
   exact hit-chance values, a differential test of legal moves and captures against a slow reference on 30,000 random
@@ -381,4 +480,9 @@ rival modelling, cut off by a time budget (default 300 ms; run in an isolate by 
   continues exactly like the uninterrupted one, `resume_test.dart`), simulation speed, and long random self-play in every mode and random house-rule
   combination (invariants after every action: piece counts and ranges, no rival seats sharing a non-safe square,
   announced moves land where announced, snapshots / clones / JSON equal, every game terminates, determinism).
+  Wave 2 adds: the formula term by term and the position value (`bot_brain_test`, `evaluation_test`), card play (`bot_cards_test`), a bot ladder
+  in self-play (`bot_strength_test`: Normal beats Easy, Hard beats Normal, Expert beats the rest, characters play differently but none is crippled),
+  Expert / Hard inside their budget (`bot_perf_test`), hints, ratings and the isolate calls (`hints_test`), pacing, stickers and the smart-move
+  tally (`bot_extras_test`), every day of three years of puzzles solved and replayed (`puzzle_test`) and chi-square values against textbook tables
+  (`dice_stats_test`). Timing tests are generous (the suite runs files side by side) and compare against the budgets, never a bare wall-clock number.
 * 0 analyzer issues (`dart analyze`), files < ~400 lines, a header comment per file (what + why).

@@ -66,8 +66,8 @@ abstract final class PotTable {
       PotLine(PotLineKind.item, 1, 1, 8, rarity: Rarity.epic),
     ],
     PotTier.mela => const [
-      PotLine(PotLineKind.coins, 500, 1500, 100),
-      PotLine(PotLineKind.gems, 2, 6, 50),
+      PotLine(PotLineKind.coins, 1500, 1500, 100),
+      PotLine(PotLineKind.gems, 15, 15, 100),
       PotLine(PotLineKind.item, 1, 1, 100, rarity: Rarity.rare),
     ],
   };

@@ -14,7 +14,8 @@ enum PotTier {
   /// Road reward at level 10: drawn with the gold pot art.
   epic('Epic pot', Duration(hours: 12)),
 
-  /// The festive pot (daily gift day 7): always a Rare item you don't own.
+  /// The festive pot (daily gift day 7, board "Daily gift"): exactly 1,500 coins + 15 gems + a Rare
+  /// item you do not own yet.
   mela('Mela pot', Duration(hours: 12));
 
   const PotTier(this.label, this.duration);

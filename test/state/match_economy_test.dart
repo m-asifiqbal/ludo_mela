@@ -56,10 +56,25 @@ void main() {
 
     test('refundEntry gives the entry back for a match that never started', () {
       ctl().payEntry('village_haat');
-      ctl().refundEntry('village_haat');
+      expect(ctl().refundEntry('village_haat'), isTrue);
       expect(me().wallet.coins, 1000);
-      ctl().refundEntry('nope');
+      expect(ctl().refundEntry('nope'), isFalse);
       expect(me().wallet.coins, 1000);
+    });
+
+    test('only an entry that was paid and not yet played comes back, and only once', () {
+      expect(ctl().refundEntry('village_haat'), isFalse, reason: 'nothing was paid');
+      expect(me().wallet.coins, 1000);
+      ctl().payEntry('village_haat');
+      expect(ctl().refundEntry('lantern_bazaar'), isFalse, reason: 'another venue than the one paid');
+      expect(ctl().refundEntry('village_haat'), isTrue);
+      expect(ctl().refundEntry('village_haat'), isFalse, reason: 'a second call mints nothing');
+      expect(me().wallet.coins, 1000);
+      ctl().payEntry('village_haat');
+      ctl().recordMatch(match(venueId: 'village_haat', id: 'm-played'));
+      final after = me().wallet.coins;
+      expect(ctl().refundEntry('village_haat'), isFalse, reason: 'the match was played: the entry is spent');
+      expect(me().wallet.coins, after);
     });
   });
 

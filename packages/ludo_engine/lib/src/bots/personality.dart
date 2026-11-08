@@ -8,6 +8,8 @@
 // Strength (BotLevel) is separate: it decides how deep the bot looks and how often it
 // slips, so any character can be played at any level.
 
+import 'dart:math';
+
 import '../config/game_mode.dart';
 import '../config/match_config.dart';
 import '../geometry.dart';
@@ -21,6 +23,7 @@ class BotPersonality {
     required this.hunt,
     this.hoard = 0.4,
     this.swapLove = 0,
+    this.onlyAt,
   });
 
   /// `raja`, `mitu`, `tara`, `golu`, `nani` or `neutral` — what `PlayerSpec.personality` stores.
@@ -41,6 +44,12 @@ class BotPersonality {
   /// Extra score for playing Swap (Golu loves it).
   final double swapLove;
 
+  /// The only level the lobby offers this character at (Nani: Expert), or null when any level will do.
+  final BotLevel? onlyAt;
+
+  /// True when the lobby may seat this character at [level] ("Nani: Expert-only; balanced and patient").
+  bool offeredAt(BotLevel level) => onlyAt == null || onlyAt == level;
+
   /// Chases captures, leaves pieces exposed (the Hunter).
   static const raja = BotPersonality('raja', run: 1.0, safe: 0.6, hunt: 1.8, hoard: 0.2);
 
@@ -53,8 +62,8 @@ class BotPersonality {
   /// Hoards power cards, loves Swap.
   static const golu = BotPersonality('golu', run: 1.0, safe: 0.9, hunt: 1.2, hoard: 0.9, swapLove: 18);
 
-  /// Balanced and patient; the lobby only offers her at Expert.
-  static const nani = BotPersonality('nani', run: 1.1, safe: 1.3, hunt: 1.2, hoard: 0.5);
+  /// Balanced and patient; the lobby only offers her at Expert ([onlyAt]).
+  static const nani = BotPersonality('nani', run: 1.1, safe: 1.3, hunt: 1.2, hoard: 0.5, onlyAt: BotLevel.expert);
 
   /// The plain formula (hints, rating, rivals the bot knows nothing about).
   static const neutral = BotPersonality('neutral', run: 1.0, safe: 1.0, hunt: 1.0);
@@ -78,10 +87,11 @@ class BotPersonality {
       other.safe == safe &&
       other.hunt == hunt &&
       other.hoard == hoard &&
-      other.swapLove == swapLove;
+      other.swapLove == swapLove &&
+      other.onlyAt == onlyAt;
 
   @override
-  int get hashCode => Object.hash(id, run, safe, hunt, hoard, swapLove);
+  int get hashCode => Object.hash(id, run, safe, hunt, hoard, swapLove, onlyAt);
 
   @override
   String toString() => 'BotPersonality($id run $run safe $safe hunt $hunt)';
@@ -100,6 +110,32 @@ extension BotLevelTraits on BotLevel {
 
   /// True when the level looks ahead (Hard expectimax, Expert rollouts).
   bool get searches => this == BotLevel.hard || this == BotLevel.expert;
+
+  /// The shortest pause the match screen leaves before this level plays (design board B, THINK TIME):
+  /// Easy 0.9 s, Normal 0.6 s, Hard 0.5 s. Expert's is the 0.4 s "show" that follows its search.
+  Duration get minThink => switch (this) {
+    BotLevel.easy => const Duration(milliseconds: 900),
+    BotLevel.normal => const Duration(milliseconds: 600),
+    BotLevel.hard => const Duration(milliseconds: 500),
+    BotLevel.expert => const Duration(milliseconds: 400),
+  };
+
+  /// The longest such pause: Easy 1.2 s, Normal 0.9 s, Hard 0.8 s, Expert 0.4 s (a fixed show; the search itself
+  /// takes up to `defaultExpertBudget` = 0.3 s on top, in an isolate).
+  Duration get maxThink => switch (this) {
+    BotLevel.easy => const Duration(milliseconds: 1200),
+    BotLevel.normal => const Duration(milliseconds: 900),
+    BotLevel.hard => const Duration(milliseconds: 800),
+    BotLevel.expert => const Duration(milliseconds: 400),
+  };
+
+  /// A think pause for one decision: uniform between [minThink] and [maxThink], drawn from [rng]. The app scales it
+  /// by the game-speed setting, never the search budget.
+  Duration thinkTime(Random rng) {
+    final lo = minThink.inMilliseconds;
+    final hi = maxThink.inMilliseconds;
+    return Duration(milliseconds: lo + (hi > lo ? rng.nextInt(hi - lo + 1) : 0));
+  }
 }
 
 /// How each seat of [config] is expected to play, indexed by `Seat.index`: a bot's own

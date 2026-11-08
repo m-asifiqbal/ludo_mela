@@ -26,6 +26,7 @@ final class ProfileData {
     required this.id,
     this.name = defaultName,
     this.avatar = const AvatarChoice(),
+    this.sharePhoto = false,
     required this.createdAt,
     this.wallet = const Wallet(),
     this.xp = 0,
@@ -70,6 +71,13 @@ final class ProfileData {
   final String name;
 
   final AvatarChoice avatar;
+
+  /// "Show my photo to friends in Wi-Fi rooms" (board Profile): off, friends see the
+  /// animal. Only meaningful while [avatar] is a photo; bots never show it.
+  final bool sharePhoto;
+
+  /// What a Wi-Fi room shows of this player: the photo only when one is chosen AND shared.
+  AvatarChoice get roomAvatar => sharePhoto ? avatar : avatar.withoutPhoto();
 
   /// When this profile was made (epoch 0 when an old save did not say).
   final DateTime createdAt;
@@ -118,6 +126,7 @@ final class ProfileData {
   ProfileData copyWith({
     String? name,
     AvatarChoice? avatar,
+    bool? sharePhoto,
     Wallet? wallet,
     int? xp,
     RewardAdBudget? adBudget,
@@ -131,6 +140,7 @@ final class ProfileData {
     id: id,
     name: name ?? this.name,
     avatar: avatar ?? this.avatar,
+    sharePhoto: sharePhoto ?? this.sharePhoto,
     createdAt: createdAt,
     wallet: wallet ?? this.wallet,
     xp: xp ?? this.xp,
@@ -147,6 +157,7 @@ final class ProfileData {
     'id',
     'name',
     'avatar',
+    'sharePhoto',
     'createdAt',
     'wallet',
     'xp',
@@ -163,6 +174,7 @@ final class ProfileData {
     'id': id,
     'name': name,
     'avatar': avatar.toJson(),
+    'sharePhoto': sharePhoto,
     'createdAt': createdAt.millisecondsSinceEpoch,
     'wallet': wallet.toJson(),
     'xp': xp,
@@ -182,6 +194,7 @@ final class ProfileData {
       id: id.isEmpty ? fallbackId : id,
       name: cleanName(j.stringOr('name', defaultName)),
       avatar: AvatarChoice.fromJson(j['avatar']),
+      sharePhoto: j.boolOr('sharePhoto', false),
       createdAt: j.dateOrNull('createdAt') ?? DateTime.fromMillisecondsSinceEpoch(0),
       wallet: Wallet.fromJson(j.mapOf('wallet')),
       xp: j.intIn('xp', 0),

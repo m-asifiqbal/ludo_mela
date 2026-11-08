@@ -19,7 +19,16 @@ import '../state/game_state.dart';
 import 'puzzle.dart';
 
 /// How a play is going.
-enum PuzzleStatus { playing, solved, failed }
+enum PuzzleStatus {
+  /// Rolls are left and at least one of them can still be played.
+  playing,
+
+  /// Every roll is played and the goal holds.
+  solved,
+
+  /// The play is over without a win (see [PuzzleFailure]).
+  failed,
+}
 
 /// Why a play failed.
 enum PuzzleFailure {

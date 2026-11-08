@@ -121,6 +121,8 @@ void main() {
         final g = PotTable.open(PotTier.mela, collection: const Collection(), level: 1, rng: rng);
         expect(g.items, hasLength(1));
         expect(Catalog.byId(g.items.single)!.rarity, Rarity.rare);
+        expect(g.coins, 1500, reason: 'board "Daily gift" Day 7: 1,500 coins');
+        expect(g.gems, 15, reason: '... + 15 gems, every time (gems "days 2/4/6/7")');
       }
     });
 

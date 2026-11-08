@@ -41,7 +41,8 @@ double scoreMove(GameCore core, Move m, BotPersonality p, {MoveInsight? insight,
   var s = BotScore.progress * p.run * GameState.effectiveProgress(m.to);
   if (m.isEnter) s += BotScore.leaveYard;
   if (m.to == Board.home) s += BotScore.reachHome;
-  if (m.from <= Board.lastLoop && m.to >= Board.firstLane) s += BotScore.enterLane;
+  // "Into the lane" = a lane square or home; the Master wrap square (57) is a loop square, not the lane.
+  if (m.from <= Board.lastLoop && m.to >= Board.firstLane && m.to <= Board.home) s += BotScore.enterLane;
   final idx = Board.loopIndexOrNone(m.seat, m.to);
   if (idx >= 0 && !m.isEnter) {
     final safe = insight?.has(MoveTag.safe) ?? core.isSafeSquare(idx);

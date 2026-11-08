@@ -18,6 +18,7 @@ import '../domain/catalog.dart';
 import '../domain/collection.dart';
 import '../domain/cup.dart';
 import '../domain/daily_gift.dart';
+import '../domain/day_key.dart';
 import '../domain/free_rewards.dart';
 import '../domain/guarded_timer.dart';
 import '../domain/insights.dart';
@@ -45,6 +46,13 @@ final momentProvider = Provider.autoDispose<Moment>((ref) {
 
 /// Today's calendar day (`yyyy-MM-dd`); changes at local midnight.
 final todayProvider = Provider.autoDispose<String>((ref) => ref.watch(momentProvider.select((m) => m.day)));
+
+/// Time left until local midnight: the "New missions in 06:12:40" countdown, and when the
+/// Free Rewards ladder and the ad budget start again.
+final untilMidnightProvider = Provider.autoDispose<Duration>((ref) {
+  final now = ref.watch(momentProvider).wall;
+  return DayKey.addDays(now, 1).difference(now);
+});
 
 // ── Slices of the active profile ─────────────────────────────────────────
 

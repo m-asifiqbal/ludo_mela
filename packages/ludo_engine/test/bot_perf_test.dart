@@ -88,6 +88,8 @@ void main() {
     final s = positions.firstWhere((s) => distinctMoves(legalMovesOf(s)).length > 1);
     final r = brain.search(s, distinctMoves(legalMovesOf(s)), 1, budget: Duration.zero);
     expect(r.rollouts, 8, reason: 'a zero budget still plays the minimum');
+    final one = brain.search(s, distinctMoves(legalMovesOf(s)), 1, maxRollouts: 0);
+    expect([one.rollouts, one.values.every((v) => v >= 0 && v <= 1)], [1, isTrue], reason: 'a cap below 1 plays one round, never NaN');
   });
 
   test('Hard: milliseconds in the typical case, never past its budget', () {

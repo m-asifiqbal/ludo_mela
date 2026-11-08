@@ -4,9 +4,9 @@
 // `walletProvider` …); every change goes through a method here, which builds the
 // next immutable [SaveData], publishes it and hands it to the [SaveStore]
 // (atomic, coalesced writes). The economy methods live in mixins of their own
-// (match_actions, reward_actions, collection_actions) built on [SaveCore], keeping
-// that rule; this file keeps settings, profiles, wallet, device and the whole-save
-// operations, and the slice providers.
+// (match_actions, reward_actions, collection_actions, profile_actions) built on
+// [SaveCore], keeping that rule; this file keeps settings, profiles, wallet and device,
+// and the slice providers. profile_actions has avatars, onboarding, backups, restore.
 //
 // Names that other code relies on: `saveProvider`, `settingsProvider`,
 // `activeProfileProvider`, `saveStoreProvider`, `clockProvider`.
@@ -16,6 +16,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../domain/ad_pacing.dart';
 import '../domain/avatar_choice.dart';
 import '../domain/day_key.dart';
+import '../domain/grant_apply.dart';
 import '../domain/profile.dart';
 import '../domain/save_data.dart';
 import '../domain/settings.dart';
@@ -23,12 +24,14 @@ import '../domain/wallet.dart';
 import 'collection_actions.dart';
 import 'core_providers.dart';
 import 'match_actions.dart';
+import 'profile_actions.dart';
 import 'reward_actions.dart';
 import 'save_core.dart';
 
 export 'collection_actions.dart';
 export 'core_providers.dart';
 export 'match_actions.dart';
+export 'profile_actions.dart';
 export 'reward_actions.dart';
 export 'save_core.dart';
 
@@ -53,7 +56,7 @@ final deviceStateProvider = Provider<DeviceState>((ref) => ref.watch(saveProvide
 /// Whether "Remove ads" is active (no banner, no break ads).
 final adsRemovedProvider = Provider<bool>((ref) => ref.watch(deviceStateProvider.select((d) => d.adsRemoved)));
 
-class SaveController extends SaveCore with MatchActions, RewardActions, CollectionActions {
+class SaveController extends SaveCore with MatchActions, RewardActions, CollectionActions, ProfileActions {
   /// How many family profiles fit (one per animal).
   static const maxProfiles = 8;
 
@@ -138,7 +141,8 @@ class SaveController extends SaveCore with MatchActions, RewardActions, Collecti
   int addXp(int amount) {
     if (amount <= 0) return 0;
     final before = state.activeProfile.level;
-    updateActiveProfile((p) => p.copyWith(xp: p.xp + amount));
+    // transact, so a level achievement reached by this XP is unlocked (and paid) in the same step.
+    transact<bool>((p, m) => (p.copyWith(xp: p.xp + amount), true, const GrantReceipt()));
     return state.activeProfile.level - before;
   }
 
@@ -183,37 +187,6 @@ class SaveController extends SaveCore with MatchActions, RewardActions, Collecti
                 for (final p in state.profiles)
                   p.id == state.activeProfileId ? p.copyWith(adBudget: p.adBudget.recorded(earned, DayKey.of(now))) : p,
               ],
-      ),
-    );
-  }
-
-  // ── The whole save ────────────────────────────────────────────────────
-
-  /// Loads settings and profiles from a backup. This phone's [DeviceState]
-  /// (Remove ads, consent, ad counters) is kept: a purchase belongs to the
-  /// store account, not to a file.
-  void restore(SaveData imported) => _commit(
-    SaveData(
-      settings: imported.settings,
-      profiles: imported.profiles,
-      activeProfileId: imported.activeProfileId,
-      device: state.device,
-      extra: imported.extra,
-    ),
-  );
-
-  /// "Reset all progress": every profile is replaced by one fresh default
-  /// profile. Settings and this phone's device state stay. The caller makes a
-  /// backup first (Settings · Data).
-  void resetProgress() {
-    final id = ref.read(idGeneratorProvider)();
-    _commit(
-      SaveData(
-        settings: state.settings,
-        profiles: [ProfileData.create(id: id, now: _now)],
-        activeProfileId: id,
-        device: state.device,
-        extra: state.extra,
       ),
     );
   }

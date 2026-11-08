@@ -36,8 +36,10 @@ class PuzzleRng {
   /// True with probability [percent] / 100.
   bool chance(int percent) => nextInt(100) < percent;
 
+  /// One element of [items], chosen uniformly.
   T pick<T>(List<T> items) => items[nextInt(items.length)];
 
+  /// Shuffles [items] in place (Fisher-Yates).
   void shuffle<T>(List<T> items) {
     for (var i = items.length - 1; i > 0; i--) {
       final j = nextInt(i + 1);

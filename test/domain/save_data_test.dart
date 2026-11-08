@@ -7,9 +7,11 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ludo_mela/core/l10n/app_language.dart';
 import 'package:ludo_mela/core/l10n/l10n.dart';
+import 'package:ludo_mela/domain/achievements.dart';
 import 'package:ludo_mela/domain/ad_pacing.dart';
 import 'package:ludo_mela/domain/avatar_choice.dart';
 import 'package:ludo_mela/domain/day_key.dart';
+import 'package:ludo_mela/domain/json_read.dart';
 import 'package:ludo_mela/domain/level_curve.dart';
 import 'package:ludo_mela/domain/profile.dart';
 import 'package:ludo_mela/domain/save_data.dart';
@@ -245,6 +247,22 @@ void main() {
       expect(p.xp, 0);
       expect(p.createdAt, DateTime.fromMillisecondsSinceEpoch(0));
       expect(p.adBudget, const RewardAdBudget());
+    });
+
+    test('a time stamp no DateTime can hold (a damaged or hand-edited file) loads as "no date", not an error', () {
+      const huge = 1 << 62;
+      final save = SaveData.fromJson({
+        'profiles': [
+          {'id': 'a', 'createdAt': huge, 'progress': {'unlocked': {'first_win': huge}}},
+        ],
+        'device': {'firstLaunchAt': huge, 'lastBackupAt': huge, 'lastBreakAdAt': huge},
+      });
+      expect(save.device.firstLaunchAt, isNull);
+      expect(save.device.lastBackupAt, isNull);
+      expect(save.activeProfile.createdAt, DateTime.fromMillisecondsSinceEpoch(0));
+      final unlocked = save.activeProfile.progress.unlocked['first_win']!;
+      expect(unlocked, lessThanOrEqualTo(maxEpochMillis), reason: 'kept as unlocked (its gems are not paid twice), but a valid date');
+      expect(Achievements.views(save.activeProfile).firstWhere((v) => v.def.id == 'first_win').unlockedAt, isNotNull);
     });
   });
 

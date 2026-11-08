@@ -13,6 +13,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/dev/placeholder_screen.dart';
+import '../../features/match/match_screen.dart';
+import '../../features/results/results.dart';
 import '../../features/shell/shell_screen.dart';
 import '../l10n/tr.dart';
 import 'routes.dart';
@@ -79,9 +81,9 @@ GoRouter buildRouter({
     GoRoute(path: Routes.vs, pageBuilder: (c, s) => matchPage(s, const PlaceholderScreen('VS'))),
 
     // ── Match and results · features/match, features/results ─────────────
-    GoRoute(path: Routes.match, pageBuilder: (c, s) => matchPage(s, const PlaceholderScreen('Match'))),
-    GoRoute(path: Routes.result, pageBuilder: (c, s) => matchPage(s, const PlaceholderScreen('Result'))),
-    GoRoute(path: Routes.report, pageBuilder: (c, s) => drillPage(s, const PlaceholderScreen('Match insights'))),
+    GoRoute(path: Routes.match, pageBuilder: (c, s) => matchPage(s, const MatchScreen())),
+    GoRoute(path: Routes.result, pageBuilder: (c, s) => matchPage(s, const ResultScreen())),
+    GoRoute(path: Routes.report, pageBuilder: (c, s) => drillPage(s, const MatchReportScreen())),
 
     // ── Daily puzzle · features/puzzle ───────────────────────────────────
     GoRoute(path: Routes.puzzle, pageBuilder: (c, s) => drillPage(s, const PlaceholderScreen('Daily puzzle'))),

@@ -103,6 +103,13 @@ void main() {
       expect(scoreOf(s, n, from: 50, to: 56), 0.5 * 56 + 80 + 30);
     });
 
+    test('Master: circling past the lane entry (to the wrap square) is not "into the lane"', () {
+      // Red has not captured yet, so its piece on 47 cannot turn into the lane: a 4 takes it to the wrap square
+      // (loop 51, effective progress -1), which is a plain loop square — no +30, no star.
+      final s = atMove({Seat.red: [47, -1, -1, -1], Seat.yellow: yardOnly}, 4, config: cfg(mode: GameMode.master));
+      expect(scoreOf(s, n, from: 47, to: Board.wrap), 0.5 * -1);
+    });
+
     test('landing on a star: 0.5 x to + 18 x safe — and the weights move it', () {
       final s = atMove({Seat.red: [5, -1, -1, -1], Seat.yellow: yardOnly}, 3);
       expect(scoreOf(s, n, from: 5, to: 8), 0.5 * 8 + 18);

@@ -1,9 +1,10 @@
 // The player's helpers: the Hint button and the "smart moves %" in the match report.
 //
 // `hintFor` is what a Hard bot with the plain formula would play (expectimax, no
-// slips) — deterministic, about a millisecond. `rateMove` compares the move a player
-// actually made with the Expert search's choice for the same position: did it match,
-// and how much equity (0 … 1, i.e. percentage points / 100) did the choice cost? The
+// slips) — deterministic, a few milliseconds typically, never past the 300 ms deadline.
+// `rateMove` compares the move a player actually made with the Expert search's choice
+// for the same position: did it match, and how much equity (0 … 1, i.e. percentage
+// points / 100) did the choice cost? The
 // search uses a fixed rollout count and a seed derived from the position, so the same
 // position and move always get the same rating, on every device — which also lets the
 // app rate a whole match afterwards (in an isolate) without anything drifting.

@@ -49,6 +49,7 @@ final class DeviceState {
     this.lastBreakAdAt,
     this.lastRewardAdAt,
     this.onboarded = false,
+    this.lastBackupAt,
   });
 
   /// "Remove ads" bought (or restored): no banner, no break ads. Reward ads stay
@@ -78,6 +79,10 @@ final class DeviceState {
   /// The first-run flow (name + animal) is done.
   final bool onboarded;
 
+  /// When a local backup file was last written on this phone (null = never). Device
+  /// state on purpose: a backup file cannot say when it was itself taken.
+  final DateTime? lastBackupAt;
+
   DeviceState copyWith({
     bool? adsRemoved,
     bool? consentAsked,
@@ -88,6 +93,7 @@ final class DeviceState {
     DateTime? lastBreakAdAt,
     DateTime? lastRewardAdAt,
     bool? onboarded,
+    DateTime? lastBackupAt,
   }) => DeviceState(
     adsRemoved: adsRemoved ?? this.adsRemoved,
     consentAsked: consentAsked ?? this.consentAsked,
@@ -98,6 +104,7 @@ final class DeviceState {
     lastBreakAdAt: lastBreakAdAt ?? this.lastBreakAdAt,
     lastRewardAdAt: lastRewardAdAt ?? this.lastRewardAdAt,
     onboarded: onboarded ?? this.onboarded,
+    lastBackupAt: lastBackupAt ?? this.lastBackupAt,
   );
 
   Map<String, Object?> toJson() => {
@@ -110,6 +117,7 @@ final class DeviceState {
     'lastBreakAdAt': dateToJson(lastBreakAdAt),
     'lastRewardAdAt': dateToJson(lastRewardAdAt),
     'onboarded': onboarded,
+    'lastBackupAt': dateToJson(lastBackupAt),
   };
 
   factory DeviceState.fromJson(Map<String, Object?> j) => DeviceState(
@@ -122,6 +130,7 @@ final class DeviceState {
     lastBreakAdAt: j.dateOrNull('lastBreakAdAt'),
     lastRewardAdAt: j.dateOrNull('lastRewardAdAt'),
     onboarded: j.boolOr('onboarded', false),
+    lastBackupAt: j.dateOrNull('lastBackupAt'),
   );
 }
 
@@ -185,6 +194,10 @@ final class SaveData {
   ProfileData get activeProfile => profiles.firstWhere((p) => p.id == activeProfileId);
 
   /// The profile with [id], or null.
+  /// The photo files the players' avatars use. Take it before a delete, reset or import and
+  /// again after: what is in the first set only is a file nobody uses any more (delete it).
+  Set<String> get photoPaths => {for (final p in profiles) ?p.avatar.photoPath};
+
   ProfileData? profile(String id) {
     for (final p in profiles) {
       if (p.id == id) return p;

@@ -12,8 +12,9 @@
 //                       isn't returned"). The device's finished-match counter (break
 //                       ad pacing) ticks here too. In pass & play every family
 //                       profile seated gets its own result.
-//   refundEntry(venue)  only for a match that could not start (error, Wi-Fi room
-//                       closed before the first roll) — never for leaving.
+//   refundEntry(venue)  only for a match that could not start, and only the entry paid and not
+//                       yet played (a second call, or one with no payEntry, returns false);
+//                       never for leaving.
 
 import 'package:ludo_engine/ludo_engine.dart' show PlayerKind;
 
@@ -34,14 +35,22 @@ mixin MatchActions on SaveCore {
     final paid = p.wallet.spend(coins: venue.entry);
     if (paid == null) return false;
     updateActiveProfile((p) => p.copyWith(wallet: paid));
+    _entryOwed = (profileId: p.id, venueId: venueId);
     return true;
   }
 
-  /// Gives the entry of [venueId] back (the match never started).
-  void refundEntry(String venueId) {
-    final venue = Venues.byId(venueId);
-    if (venue == null) return;
-    updateActiveProfile((p) => p.copyWith(wallet: p.wallet.add(coins: venue.entry)));
+  /// The entry that was paid and has neither been played (`recordMatch`) nor given back:
+  /// `refundEntry` returns exactly this, once, so a repeated or stray call cannot mint coins.
+  ({String profileId, String venueId})? _entryOwed;
+
+  /// Gives the entry of [venueId] back (the match never started). True when it was paid
+  /// back: false for an entry that was not paid, was already refunded or already played.
+  bool refundEntry(String venueId) {
+    final venue = Venues.byId(venueId), owed = _entryOwed;
+    if (venue == null || owed == null || owed.venueId != venueId) return false;
+    _entryOwed = null;
+    updateProfile(owed.profileId, (p) => p.copyWith(wallet: p.wallet.add(coins: venue.entry)));
+    return true;
   }
 
   String? _lastMatchId;
@@ -53,6 +62,7 @@ mixin MatchActions on SaveCore {
   RewardSummary recordMatch(MatchRecord record) {
     final again = _lastSummary;
     if (record.id != null && record.id == _lastMatchId && again != null) return again;
+    _entryOwed = null; // the entry bought this match: nothing left to refund
     final m = moment;
     final outcome = MatchRewards.apply(state.activeProfile, record, m);
     final profiles = [

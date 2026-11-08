@@ -456,4 +456,33 @@ void main() {
     expect([s.chiSquare, s.pValue, s.enoughData, s.looksFair], [isA<double>(), isA<double>(), false, true]);
     expect(DiceStats.of(List.filled(60, 6)).looksFair, isFalse);
   });
+
+  test('5.8 pacing, sticker reactions and the smart-move tally', () {
+    final Duration lo = BotLevel.easy.minThink;
+    final Duration hi = BotLevel.easy.maxThink;
+    expect([lo, hi], [const Duration(milliseconds: 900), const Duration(milliseconds: 1200)]);
+    final Duration think = BotLevel.hard.thinkTime(Random(1));
+    expect(think >= BotLevel.hard.minThink && think <= BotLevel.hard.maxThink, isTrue);
+
+    final config = MatchConfig.generic(allBots: true, firstSeat: Seat.red);
+    final state = GameState.initial(config);
+    final reactions = BotReactions(cooldownTurns: BotReactions.defaultCooldownTurns, muted: false);
+    final List<BotSticker> stickers = reactions.react(state, const [
+      CapturedEvent(by: Seat.red, byPiece: 0, victim: Seat.yellow, victimPiece: 1, atLoop: 12, victimFrom: 38, victimTo: -1),
+    ]);
+    expect([for (final s in stickers) (s.seat, s.sticker)], [(Seat.red, StickerIds.cool), (Seat.yellow, StickerIds.angry)]);
+    expect(StickerIds.all, hasLength(6));
+    reactions
+      ..muted = true
+      ..reset();
+
+    final s = GameState.initial(MatchConfig.generic(firstSeat: Seat.red))
+        .withPieces(Seat.red, [10, 20, -1, -1])
+        .withPieces(Seat.yellow, [-1, -1, -1, -1])
+        .copyWith(phase: Phase.awaitMove, pendingDice: const [3]);
+    final tally = SmartMoveTally()..add(rateMove(s, legalMovesOf(s).first, rollouts: 8), turn: 4);
+    final RatedMove? worst = tally.costliest;
+    expect([tally.moves.length, tally.decisions, tally.matched <= tally.smart, tally.smartShare, worst == null || worst.turn == 4], [1, 1, true, isA<double>(), true]);
+    expect(SmartMoveTally.fromJson(tally.toJson()).decisions, 1);
+  });
 }

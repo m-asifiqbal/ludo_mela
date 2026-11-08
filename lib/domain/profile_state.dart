@@ -95,9 +95,9 @@ final class Progress {
   };
 
   factory Progress.fromJson(Map<String, Object?> j) {
-    Map<String, int> counts(String key) => {
+    Map<String, int> counts(String key, {int max = 1 << 40}) => {
       for (final e in j.mapOf(key).entries)
-        if (e.value case final int n when n > 0) e.key: n,
+        if (e.value case final int n when n > 0) e.key: n > max ? max : n,
     };
     return Progress(
       road: RoadState.fromJson(j.mapOf('road')),
@@ -105,7 +105,7 @@ final class Progress {
       puzzle: PuzzleState.fromJson(j.mapOf('puzzle')),
       venuePlays: counts('venuePlays'),
       venueWins: counts('venueWins'),
-      unlocked: counts('unlocked'),
+      unlocked: counts('unlocked', max: maxEpochMillis), // a time stamp: never one a DateTime cannot hold
       potsOpened: j.intIn('potsOpened', 0),
       giftsClaimed: j.intIn('giftsClaimed', 0),
       safetyNetUses: j.intIn('safetyNetUses', 0),
