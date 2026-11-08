@@ -63,27 +63,45 @@ join by list/code/QR, guest lobby).
 The match screen only talks to a `MatchSession` (never to `LudoGame` directly):
 ```dart
 abstract class MatchSession {
-  MatchConfig get config;
-  GameState get state;
-  Stream<MatchUpdate> get updates;          // MatchUpdate { GameState state; List<GameEvent> events; TurnClock? clock; }
+  MatchSetup get setup;                     // venue, practice / cup / puzzle / tabletop flags, mySeat, turn time
+  MatchConfig get config;  GameState get state;   // state runs AHEAD of the screen while it animates
+  Stream<MatchUpdate> get updates;          // MatchUpdate { state, events, action, clock, rush, sticker }: one per applied
+                                            // action; clock / rush / sticker updates carry no events (action == null)
+  TurnClock? get clock;  RushClock? get rushClock;  bool get paused;
   bool canControl(Seat seat);               // a local human (pass & play: several)
-  Future<void> roll(); Future<void> move(Move m); Future<void> useCard(CardUse c);
-  void sendSticker(Seat from, String sticker);
-  void setAnimating(bool busy);             // bots/timeouts wait while the screen animates events
-  void setPaused(bool paused);              // pause menu freezes timers and bots (local only)
-  Future<void> concede();                   // leave match
+  Future<void> roll(); Future<void> move(Move m); Future<void> useCard(CardUse c); Future<void> pass();
+  void sendSticker(Seat from, String sticker);   // a Stickers id (= the engine's StickerIds) or a quick-chat phrase
+  void setAnimating(bool busy);             // bots, the turn timer and a Rush time-up wait while the screen animates events
+  void setPaused(bool paused);              // pause menu freezes timers, the Rush clock and bots (local only)
+  Future<void> concede();                   // leave match: a recorded loss; completes once it is recorded
   void dispose();
 }
 ```
-`LocalMatchSession` (bots + local humans; bot think time scaled by game speed; Expert via `Isolate.run`; turn
-timer 15 s (20 s pass & play when enabled) → `AutoPlay`; autosave of the running match so it resumes after the
-app is killed), `LanHostSession` / `LanGuestSession` (Wi-Fi). The screen plays `events` in order (hop per square,
-capture burst, home burst, toasts) and calls `setAnimating(false)` when done.
+`LocalMatchSession` (bots + local humans; Expert / Hard decide via `Isolate.run`, stale answers are dropped; turn timer
+15 s (20 s pass & play when enabled) → `AutoPlay`; Rush clock 5 min; autosave of the running match after every action so
+it resumes after the app is killed, a match that was already over is recorded by the next session), `LanHostSession` /
+`LanGuestSession` (Wi-Fi). **Bot manners are the engine's**: think time is `BotLevel.thinkTime(rng)` (scaled by game speed
+with `Motion.game`, never the dice), stickers are `BotReactions` (captured → angry, capture → cool, once per 3 turns,
+muted by Settings); `bot_pacing.dart` only says where each pause goes. The session records ONCE: at the end (after the
+screen is idle) or on `concede()`, through `onFinished` → `MatchRecorder`.
+
+### Match screen — `features/match/`
+`MatchScreen` owns one `MatchController` (a ChangeNotifier that never draws; its parts are mixins `MatchPause` — pause /
+leave / sticker picker — and `MatchHand` — the Mayhem cards — plus `Celebration`, `DiceTable`, `StickerBubbles`,
+`EventPlayer` and `BoardModel`). Every update with events is queued and played in order by the EventPlayer while
+`setAnimating(true)` holds the session; Rush / turn clocks and stickers are applied the moment they arrive (a snapshot
+taken when an animation ends would be stale). Android back closes the sticker picker, then opens / closes the pause menu,
+then steps back from "Leave this match?". A match that is over cannot be paused. The board is silent at the end (the
+verdict toast and confetti only): the cheer / "next time" sound is the Win screen's. The banner slot (`MatchBanner`) is
+hidden under the pause menu and the pop-ups opened from it.
 
 ### Results
 Build a `MatchRecord` (mode, venue, seats, placements, my place, coins from chests, turns, duration, rolls,
-captures, smart-move rate, race series for the chart, key moments) → `recordMatch` → `context.go(Routes.result)`
-with the `RewardSummary`. The break ad (`AdService.maybeShowBreak`) runs when the player *leaves* the result.
+captures, smart-move rate, race series for the chart, key moments) → `recordMatch` (idempotent by record id) →
+`matchResultProvider` = { record, RewardSummary } → `go(Routes.result)` (a left match is recorded quietly and the
+pause menu goes to the lobby). `/result` (Win / lose) and `/report` (match insights) read the provider; PLAY AGAIN sits
+down through `MatchLauncher` on top of the lobby. The break ad (`AdService.maybeShowBreak`) runs when the player *leaves*
+the result.
 
 ### Routes — `core/router/routes.dart`
 `/` splash · `/onboarding` · tabs (round dock): `/lobby`, `/friends` (Wi-Fi hub), `/collection`, `/road`,
@@ -94,8 +112,8 @@ free rewards, missions, game options, mela pot opening, level-up. Android back: 
 the mela?" dialog; match → pause menu.
 
 ### Ads (docs/ads.md, from board C)
-Banner ONLY at the top of match screens (50 pt reserved); none on splash, lobby, menus, rewards, VS, results,
-pause or pop-ups. Break ad only after a finished match, at most every 2nd match, ≥ 4 min apart, never in the
+Banner ONLY at the top of match screens (50 pt reserved, hidden while the match is paused); none on splash, lobby,
+menus, rewards, VS, results, pause or pop-ups. Break ad only after a finished match, at most every 2nd match, ≥ 4 min apart, never in the
 first 3 matches or within 2 min of a reward ad, behind a "Quick break" card, never with Remove ads. Rewarded:
 opt-in, labelled "Ad", reward only on completion; coin ads 5/day, gem ads 3/day, 30 s apart. G-rated, UMP first.
 

@@ -31,6 +31,12 @@ and `docs/engine_spec.md` (rules + engine API) before changing anything.
   files under ~400 lines (split into `widgets/`), logic out of widgets.
 * Saves: every change through `SaveController`; dates by calendar day (`DateUtils`-style helpers in domain),
   never `Duration.inDays` on local midnights.
+* Bot manners are the engine's: think time `BotLevel.thinkTime(rng)`, stickers `BotReactions` / `StickerIds`, move
+  ratings `rateMove` — the app only scales a pause with `Motion.game` and never copies those numbers.
+* Match board: it talks only to a `MatchSession`; clocks (turn pie, Rush) are applied when their update ARRIVES, never
+  when an animation ends (a late snapshot is stale); the board is silent at the end — the Win screen owns the cheer;
+  the banner exists only as `MatchBanner` and is hidden while paused. A finished match is recorded once
+  (`recordMatch` is idempotent by record id).
 
 ## Commands
 ```bash
