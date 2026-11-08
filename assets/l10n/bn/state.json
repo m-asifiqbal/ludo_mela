@@ -1,0 +1,18 @@
+{
+  "{n, plural, one {+# coin} other {+# coins}}": "{n, plural, one {+# কয়েন} other {+# কয়েন}}",
+  "{n, plural, one {+# gem} other {+# gems}}": "{n, plural, one {+# জেম} other {+# জেম}}",
+  "{n, plural, one {+# free spin} other {+# free spins}}": "{n, plural, one {+# ফ্রি স্পিন} other {+# ফ্রি স্পিন}}",
+  "New: {name}": "নতুন: {name}",
+  "{name} unlocked!": "{name} খুলে গেল!",
+  "You already had it, so you got {n} coins instead.": "এটা আগেই তোমার ছিল, তাই বদলে {n} কয়েন পেলে।",
+  "{pot} added to your shelf.": "{pot} তোমার তাকে রাখা হলো।",
+  "{pot} is waiting for a free spot on your shelf.": "{pot} তাকে একটা খালি জায়গার অপেক্ষায় আছে।",
+  "This item is not available.": "এই আইটেমটা পাওয়া যাচ্ছে না।",
+  "You already have this.": "এটা তোমার আগেই আছে।",
+  "Get it first, then you can upgrade it.": "আগে এটা নাও, তারপর আপগ্রেড করতে পারবে।",
+  "This one cannot be bought. Earn it in the game.": "এটা কেনা যায় না। খেলে অর্জন করো।",
+  "Reach level {n} to unlock this.": "এটা খুলতে লেভেল {n}-এ পৌঁছাও।",
+  "Not enough gems.": "যথেষ্ট জেম নেই।",
+  "Not enough coins.": "যথেষ্ট কয়েন নেই।",
+  "Already at the top level.": "এটা আগেই সর্বোচ্চ লেভেলে আছে।"
+}

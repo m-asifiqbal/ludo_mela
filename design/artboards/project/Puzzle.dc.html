@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ludo Mela — Daily puzzle</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#FFE27A}a:hover{color:#FFF3B8}
+:root{--e:cubic-bezier(.2,.8,.2,1);--b:cubic-bezier(.34,1.56,.64,1)}
+button,a{-webkit-tap-highlight-color:transparent;transition:transform 150ms var(--b),filter 160ms var(--e),box-shadow 160ms var(--e),opacity 160ms var(--e)}
+button:focus-visible,a:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
+button:disabled{cursor:default}
+.ttl{font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-shadow:0 -1.5px 0 #0A2A6B,1.5px 0 0 #0A2A6B,0 1.5px 0 #0A2A6B,-1.5px 0 0 #0A2A6B,1.2px 1.2px 0 #0A2A6B,-1.2px 1.2px 0 #0A2A6B,1.2px -1.2px 0 #0A2A6B,-1.2px -1.2px 0 #0A2A6B,0 3px 0 #0A2A6B}
+.gl{position:relative;border:0;cursor:pointer;font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;text-shadow:0 2px 0 rgba(0,0,0,.3);box-sizing:border-box}
+.gl::after{content:'';position:absolute;left:8%;right:8%;top:3px;height:42%;border-radius:999px;background:linear-gradient(rgba(255,255,255,.6),rgba(255,255,255,0));pointer-events:none}
+.gl:active{transform:translateY(3px) scale(.98)}
+.g-green{background:linear-gradient(#8DEB50,#47BA2B 55%,#2E9A1B);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 4px 0 #1D6B0F,0 8px 12px rgba(0,20,60,.35)}
+.g-blue{background:linear-gradient(#6DCEFF,#2F95F2 55%,#1C72DA);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 4px 0 #0D4A9E,0 8px 12px rgba(0,20,60,.3)}
+.g-gold{color:#5A2E00;text-shadow:0 1px 0 rgba(255,255,255,.55);background:linear-gradient(#FFEC8F,#FFC61F 55%,#F59E00);box-shadow:inset 0 -3px 0 rgba(0,0,0,.1),0 4px 0 #B26400,0 8px 12px rgba(0,20,60,.3)}
+.lm-pop{animation:lmPop 460ms var(--b) backwards}
+.lm-bob{animation:lmBob 900ms ease-in-out infinite}
+.lm-ring{animation:lmRing 1.2s ease-in-out infinite}
+.lm-knock{animation:lmKnock 600ms var(--e)}
+.lm-shake{animation:lmShake 420ms var(--e)}
+.lm-hint{animation:lmHint 1.2s ease-in-out infinite}
+@keyframes lmPop{from{opacity:0;transform:scale(.4)}}
+@keyframes lmBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes lmRing{0%,100%{box-shadow:0 0 0 2px #FFFFFF,0 0 0 5px #FFC61F,0 0 0 5px rgba(255,198,31,.6)}50%{box-shadow:0 0 0 2px #FFFFFF,0 0 0 5px #FFC61F,0 0 0 12px rgba(255,198,31,0)}}
+@keyframes lmKnock{0%{transform:scale(1) rotate(0)}30%{transform:scale(1.5) rotate(180deg)}100%{transform:scale(1) rotate(720deg)}}
+@keyframes lmShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+@keyframes lmHint{0%,100%{box-shadow:inset 0 -5px 0 #C5CEDC,0 6px 12px rgba(0,0,0,.35),0 0 0 4px #7DF0E4}50%{box-shadow:inset 0 -5px 0 #C5CEDC,0 6px 12px rgba(0,0,0,.35),0 0 0 10px rgba(125,240,228,.2)}}
+@media (prefers-reduced-motion: reduce){*{animation-duration:1ms !important;animation-delay:0ms !important;animation-iteration-count:1 !important;transition-duration:1ms !important}}
+</style>
+</helmet>
+<div style="width:390px;height:844px;position:relative;overflow:hidden;background:#1250C2;font-family:'Baloo 2',system-ui,sans-serif;color:#FFFFFF">
+  <div style="position:absolute;inset:0;background:radial-gradient(120% 60% at 50% 50%,#3E9CFA 0%,#1F6EE0 40%,#1250C2 70%,#0B3592 100%)"></div>
+  <svg width="390" height="844" aria-hidden="true" style="position:absolute;inset:0"><defs><pattern id="jali" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M22 8l14 14-14 14L8 22zM12.5 12.5h19v19h-19z" fill="none" stroke="#FFFFFF" stroke-opacity=".07" stroke-width="1.6"></path></pattern></defs><rect width="390" height="844" fill="url(#jali)"></rect></svg>
+
+  <div style="position:relative;z-index:1;height:100%;display:flex;flex-direction:column">
+    <div style="height:47px;flex:none"></div>
+    <div style="flex:none;height:58px;background:linear-gradient(#FFEC8F,#F2A100);box-shadow:inset 0 3px 0 rgba(255,255,255,.55),inset 0 -4px 0 #B26400,0 4px 10px rgba(0,0,0,.25);display:flex;align-items:center;padding:0 10px;gap:8px">
+      <a href="Main.dc.html" aria-label="Back to lobby" class="gl g-blue" style="width:42px;height:42px;border-radius:14px;flex:none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position:relative;z-index:1"><path d="M15 5l-7 7 7 7"></path></svg></a>
+      <h1 class="ttl" style="margin:0;flex:1;font-size:24px;text-align:center">PUZZLE #128</h1>
+      <span style="height:34px;border-radius:17px;background:rgba(90,46,0,.35);display:flex;align-items:center;gap:4px;padding:0 10px" aria-label="5 day streak"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c1 4 6 6 6 12a6 6 0 0 1-12 0c0-3 2-5 3-6 0 2 1 3 2 3 0-4 0-6 1-9z" fill="#FF5A1F" stroke="#FFFFFF" stroke-width="1.2"></path></svg><span class="ttl" style="font-size:15px">5</span></span>
+    </div>
+
+    <div style="flex:none;margin:12px 12px 10px;border-radius:18px;background:rgba(4,18,58,.45);box-shadow:inset 0 0 0 2px rgba(255,255,255,.18);padding:10px 14px;display:flex;gap:10px;align-items:center">
+      <span style="width:36px;height:36px;border-radius:18px;background:linear-gradient(#FFEC8F,#F59E00);display:grid;place-items:center;flex:none;box-shadow:0 3px 0 #B26400"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5A2E00" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 8a4 4 0 1 0 0 8a4 4 0 1 0 0-8z"></path></svg></span>
+      <span style="font:800 13.5px/1.35 'Baloo 2',sans-serif">Get your glowing red puck home using these three rolls — without stopping where someone can hit you.</span>
+    </div>
+
+    <div class="{{boardShake}}" style="flex:none;align-self:center;position:relative;width:376px;height:376px">
+      <div style="position:absolute;inset:0;border-radius:22px;background:linear-gradient(145deg,#E5A257,#B8692A 45%,#8C4A18);box-shadow:inset 0 0 0 2px #FFD27A,inset 0 3px 0 rgba(255,255,255,.35),inset 0 -3px 0 rgba(0,0,0,.25),0 8px 0 #5E2E0C,0 18px 30px rgba(0,10,40,.55)"></div>
+      <div role="img" aria-label="Puzzle board. Your red puck is 15 squares from home. Green and yellow are behind you, blue is just ahead." style="position:absolute;left:8px;top:8px;width:360px;height:360px;border-radius:14px;overflow:hidden;background:#D2D2D2;box-shadow:0 0 0 2px #FFD27A">
+        <sc-for list="{{yards}}" as="y" hint-placeholder-count="4">
+          <div style="position:absolute;left:{{y.x}}px;top:{{y.y}}px;width:144px;height:144px;background:{{y.mid}}">
+            <div style="position:absolute;left:15px;top:15px;width:114px;height:114px;border-radius:17px;background:{{y.dark}};box-shadow:inset 0 3px 5px rgba(0,0,0,.18),0 1px 0 rgba(255,255,255,.25)"></div>
+          </div>
+        </sc-for>
+        <sc-for list="{{tiles}}" as="c" hint-placeholder-count="72">
+          <div style="position:absolute;left:{{c.x}}px;top:{{c.y}}px;width:23px;height:23px;background:{{c.bg}};display:grid;place-items:center">
+            <sc-if value="{{c.hasIcon}}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="transform:rotate({{c.rot}}deg)"><path d="{{c.icon}}" fill="{{c.fill}}" stroke="{{c.ink}}" stroke-width="1.4" stroke-linejoin="round"></path></svg></sc-if>
+            <sc-if value="{{c.hot}}" hint-placeholder-val="{{ false }}"><span class="lm-pop" style="position:absolute;inset:0;border-radius:4px;background:rgba(242,70,59,.35);box-shadow:inset 0 0 0 2px #F2463B"></span></sc-if>
+          </div>
+        </sc-for>
+        <div style="position:absolute;left:144px;top:144px;width:72px;height:72px">
+          <div style="position:absolute;inset:0;clip-path:polygon(0 0,100% 0,50% 50%);background:#F8C21C"></div>
+          <div style="position:absolute;inset:0;clip-path:polygon(100% 0,100% 100%,50% 50%);background:#1E8BEA"></div>
+          <div style="position:absolute;inset:0;clip-path:polygon(0 100%,100% 100%,50% 50%);background:#E8322B"></div>
+          <div style="position:absolute;inset:0;clip-path:polygon(0 0,0 100%,50% 50%);background:#76BE2E"></div>
+        </div>
+      </div>
+      <div style="position:absolute;left:8px;top:8px;width:360px;height:360px;pointer-events:none">
+        <sc-for list="{{tokens}}" as="t" hint-placeholder-count="16">
+          <span style="position:absolute;left:{{t.x}}px;top:{{t.y}}px;width:{{t.s}}px;height:{{t.s}}px;z-index:{{t.z}};transition:left 170ms cubic-bezier(.2,.8,.2,1),top 170ms cubic-bezier(.2,.8,.2,1)">
+            <sc-if value="{{t.me}}" hint-placeholder-val="{{ false }}"><span class="lm-ring" style="position:absolute;inset:-5px;border-radius:50%"></span></sc-if>
+            <span class="{{t.anim}}" style="position:absolute;inset:0;display:block">
+              <span style="position:absolute;inset:0;border-radius:50%;background:{{t.side}};transform:translateY({{t.th}}px);box-shadow:0 {{t.th}}px 5px rgba(0,0,0,.45)"></span>
+              <span style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 50% 28%,{{t.light}} 0%,{{t.mid}} 62%,{{t.dark}} 100%);box-shadow:inset 0 0 0 2px rgba(255,255,255,.95),inset 0 0 0 3.5px {{t.dark}},inset 0 3px 3px rgba(255,255,255,.4)"></span>
+              <svg width="{{t.es}}" height="{{t.es}}" viewBox="0 0 24 24" aria-hidden="true" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)"><path d="{{t.emblem}}" fill="#FFFFFF" fill-opacity=".95"></path></svg>
+            </span>
+          </span>
+        </sc-for>
+      </div>
+      <div aria-live="polite" style="position:absolute;left:0;right:0;top:164px;display:flex;justify-content:center;pointer-events:none;z-index:30">
+        <sc-if value="{{hasMsg}}" hint-placeholder-val="{{ false }}"><span class="lm-pop" style="max-width:310px;border-radius:20px;background:linear-gradient(#2064CC,#1549A6);box-shadow:inset 0 0 0 3px {{msgRing}},0 5px 0 #0A2E70,0 12px 24px rgba(0,0,0,.45);font:800 14px/1.35 'Baloo 2',sans-serif;padding:10px 16px;text-align:center;box-sizing:border-box">{{msg}}</span></sc-if>
+      </div>
+    </div>
+
+    <div style="flex:1"></div>
+    <div role="group" aria-label="Your three rolls" style="flex:none;display:flex;justify-content:center;gap:16px">
+      <sc-for list="{{dice}}" as="d" hint-placeholder-count="3">
+        <button type="button" onClick="{{d.use}}" disabled="{{d.used}}" aria-label="{{d.label}}" class="{{d.hint}}" style="width:70px;height:70px;border:0;border-radius:18px;background:radial-gradient(circle at 50% 35%,#FFFFFF 0 55%,#E1E6EF 100%);box-shadow:inset 0 -5px 0 #C5CEDC,0 6px 12px rgba(0,0,0,.35);display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));grid-template-rows:repeat(3, minmax(0, 1fr));padding:11px;box-sizing:border-box;cursor:pointer;opacity:{{d.op}};transform:translateY({{d.y}}px) rotate({{d.r}}deg)">
+          <sc-for list="{{d.pips}}" as="q" hint-placeholder-count="9"><span style="display:grid;place-items:center"><span style="width:11px;height:11px;border-radius:50%;background:{{q.bg}};opacity:{{q.on}};box-shadow:inset 0 1px 1px rgba(0,0,0,.4)"></span></span></sc-for>
+        </button>
+      </sc-for>
+    </div>
+    <div style="flex:none;display:flex;gap:10px;padding:18px 12px 0">
+      <button type="button" onClick="{{hint}}" class="gl {{hintCls}}" style="flex:1;height:52px;border-radius:16px;font-size:15px"><span style="position:relative;z-index:1">{{hintText}}</span></button>
+      <button type="button" onClick="{{reset}}" class="gl g-blue" style="flex:1;height:52px;border-radius:16px;font-size:15px"><span style="position:relative;z-index:1">START OVER</span></button>
+    </div>
+    <div style="height:34px;flex:none"></div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+const C = 24;
+const TRACK = [[13,6],[12,6],[11,6],[10,6],[9,6],[8,5],[8,4],[8,3],[8,2],[8,1],[8,0],[7,0],[6,0],[6,1],[6,2],[6,3],[6,4],[6,5],[5,6],[4,6],[3,6],[2,6],[1,6],[0,6],[0,7],[0,8],[1,8],[2,8],[3,8],[4,8],[5,8],[6,9],[6,10],[6,11],[6,12],[6,13],[6,14],[7,14],[8,14],[8,13],[8,12],[8,11],[8,10],[8,9],[9,8],[10,8],[11,8],[12,8],[13,8],[14,8],[14,7],[14,6]];
+const SEATS = {
+  red: { off: 0, yard: [9, 0], lane: [[13,7],[12,7],[11,7],[10,7],[9,7]], goal: [8, 7], entry: 50, rot: 0 },
+  green: { off: 13, yard: [0, 0], lane: [[7,1],[7,2],[7,3],[7,4],[7,5]], goal: [7, 6], entry: 11, rot: 90 },
+  yellow: { off: 26, yard: [0, 9], lane: [[1,7],[2,7],[3,7],[4,7],[5,7]], goal: [6, 7], entry: 24, rot: 180 },
+  blue: { off: 39, yard: [9, 9], lane: [[7,13],[7,12],[7,11],[7,10],[7,9]], goal: [7, 8], entry: 37, rot: 270 }
+};
+const ORDER = ['red', 'green', 'yellow', 'blue'];
+const SAFE = [0, 8, 13, 21, 26, 34, 39, 47];
+const STARTS = { 0: 'red', 13: 'green', 26: 'yellow', 39: 'blue' };
+const COL = {
+  red: { light: '#FF8A7A', mid: '#EC3B30', dark: '#A71D16', side: '#7E120E', hole: '#B3241C', pillow: '#F7685C' },
+  green: { light: '#A3EC6A', mid: '#43B32D', dark: '#24781A', side: '#195A11', hole: '#2C8A1E', pillow: '#6ACD4A' },
+  yellow: { light: '#FFEA7A', mid: '#FFC21F', dark: '#C88A00', side: '#8E6100', hole: '#D99A00', pillow: '#FFD84F' },
+  blue: { light: '#7CC6FF', mid: '#2381EC', dark: '#114FA8', side: '#0B3878', hole: '#1A62C4', pillow: '#4A9FF4' }
+};
+const SPOT = [[1.7, 1.7], [1.7, 3.3], [3.3, 1.7], [3.3, 3.3]];
+const GOAL = [[-0.3, -0.3], [-0.3, 0.3], [0.3, -0.3], [0.3, 0.3]];
+const LOTUS = 'M12 4.5c1.9 2.3 2.3 4.8 0 8c-2.3-3.2-1.9-5.7 0-8zM4 9.5c3.4.2 5.9 2.1 8 5.3c-4 .4-6.8-1.3-8-5.3zM20 9.5c-3.4.2-5.9 2.1-8 5.3c4 .4 6.8-1.3 8-5.3zM7.5 17h9a4.5 2 0 0 1-9 0z';
+const STAR = 'M12 2.5l2.9 6.1 6.6.7-4.9 4.5 1.4 6.5L12 17l-6 3.3 1.4-6.5-4.9-4.5 6.6-.7z';
+const PIPS = { 4: [0, 2, 6, 8], 5: [0, 2, 4, 6, 8], 6: [0, 2, 3, 5, 6, 8] };
+const FOES = { green: [25, -1, -1, -1], yellow: [10, 56, -1, -1], blue: [4, 30, -1, -1] };
+function gidx(k, s) { return (SEATS[k].off + s) % 52; }
+function cellOf(k, s, i) {
+  const p = SEATS[k];
+  if (s < 0) return [p.yard[0] + SPOT[i][0], p.yard[1] + SPOT[i][1]];
+  if (s <= 50) return TRACK[gidx(k, s)];
+  if (s <= 55) return p.lane[s - 51];
+  return [p.goal[0] + GOAL[i][0], p.goal[1] + GOAL[i][1]];
+}
+// Squares an opponent could reach with one roll (1–6 ahead of them), safe stars excluded.
+function hotSquares() {
+  const hot = {};
+  Object.keys(FOES).forEach((o) => FOES[o].forEach((q) => {
+    if (q < 0 || q > 50) return;
+    for (let d = 1; d <= 6 && q + d <= 50; d++) { const g = gidx(o, q + d); if (!SAFE.includes(g)) hot[g] = o; }
+  }));
+  return hot;
+}
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { at: 41, used: [], msg: '', ring: '#FFC61F', knocked: false, shake: false, solved: false, hint: false, busy: false };
+    this.timers = [];
+  }
+  componentWillUnmount() { this.timers.forEach((t) => clearTimeout(t)); }
+  later(ms, fn) { this.timers.push(setTimeout(fn, ms)); }
+  use(v) {
+    const st = this.state;
+    if (st.used.includes(v) || st.knocked || st.solved || st.busy) return;
+    const to = st.at + v;
+    this.setState({ busy: true, msg: '' });
+    Array.from({ length: v }, (_, j) => st.at + j + 1).forEach((s, j) => this.later(170 * j, () => this.setState({ at: s })));
+    this.later(170 * v + 120, () => {
+      const used = this.state.used.concat([v]);
+      const hot = hotSquares();
+      if (to <= 50 && hot[gidx('red', to)]) {
+        const who = hot[gidx('red', to)];
+        this.setState({ used, busy: false, knocked: true, shake: true, ring: '#F2463B', msg: who[0].toUpperCase() + who.slice(1) + ' could reach that square — captured! Try another order.' });
+        this.later(500, () => this.setState({ shake: false }));
+        return;
+      }
+      if (used.length === 3) { this.setState({ used, busy: false, solved: true, ring: '#47BA2B', msg: 'Solved! +100 coins · 6-day streak' }); return; }
+      this.setState({ used, busy: false, ring: '#FFC61F', msg: to > 50 ? 'In your home lane — nobody can touch you there.' : 'Safe star — nice thinking!' });
+    });
+  }
+  renderVals() {
+    const st = this.state;
+    const hot = st.hint ? hotSquares() : {};
+    const tiles = [];
+    TRACK.forEach((rc, g) => {
+      const own = STARTS[g];
+      const entry = ORDER.find((k) => SEATS[k].entry === g);
+      const t = { x: rc[1] * C + 0.5, y: rc[0] * C + 0.5, bg: '#FFFFFF', edge: '#CBD5E4', hasIcon: false, icon: '', fill: 'none', ink: 'none', rot: 0, hot: !!hot[g] };
+      if (own) Object.assign(t, { bg: COL[own].mid, edge: COL[own].dark, hasIcon: true, icon: STAR, fill: '#FFFFFF', ink: COL[own].dark });
+      else if (SAFE.includes(g)) Object.assign(t, { bg: '#CFCFCF', hasIcon: true, icon: STAR, fill: '#A0A0A0', ink: 'none' });
+      if (entry) Object.assign(t, { hasIcon: true, icon: 'M12 4.5l7.5 12h-15z', fill: COL[entry].mid, ink: COL[entry].dark, rot: SEATS[entry].rot });
+      tiles.push(t);
+    });
+    ORDER.forEach((k) => SEATS[k].lane.forEach((rc) => tiles.push({ x: rc[1] * C + 0.5, y: rc[0] * C + 0.5, bg: COL[k].mid, edge: COL[k].dark, hasIcon: false, icon: '', fill: 'none', ink: 'none', rot: 0, hot: false })));
+    const yards = ORDER.map((k) => Object.assign({ x: SEATS[k].yard[1] * C, y: SEATS[k].yard[0] * C, slots: [[29, 29], [77, 29], [29, 77], [77, 77]].map((s) => ({ x: s[0], y: s[1] })) }, COL[k]));
+    const pos = Object.assign({ red: [st.knocked ? -1 : st.at, 56, -1, -1] }, FOES);
+    const tokens = [];
+    ORDER.forEach((k) => pos[k].forEach((s, i) => {
+      const rc = cellOf(k, s, i);
+      const size = s === 56 ? 15 : s < 0 ? 27 : 22;
+      const me = k === 'red' && i === 0 && !st.knocked && !st.solved;
+      tokens.push(Object.assign({
+        x: (rc[1] + 0.5) * C - size / 2, y: (rc[0] + 0.5) * C - size / 2 - 2, s: size, z: me ? 9 : 5, th: size > 20 ? 3.5 : 2.5, es: Math.round(size * 0.6), emblem: LOTUS, me,
+        anim: k === 'red' && i === 0 && st.knocked ? 'lm-knock' : me && !st.busy ? 'lm-bob' : ''
+      }, COL[k]));
+    }));
+    const dice = [6, 5, 4].map((v, i) => {
+      const used = st.used.includes(v);
+      return {
+        used: used || st.knocked || st.solved, op: used ? 0.35 : 1, y: used ? 6 : 0, r: [-6, 3, 7][i], label: 'Use the ' + v,
+        hint: st.hint && v === 6 && !st.used.length ? 'lm-hint' : '',
+        pips: Array.from({ length: 9 }, (_, x) => ({ on: PIPS[v].includes(x) ? 1 : 0, bg: v === 4 ? 'radial-gradient(circle at 40% 35%,#FF7A6E,#B3140C 72%)' : 'radial-gradient(circle at 40% 35%,#5A6176,#121726 72%)' })),
+        use: () => this.use(v)
+      };
+    });
+    return {
+      tiles, yards, tokens, dice,
+      hasMsg: !!st.msg, msg: st.msg, msgRing: st.ring,
+      boardShake: st.shake ? 'lm-shake' : '',
+      hintText: st.hint ? 'HIDE DANGER' : 'SHOW DANGER', hintCls: st.hint ? 'g-gold' : 'g-green',
+      hint: () => this.setState({ hint: !this.state.hint }),
+      reset: () => this.setState({ at: 41, used: [], msg: '', knocked: false, solved: false, busy: false, ring: '#FFC61F' })
+    };
+  }
+}
+</script>
+</body>
+</html>

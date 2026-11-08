@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ludo Mela — Daily missions</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#FFE27A}
+:root{--e:cubic-bezier(.2,.8,.2,1);--b:cubic-bezier(.34,1.56,.64,1)}
+button,a{-webkit-tap-highlight-color:transparent;transition:transform 150ms var(--b),filter 160ms var(--e),opacity 160ms var(--e)}
+button:focus-visible,a:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
+.ttl{font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-shadow:0 -1.5px 0 #0A2A6B,1.5px 0 0 #0A2A6B,0 1.5px 0 #0A2A6B,-1.5px 0 0 #0A2A6B,1.2px 1.2px 0 #0A2A6B,-1.2px 1.2px 0 #0A2A6B,1.2px -1.2px 0 #0A2A6B,-1.2px -1.2px 0 #0A2A6B,0 3px 0 #0A2A6B}
+.gl{position:relative;border:0;cursor:pointer;font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;text-shadow:0 2px 0 rgba(0,0,0,.3);box-sizing:border-box}
+.gl::after{content:'';position:absolute;left:6%;right:6%;top:3px;height:40%;border-radius:999px;background:linear-gradient(rgba(255,255,255,.55),rgba(255,255,255,0));pointer-events:none}
+.gl:active{transform:translateY(3px) scale(.98)}
+.g-green{background:linear-gradient(#8DEB50,#47BA2B 55%,#2E9A1B);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 4px 0 #1D6B0F}
+.g-blue{background:linear-gradient(#6DCEFF,#2F95F2 55%,#1C72DA);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 4px 0 #0D4A9E}
+.g-red{background:linear-gradient(#FF8A7A,#F2463B 55%,#C4251B);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 4px 0 #7E120B,0 7px 10px rgba(0,20,60,.3)}
+.lm-pop{animation:lmPop 420ms var(--b) backwards}
+.lm-fly{animation:lmFly 1100ms var(--e) forwards}
+.lm-glow{animation:lmGlow 1.5s ease-in-out infinite}
+.lm-tick{animation:lmTick 320ms var(--b) backwards}
+.lm-shake{animation:lmShake 1.8s ease-in-out infinite;transform-origin:50% 100%}
+@keyframes lmPop{from{opacity:0;transform:scale(.6)}}
+@keyframes lmFly{0%{opacity:0;transform:translateY(0) scale(.6)}20%{opacity:1;transform:translateY(-10px) scale(1.2)}100%{opacity:0;transform:translateY(-80px) scale(.8)}}
+@keyframes lmGlow{0%,100%{filter:drop-shadow(0 0 0 rgba(255,214,90,0))}50%{filter:drop-shadow(0 0 8px rgba(255,214,90,.95))}}
+@keyframes lmTick{from{transform:scale(0)}}
+@keyframes lmShake{0%,70%,100%{transform:rotate(0)}76%{transform:rotate(-8deg)}84%{transform:rotate(7deg)}92%{transform:rotate(-3deg)}}
+@media (prefers-reduced-motion: reduce){*{animation-duration:1ms !important;animation-iteration-count:1 !important;transition-duration:1ms !important}}
+</style>
+</helmet>
+<div style="width:390px;height:844px;position:relative;overflow:hidden;background:#0B2466;font-family:'Baloo 2',system-ui,sans-serif;color:#FFFFFF">
+  <svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>
+    <linearGradient id="gGold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFEC8F"></stop><stop offset=".55" stop-color="#FFC21F"></stop><stop offset="1" stop-color="#E08A00"></stop></linearGradient>
+    <linearGradient id="gClay" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9A4418"></stop><stop offset=".45" stop-color="#E07A3A"></stop><stop offset="1" stop-color="#8A3A12"></stop></linearGradient>
+  </defs></svg>
+  <div style="position:absolute;inset:0;background:linear-gradient(#0B2466 0%,#143A96 38%,#2462CF 62%,#2E74E0 100%)"></div>
+  <div style="position:absolute;left:0;right:0;top:0;height:50px;background:repeating-linear-gradient(90deg,#E8322B 0 26px,#FFF1D0 26px 52px)"></div>
+  <div style="position:absolute;left:10px;top:124px;width:85px;height:88px;border-radius:16px;background:#FF8A3D"></div>
+  <div style="position:absolute;left:103px;top:124px;width:85px;height:88px;border-radius:16px;background:#2FB8C8"></div>
+  <div style="position:absolute;left:196px;top:124px;width:85px;height:88px;border-radius:16px;background:#F0577A"></div>
+  <div style="position:absolute;left:289px;top:124px;width:85px;height:88px;border-radius:16px;background:#4CBF3E"></div>
+  <div style="position:absolute;left:10px;top:228px;width:370px;height:150px;border-radius:16px;background:#FFA51F"></div>
+  <div style="position:absolute;left:10px;top:428px;width:180px;height:92px;border-radius:16px;background:#2F86E6"></div>
+  <div style="position:absolute;left:200px;top:428px;width:180px;height:92px;border-radius:16px;background:#47BA2B"></div>
+  <div style="position:absolute;left:10px;top:530px;width:180px;height:92px;border-radius:16px;background:#8B55F0"></div>
+  <div style="position:absolute;left:200px;top:530px;width:180px;height:92px;border-radius:16px;background:#E0407E"></div>
+  <div style="position:absolute;left:10px;right:10px;bottom:20px;height:66px;border-radius:33px;background:#0A2464"></div>
+  <div style="position:absolute;inset:0;background:rgba(4,14,40,.72)"></div>
+
+  <div style="position:absolute;left:14px;right:14px;top:96px">
+    <div class="lm-pop" style="position:relative;border-radius:20px;background:linear-gradient(#2C7BDA,#1B57B4);box-shadow:inset 0 0 0 3px #5FB0FF,inset 0 5px 0 rgba(255,255,255,.18),0 6px 0 #0A2A6B,0 18px 30px rgba(0,0,0,.45);padding:38px 12px 14px">
+      <div style="position:absolute;left:50%;top:-24px;transform:translateX(-50%);width:240px;height:50px">
+        <svg width="240" height="50" viewBox="0 0 240 50" aria-hidden="true" style="position:absolute;inset:0"><path d="M8 14h24v30H8l8-15z" fill="#1D6B0F"></path><path d="M232 14h-24v30h24l-8-15z" fill="#1D6B0F"></path><path d="M24 4h192v36H24z" fill="#47BA2B" stroke="#1D6B0F" stroke-width="2.5" stroke-linejoin="round"></path><path d="M28 8h184v8H28z" fill="#FFFFFF" opacity=".3"></path></svg>
+        <h1 class="ttl" style="position:relative;margin:0;text-align:center;font-size:24px;line-height:44px">Daily Missions</h1>
+      </div>
+      <a href="Main.dc.html" aria-label="Close" class="gl g-red" style="position:absolute;right:-8px;top:-14px;width:40px;height:40px;border-radius:12px"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="position:relative;z-index:1"><path d="M5 5l14 14M19 5L5 19" stroke="#FFFFFF" stroke-width="4.2" stroke-linecap="round"></path></svg></a>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <span class="ttl" style="font-size:15px">Mission points</span>
+        <span style="height:22px;border-radius:11px;background:#0D3680;box-shadow:inset 0 2px 3px rgba(0,0,0,.4);font:700 11.5px/22px 'Baloo 2',sans-serif;color:#CFE6FF;padding:0 10px">New missions in 06:12:40</span>
+      </div>
+      <div style="position:relative;height:82px;border-radius:14px;background:#0D3680;box-shadow:inset 0 3px 6px rgba(0,0,0,.4)">
+        <div role="progressbar" aria-label="Mission points" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{pts}}" style="position:absolute;left:40px;right:30px;top:56px;height:12px;border-radius:6px;background:rgba(0,0,0,.35)"><span style="display:block;height:12px;width:{{ptsW}};border-radius:6px;background:linear-gradient(#A3F06A,#47BA2B);transition:width 600ms cubic-bezier(.2,.8,.2,1)"></span></div>
+        <span class="ttl" style="position:absolute;left:10px;top:47px;font-size:16px;color:#A3F06A">{{pts}}</span>
+        <sc-for list="{{miles}}" as="m" hint-placeholder-count="4">
+          <button type="button" onClick="{{m.tap}}" aria-label="{{m.aria}}" class="{{m.anim}}" style="position:absolute;left:{{m.x}};top:4px;transform:translateX(-50%);width:44px;height:68px;border:0;background:none;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center">
+            <span style="position:relative;width:40px;height:40px;opacity:{{m.op}}">
+              <svg width="40" height="40" viewBox="0 0 32 32" aria-hidden="true"><sc-for list="{{m.icon}}" as="q" hint-placeholder-count="4"><path d="{{q.d}}" fill="{{q.f}}" stroke="{{q.s}}" stroke-width="{{q.w}}" stroke-linejoin="round"></path></sc-for></svg>
+              <sc-if value="{{m.done}}" hint-placeholder-val="{{ false }}"><span class="lm-tick" style="position:absolute;right:-4px;bottom:-2px;width:18px;height:18px;border-radius:9px;background:#47BA2B;box-shadow:0 0 0 2px #FFFFFF;display:grid;place-items:center"><svg width="11" height="11" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></sc-if>
+            </span>
+            <span style="margin-top:22px;width:14px;height:14px;border-radius:7px;background:{{m.dot}};box-shadow:0 0 0 2px #0D3680"></span>
+            <span style="position:absolute;top:42px;font:400 10.5px 'Lilita One',sans-serif;color:{{m.ink}}">{{m.at}}</span>
+          </button>
+        </sc-for>
+        <sc-if value="{{milePop}}" hint-placeholder-val="{{ false }}"><span class="ttl lm-fly" style="position:absolute;right:60px;top:0;font-size:20px;color:#FFE27A">{{milePopText}}</span></sc-if>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+        <sc-for list="{{rows}}" as="r" hint-placeholder-count="5">
+          <div style="position:relative;min-height:62px;border-radius:14px;background:{{r.bg}};box-shadow:inset 0 0 0 2px {{r.rim}};display:flex;align-items:center;gap:9px;padding:8px 10px 8px 8px;box-sizing:border-box">
+            <span style="width:40px;height:40px;flex:none;border-radius:12px;background:{{r.iconBg}};display:grid;place-items:center;box-shadow:0 2px 0 rgba(0,0,0,.25)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{r.icon}}"></path></svg></span>
+            <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px">
+              <span style="display:flex;align-items:baseline;gap:6px"><span class="ttl" style="font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{r.title}}</span></span>
+              <span style="display:flex;align-items:center;gap:6px"><span style="position:relative;flex:1;height:14px;border-radius:7px;background:rgba(0,0,0,.35);overflow:hidden"><span style="display:block;height:14px;width:{{r.w}};background:{{r.fill}}"></span><span style="position:absolute;inset:0;text-align:center;font:400 10px/14px 'Lilita One',sans-serif;color:#FFFFFF;text-shadow:0 1px 0 #000">{{r.prog}}</span></span><span style="font:800 10.5px 'Baloo 2',sans-serif;color:#FFE27A;white-space:nowrap">{{r.reward}}</span></span>
+            </span>
+            <sc-if value="{{r.canClaim}}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{r.tap}}" aria-label="{{r.aria}}" class="gl g-green" style="width:72px;height:40px;border-radius:12px;font-size:15px;flex:none"><span style="position:relative;z-index:1">Claim</span></button></sc-if>
+            <sc-if value="{{r.canGo}}" hint-placeholder-val="{{ true }}"><a href="{{r.href}}" aria-label="{{r.aria}}" class="gl g-blue" style="width:72px;height:40px;border-radius:12px;font-size:15px;flex:none"><span style="position:relative;z-index:1">Go</span></a></sc-if>
+            <sc-if value="{{r.isDone}}" hint-placeholder-val="{{ false }}"><span class="lm-tick" style="width:72px;flex:none;display:flex;justify-content:center"><svg width="34" height="34" viewBox="0 0 36 36" role="img" aria-label="Claimed"><circle cx="18" cy="18" r="16" fill="#47BA2B" stroke="#FFFFFF" stroke-width="3"></circle><path d="M10 18.5l5.5 5.5L26.5 13" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></sc-if>
+            <sc-if value="{{r.flying}}" hint-placeholder-val="{{ false }}"><span class="ttl lm-fly" style="position:absolute;right:16px;top:-4px;font-size:18px;color:#A3F06A">+{{r.pts}} pts</span></sc-if>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:8px;margin-top:12px">
+        <button type="button" onClick="{{swap}}" disabled="{{swapUsed}}" class="gl g-blue" style="height:36px;border-radius:11px;font-size:13px;padding:0 12px;flex:none;opacity:{{swapOp}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position:relative;z-index:1"><path d="M4 8h13l-3-3M20 16H7l3 3"></path></svg><span style="position:relative;z-index:1">{{swapLabel}}</span></button>
+        <span style="font:600 11.5px/1.35 'Baloo 2',sans-serif;color:#BFD6F5">No ads, no purchases. Missions work in every mode, offline.</span>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+const P = (d, f, s, w) => ({ d, f: f || 'none', s: s || 'none', w: w || 0 });
+const COINS = [P('M6 22a8 3 0 1 0 16 0v-4a8 3 0 1 0-16 0z', '#C27A00'), P('M6 18a8 3 0 1 0 16 0a8 3 0 1 0-16 0z', 'url(#gGold)'), P('M12 14a8 3 0 1 0 16 0v-4a8 3 0 1 0-16 0z', '#C27A00'), P('M12 10a8 3 0 1 0 16 0a8 3 0 1 0-16 0z', 'url(#gGold)')];
+const GEMS = [P('M8 5h16l5 7-13 16L3 12z', '#C2186D'), P('M8 5h16l5 7H3z', '#FF6CC0'), P('M16 28L3 12h26z', '#F0328F')];
+const pot = (cloth, body) => [P('M10 10q6-1.6 12 0l-1 3q6 3 6 9.5q0 7.5-11 8.5q-11-1-11-8.5q0-6.5 6-9.5z', body, '#5A2006', 1.3), P('M9 5q7-3 14 0l-1 5q-6-1.6-12 0z', cloth, '#5A2006', 1.1), P('M9.5 10q6.5-1.8 13 0', 'none', '#FFC61F', 1.8)];
+const MILES = [
+  { at: 25, icon: COINS, reward: '+200 coins' },
+  { at: 50, icon: GEMS, reward: '+3 gems' },
+  { at: 75, icon: pot('#E8322B', 'url(#gClay)'), reward: 'a clay pot' },
+  { at: 100, icon: pot('#2F95F2', '#C9D3E2'), reward: 'a silver pot' }
+];
+const MISSIONS = [
+  { id: 'win', title: 'Win 2 matches', need: 2, have: 1, pts: 25, coins: 150, href: 'VsIntro.dc.html', bg: '#E8322B', icon: 'M8 4h8v5a4 4 0 0 1-8 0zM12 13v4M8 21h8' },
+  { id: 'cap', title: 'Capture 5 pieces', need: 5, have: 5, pts: 20, coins: 150, href: 'VsIntro.dc.html', bg: '#8B55F0', icon: 'M5 19L19 5M15 5h4v4M9 19H5v-4' },
+  { id: 'six', title: 'Roll three 6s', need: 3, have: 3, pts: 15, coins: 100, href: 'VsIntro.dc.html', bg: '#F59E00', icon: 'M5 5h14v14H5zM9 9h.01M15 9h.01M9 15h.01M15 15h.01M9 12h.01M15 12h.01', claimed: true },
+  { id: 'pass', title: 'Play a pass & play game', need: 1, have: 0, pts: 20, coins: 100, href: 'PassPlaySetup.dc.html', bg: '#2F95F2', icon: 'M7 3h10v18H7zM11 18h2' },
+  { id: 'puz', title: "Solve today's puzzle", need: 1, have: 0, pts: 20, coins: 150, href: 'Puzzle.dc.html', bg: '#14B8C8', icon: 'M4 7h4a2 2 0 1 1 4 0h4v4a2 2 0 1 1 0 4v4h-4a2 2 0 1 0-4 0H4v-4a2 2 0 1 0 0-4z' }
+];
+const SWAP_IN = { id: 'home', title: 'Bring 3 pieces home', need: 3, have: 0, pts: 20, coins: 150, href: 'VsIntro.dc.html', bg: '#2E9A1B', icon: 'M3 11l9-8 9 8M5 10v10h14V10' };
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { pts: 55, claimed: { six: true }, miles: { 25: true, 50: true }, flying: '', milePop: '', swapped: false };
+  }
+  componentWillUnmount() { clearTimeout(this.t1); clearTimeout(this.t2); }
+  renderVals() {
+    const st = this.state;
+    const list = MISSIONS.map((m) => (st.swapped && m.id === 'pass' ? SWAP_IN : m));
+    const rows = list.map((m) => {
+      const done = m.have >= m.need, claimed = !!st.claimed[m.id];
+      return {
+        title: m.title, icon: m.icon, iconBg: m.bg, href: m.href, pts: m.pts,
+        prog: Math.min(m.have, m.need) + ' / ' + m.need, w: Math.round(100 * Math.min(m.have, m.need) / m.need) + '%',
+        fill: done ? 'linear-gradient(#A3F06A,#47BA2B)' : 'linear-gradient(#FFF3B0,#FFC61F)',
+        reward: '+' + m.pts + ' pts · ' + m.coins, canClaim: done && !claimed, canGo: !done, isDone: claimed, flying: st.flying === m.id,
+        bg: done && !claimed ? 'linear-gradient(#3B8CEB,#2368C8)' : 'linear-gradient(#2258AE,#1A4A98)', rim: done && !claimed ? '#A3F06A' : (claimed ? 'rgba(71,186,43,.6)' : '#3F78D6'),
+        aria: done ? 'Claim ' + m.pts + ' points and ' + m.coins + ' coins for: ' + m.title : 'Go play: ' + m.title,
+        tap: () => {
+          const c = Object.assign({}, this.state.claimed); c[m.id] = true;
+          this.setState({ claimed: c, pts: Math.min(100, this.state.pts + m.pts), flying: m.id });
+          clearTimeout(this.t1); this.t1 = setTimeout(() => this.setState({ flying: '' }), 1100);
+        }
+      };
+    });
+    const miles = MILES.map((m) => {
+      const got = !!st.miles[m.at], ready = !got && st.pts >= m.at;
+      return {
+        x: 'calc(40px + (100% - 70px) * ' + (m.at / 100) + ')', at: m.at, icon: m.icon, done: got, op: got ? 0.55 : 1,
+        anim: ready ? 'lm-glow lm-shake' : '', dot: st.pts >= m.at ? '#47BA2B' : '#4C6A9E', ink: ready ? '#FFE27A' : '#CFE6FF',
+        aria: got ? m.at + ' points: ' + m.reward + ', collected' : (ready ? 'Collect ' + m.reward + ' for reaching ' + m.at + ' points' : m.reward + ' at ' + m.at + ' points'),
+        tap: () => {
+          if (!ready) return;
+          const ms = Object.assign({}, this.state.miles); ms[m.at] = true;
+          this.setState({ miles: ms, milePop: m.reward });
+          clearTimeout(this.t2); this.t2 = setTimeout(() => this.setState({ milePop: '' }), 1100);
+        }
+      };
+    });
+    return {
+      pts: st.pts, ptsW: st.pts + '%', miles, rows, milePop: !!st.milePop, milePopText: '+' + st.milePop,
+      swapUsed: st.swapped, swapOp: st.swapped ? 0.55 : 1, swapLabel: st.swapped ? 'Swapped today' : 'Swap 1 free',
+      swap: () => { if (!this.state.swapped) this.setState({ swapped: true }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

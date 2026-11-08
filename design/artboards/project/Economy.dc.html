@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ludo Mela — Economy, unlocks and ads</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#FFE27A}a:hover{color:#FFF3B8}
+.ttl{font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-shadow:0 -1.5px 0 #0A2A6B,1.5px 0 0 #0A2A6B,0 1.5px 0 #0A2A6B,-1.5px 0 0 #0A2A6B,1.2px 1.2px 0 #0A2A6B,-1.2px 1.2px 0 #0A2A6B,1.2px -1.2px 0 #0A2A6B,-1.2px -1.2px 0 #0A2A6B,0 3px 0 #0A2A6B}
+.pnl{background:linear-gradient(#2064CC,#1549A6);border-radius:24px;box-shadow:inset 0 0 0 3px #3F86EA,inset 0 5px 0 rgba(255,255,255,.16),0 6px 0 #0A2E70,0 12px 22px rgba(0,10,40,.4)}
+.well{background:#0D3680;border-radius:12px;box-shadow:inset 0 3px 6px rgba(0,0,0,.4),inset 0 -1px 0 rgba(255,255,255,.14)}
+.hd{display:grid;font:800 12px 'Baloo 2',sans-serif;color:#9CC2FF;letter-spacing:.05em;padding:0 10px;margin-top:10px;gap:10px}
+.tr{display:grid;background:#0D3680;border-radius:10px;margin-top:6px;padding:8px 10px;gap:10px;font:700 13.5px/1.35 'Baloo 2',sans-serif;color:#FFFFFF;box-shadow:inset 0 2px 4px rgba(0,0,0,.3)}
+.tr .k{font-family:'Lilita One',sans-serif;font-weight:400;letter-spacing:.3px}
+li{margin-bottom:4px}
+</style>
+</helmet>
+<div style="width:1280px;height:2720px;position:relative;overflow:hidden;background:#1250C2;font-family:'Baloo 2',system-ui,sans-serif;color:#FFFFFF">
+  <div style="position:absolute;inset:0;background:radial-gradient(90% 60% at 50% 20%,#3E9CFA 0%,#1F6EE0 40%,#1250C2 70%,#0B3592 100%)"></div>
+  <svg width="1280" height="2720" aria-hidden="true" style="position:absolute;inset:0"><defs><pattern id="jali" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M22 8l14 14-14 14L8 22zM12.5 12.5h19v19h-19z" fill="none" stroke="#FFFFFF" stroke-opacity=".06" stroke-width="1.6"></path></pattern></defs><rect width="1280" height="2720" fill="url(#jali)"></rect></svg>
+
+  <div style="position:relative;z-index:1;padding:48px 56px;display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <h1 class="ttl" style="margin:0;font-size:52px;letter-spacing:1px">ECONOMY, UNLOCKS &amp; ADS</h1>
+      <p style="margin:0;font:700 18px/1.45 'Baloo 2',sans-serif;color:#DDEEFF;max-width:1060px">Two play currencies, no cash value, nothing sold for real money except an optional "remove ads". Every beautiful board, puck and dice is reachable by playing — gems and levels just decide <i>when</i>.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:24px">
+      <sc-for list="{{currencies}}" as="c" hint-placeholder-count="2">
+        <div class="pnl" style="padding:22px">
+          <div style="display:flex;align-items:center;gap:12px"><svg width="44" height="44" viewBox="0 0 24 24" aria-hidden="true"><path d="{{c.a}}" fill="{{c.f1}}"></path><path d="{{c.b}}" fill="{{c.f2}}"></path></svg><span class="ttl" style="font-size:26px">{{c.nm}}</span><span style="font:800 13px 'Baloo 2',sans-serif;color:#CFE3FF">{{c.kind}}</span></div>
+          <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:16px;margin-top:12px">
+            <div><span style="font:800 12px 'Baloo 2',sans-serif;color:#A3F06A;letter-spacing:.05em">EARN</span><ul style="margin:6px 0 0;padding-left:18px;font:700 13.5px/1.45 'Baloo 2',sans-serif;color:#DDEEFF"><sc-for list="{{c.earn}}" as="e" hint-placeholder-count="5"><li>{{e}}</li></sc-for></ul></div>
+            <div><span style="font:800 12px 'Baloo 2',sans-serif;color:#FF9A8A;letter-spacing:.05em">SPEND</span><ul style="margin:6px 0 0;padding-left:18px;font:700 13.5px/1.45 'Baloo 2',sans-serif;color:#DDEEFF"><sc-for list="{{c.spend}}" as="e" hint-placeholder-count="4"><li>{{e}}</li></sc-for></ul></div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div class="pnl" style="padding:22px">
+      <span class="ttl" style="font-size:24px">Mela Tour venues (vs computer)</span>
+      <div class="hd" style="grid-template-columns:170px 70px 90px 110px 190px 1fr"><span>VENUE</span><span>LEVEL</span><span>ENTRY</span><span>WIN · 2 PLAYERS</span><span>WIN · 4 PLAYERS (1ST / 2ND)</span><span>BOARD</span></div>
+      <sc-for list="{{venues}}" as="v" hint-placeholder-count="8"><div class="tr" style="grid-template-columns:170px 70px 90px 110px 190px 1fr"><span class="k" style="color:{{v.c}}">{{v.nm}}</span><span>{{v.lv}}</span><span>{{v.entry}}</span><span>{{v.w2}}</span><span>{{v.w4}}</span><span>{{v.board}}</span></div></sc-for>
+      <p style="margin:10px 0 0;font:700 13px/1.45 'Baloo 2',sans-serif;color:#DDEEFF">Practice is always free (XP only). Safety net: under 100 coins with no gift waiting → a free top-up to 300 coins every 4 hours, so nobody is ever locked out of playing.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:24px">
+      <div class="pnl" style="padding:22px">
+        <span class="ttl" style="font-size:24px">Daily gift · every 24 h</span>
+        <div style="display:grid;grid-template-columns:repeat(7, minmax(0, 1fr));gap:8px;margin-top:12px">
+          <sc-for list="{{gift}}" as="g" hint-placeholder-count="7"><div style="border-radius:14px;background:{{g.bg}};box-shadow:inset 0 0 0 2px rgba(255,255,255,.3),0 4px 0 {{g.edge}};padding:8px 4px;text-align:center"><span class="ttl" style="font-size:13px;display:block">DAY {{g.d}}</span><span style="font:800 11.5px/1.3 'Baloo 2',sans-serif;display:block;margin-top:4px">{{g.r}}</span></div></sc-for>
+        </div>
+        <ul style="margin:14px 0 0;padding-left:20px;font:700 13.5px/1.5 'Baloo 2',sans-serif;color:#DDEEFF">
+          <li>Unlocks 24 h after the last claim (not at midnight) — a countdown shows on the lobby gift button.</li>
+          <li>Miss more than 48 h → streak restarts at Day 1. Watch one ad to double today's gift.</li>
+          <li>Clock-safe: store wall time + monotonic uptime; if the clock moved back, the timer pauses.</li>
+          <li>Optional local notification when the gift is ready (one per day, off by default for kids).</li>
+        </ul>
+      </div>
+      <div class="pnl" style="padding:22px">
+        <span class="ttl" style="font-size:24px">Reward ads &amp; wheel</span>
+        <div class="hd" style="grid-template-columns:1fr 90px 80px"><span>OFFER</span><span>REWARD</span><span>PER DAY</span></div>
+        <sc-for list="{{ads}}" as="a" hint-placeholder-count="5"><div class="tr" style="grid-template-columns:1fr 90px 80px"><span>{{a.o}}</span><span class="k" style="color:{{a.c}}">{{a.r}}</span><span>{{a.n}}</span></div></sc-for>
+        <p style="margin:10px 0 6px;font:700 13px/1.45 'Baloo 2',sans-serif;color:#DDEEFF">Daily missions (lobby stall): 5 tasks, each pays coins + mission points; 25 / 50 / 75 / 100 points unlock 200 coins, 3 gems, a clay pot and a silver pot; 1 free swap a day; never an ad. Free Rewards ladder: steps unlock one by one and reset at midnight. Coin ads cap at 5 a day and gem ads at 3 (ladder steps included) · 30 s between ads · reward only after the ad completes.</p>
+        <div style="display:flex;height:22px;border-radius:11px;overflow:hidden;box-shadow:0 0 0 2px rgba(255,255,255,.3)"><sc-for list="{{odds}}" as="o" hint-placeholder-count="8"><span style="width:{{o.p}}%;background:{{o.c}}" title="{{o.t}}"></span></sc-for></div>
+        <span style="font:700 12px 'Baloo 2',sans-serif;color:#CFE3FF;display:block;margin-top:6px">Wheel: 100c 30% · 2 gems 15% · 250c 22% · 5 gems 9% · 500c 12% · 10 gems 2% · 1,000c 6% · Rare dice 4%</span>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:24px">
+      <div class="pnl" style="padding:22px">
+        <span class="ttl" style="font-size:24px">Rarity, prices &amp; gates</span>
+        <div class="hd" style="grid-template-columns:110px 1fr 90px 1fr"><span>TIER</span><span>PRICE</span><span>LEVEL</span><span>EXAMPLES</span></div>
+        <sc-for list="{{tiers}}" as="t" hint-placeholder-count="5"><div class="tr" style="grid-template-columns:110px 1fr 90px 1fr"><span class="k" style="color:{{t.c}}">{{t.nm}}</span><span>{{t.p}}</span><span>{{t.l}}</span><span>{{t.e}}</span></div></sc-for>
+        <p style="margin:10px 0 0;font:700 13px/1.45 'Baloo 2',sans-serif;color:#DDEEFF">Try-on is free for every item. Mela pots show contents and odds before opening and are earned, never bought. 3 pot spots on the lobby shelf: a win fills an empty spot (clay 3 h, silver 8 h, gold 12 h); one timer runs at a time; 1 gem skips 20 min. Duplicates become shards. Coin upgrades raise only XP boost and cosmetic effects — every dice stays a fair 1–6.</p>
+      </div>
+      <div class="pnl" style="padding:22px">
+        <span class="ttl" style="font-size:24px">XP, levels &amp; Mela Road</span>
+        <ul style="margin:12px 0 0;padding-left:20px;font:700 13.5px/1.5 'Baloo 2',sans-serif;color:#DDEEFF">
+          <li>XP per match: 20 for playing, +30 for a win, +5 per capture, +5 per puck home (practice gives half).</li>
+          <li>XP needed for the next level: 150 + 50 × (level − 1) → level 7 → 8 needs 450.</li>
+          <li>Every level: a reward on the Mela Road (coins, gems, pots, free items).</li>
+          <li>New venues at levels 3, 6, 9, 12, 16, 20, 25; Epic items buyable from 10, Legendary from 20.</li>
+          <li>Seasonal "Mela" items (Eid, Pohela Boishakh, Diwali, Christmas themes) are earn-only via event missions.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pnl" style="padding:22px">
+      <span class="ttl" style="font-size:24px">Ad placement — never in the way of play</span>
+      <div style="display:grid;grid-template-columns:repeat(5, minmax(0, 1fr));gap:18px;margin-top:14px">
+        <sc-for list="{{phones}}" as="p" hint-placeholder-count="5">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+            <div style="position:relative;width:120px;height:240px;border-radius:20px;background:#0A2A6B;box-shadow:0 0 0 4px #CFE3FF;overflow:hidden">
+              <sc-if value="{{p.banner}}" hint-placeholder-val="{{ true }}"><span style="position:absolute;left:8px;right:8px;top:18px;height:20px;border-radius:5px;background:#FFC61F;display:grid;place-items:center;font:800 9px 'Baloo 2',sans-serif;color:#3A2200">BANNER</span></sc-if>
+              <sc-for list="{{p.blocks}}" as="b" hint-placeholder-count="3"><span style="position:absolute;left:{{b.x}}px;top:{{b.y}}px;width:{{b.w}}px;height:{{b.h}}px;border-radius:6px;background:{{b.c}}"></span></sc-for>
+            </div>
+            <span class="ttl" style="font-size:14px">{{p.nm}}</span>
+            <span style="font:700 12px/1.35 'Baloo 2',sans-serif;color:#CFE3FF;text-align:center">{{p.note}}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:24px;margin-top:16px">
+        <ul style="margin:0;padding-left:20px;font:700 13.5px/1.5 'Baloo 2',sans-serif;color:#DDEEFF">
+          <li><b style="color:#FFE27A">Banner</b>: one adaptive AdMob banner, on match screens only, in a fixed top slot under the status bar (50 px reserved before it loads) — the board, dice trays and thumb zone stay ad-free.</li>
+          <li>No banner anywhere else: splash, lobby, menus, daily gift, free rewards, wheel, VS, results, pause or any pop-up.</li>
+          <li><b style="color:#FFE27A">Break ads</b> (interstitial): only after a finished match, at most every 2nd match and 4 minutes apart, never in the first 3 matches or within 2 minutes of a reward ad — shown behind a "Quick break" card.</li>
+        </ul>
+        <ul style="margin:0;padding-left:20px;font:700 13.5px/1.5 'Baloo 2',sans-serif;color:#DDEEFF">
+          <li><b style="color:#FFE27A">Reward ads</b>: always opt-in, clearly labelled "Ad", never auto-play.</li>
+          <li><b>Remove ads</b> (one-time, [YOUR PRICE]) removes banner + break ads; reward ads stay as optional bonuses.</li>
+          <li><b>Kids &amp; families</b>: if the store audience includes under-13s, use Families-certified settings — child-directed treatment, max rating G, no personalised ads; Parent controls can switch off reward ads and coin tables.</li>
+          <li>UMP consent form at first launch where required; "Ad privacy choices" in Settings.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":2720}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      currencies: [
+        { nm: 'Coins', kind: 'everyday currency', a: 'M12 2.4a10 10 0 1 0 0 20 10 10 0 0 0 0-20z', b: 'M12 1a10 10 0 1 0 0 20 10 10 0 0 0 0-20z', f1: '#B86E00', f2: '#FFC928',
+          earn: ['Venue prizes', 'Daily gift (200–1,500)', 'Daily missions (100–150 + pots)', 'Reward ads (+250, 5/day)', 'Wheel, pots, Mela Road'],
+          spend: ['Venue entries (100–20,000)', 'Common & Rare items (1,500–8,000)', 'Extra Mela Cup run (300)', 'Nothing else — no energy, no timers'] },
+        { nm: 'Gems', kind: 'premium, earn-only', a: 'M6 3.5h12l4.5 6L12 21.5 1.5 9.5z', b: 'M6 3.5h12l4.5 6H1.5z', f1: '#C2186D', f2: '#FF6CC0',
+          earn: ['Daily gift days 2/4/6/7', 'Level-ups (+5)', 'Achievements & Mela Cup (+25)', 'Reward ads (+3, 3/day)', 'Wheel & pots'],
+          spend: ['Epic items (80–150)', 'Legendary items (250–400)', 'Extra wheel spin (10)', 'Never sold for real money'] }
+      ],
+      venues: [
+        ['Village Haat', 1, '100', '200', '300 / 100', 'Classic Wood', '#A3F06A'], ['Lantern Bazaar', 3, '500', '1,000', '1,500 / 500', 'Lantern Night', '#C49BFF'],
+        ['Monsoon Garden', 6, '1,000', '2,000', '3,000 / 1,000', 'Monsoon', '#7DF0E4'], ['Desert Carnival', 9, '2,500', '5,000', '7,500 / 2,500', 'Sandstone', '#FFB070'],
+        ['Royal Palace', 12, '5,000', '10,000', '15,000 / 5,000', 'Royal', '#FF9A8A'], ['Ocean Pier', 16, '8,000', '16,000', '24,000 / 8,000', 'Ocean Reef', '#7CC6FF'],
+        ['Snow Festival', 20, '10,000', '20,000', '30,000 / 10,000', 'Frost', '#E8F6FF'], ['Neon City', 25, '20,000', '40,000', '60,000 / 20,000', 'Neon', '#FF92D4']
+      ].map((v) => ({ nm: v[0], lv: v[1], entry: v[2], w2: v[3], w4: v[4], board: v[5], c: v[6] })),
+      gift: [['200c', false], ['300c + 2 gems', true], ['400c', false], ['500c + 3 gems', true], ['600c + spin', false], ['800c + 5 gems', true], ['Mela pot', true]]
+        .map((g, i) => ({ d: i + 1, r: g[0], bg: i === 6 ? 'linear-gradient(#C49BFF,#6A35D6)' : g[1] ? 'linear-gradient(#FF92D4,#DB1F7C)' : 'linear-gradient(#FFEC8F,#F29A00)', edge: i === 6 ? '#3E1A8E' : g[1] ? '#8E0F4D' : '#9A5600' })),
+      ads: [['Free coins · no ad · every 4 h', '+150', '6', '#FFE27A'], ['Ladder 1 · coins (ad)', '+250', '1', '#FFE27A'], ['Ladder 2 · gems (ad)', '+2', '1', '#FF92D4'], ['Ladder 3 · coins (ad)', '+600', '1', '#FFE27A'], ['Ladder 4 · silver pot (ad)', 'pot', '1', '#A3F06A'], ['Extra coin / gem ads', '+250 / +3', '5 / 3', '#7CC6FF'], ['Double daily gift', '×2', '1', '#A3F06A'], ['Extra wheel spin', '1 spin', '1', '#C49BFF']]
+        .map((a) => ({ o: a[0], r: a[1], n: a[2], c: a[3] })),
+      odds: [[30, '#FF5A4E'], [15, '#2F95F2'], [22, '#47BA2B'], [9, '#FF3FA4'], [12, '#FFC21F'], [2, '#8B55F0'], [6, '#14B8C8'], [4, '#FF8A1F']].map((o) => ({ p: o[0], c: o[1], t: o[0] + '%' })),
+      tiers: [
+        ['STANDARD', 'Free or 800–1,500 coins', '1+', 'Mela Classic, Lotus Coins, Mela Wood', '#7CC6FF'],
+        ['RARE', '3,000–8,000 coins or shards', '3+', 'Ruby Jelly, Moon Gems, Night Bazaar', '#FFB64D'],
+        ['EPIC', '120–180 gems', '10+', 'Midnight Gold, Royal Crown, Royal Palace', '#FF7C6C'],
+        ['LEGENDARY', 'Shards or Mela Road only', '20+', 'Peacock Royal, Peacock Fan, Royal Durbar', '#C99BFF'],
+        ['MELA', 'Earn-only', 'events', 'Mela Lantern dice, Elephant pucks, Champion set', '#FF92D4']
+      ].map((t) => ({ nm: t[0], p: t[1], l: t[2], e: t[3], c: t[4] })),
+      phones: [
+        ['Lobby', 'No banner — the lobby stays clean', false, [[8, 46, 104, 70, '#2F95F2'], [8, 124, 104, 30, '#FF3FA4'], [8, 200, 104, 32, '#1A4CA8']]],
+        ['Match', 'Top slot; board and dice below, untouched', true, [[8, 50, 104, 104, '#E5A257'], [8, 164, 40, 30, '#FFC61F'], [72, 164, 40, 30, '#2381EC']]],
+        ['Menus', 'No banner — Collection, Road, Insights, Profile, Settings', false, [[8, 46, 104, 120, '#2064CC'], [8, 200, 104, 32, '#1A4CA8']]],
+        ['Reward screens', 'No banner — gift, free rewards, wheel', false, [[8, 30, 104, 150, '#FFC61F'], [8, 194, 104, 34, '#47BA2B']]],
+        ['Break ad', 'After a finished match only, behind a "Quick break" card', false, [[14, 60, 92, 110, '#FFFFFF'], [26, 180, 68, 26, '#47BA2B']]]
+      ].map((p) => ({ nm: p[0], note: p[1], banner: p[2], blocks: p[3].map((b) => ({ x: b[0], y: b[1], w: b[2], h: b[3], c: b[4] })) }))
+    };
+  }
+}
+</script>
+</body>
+</html>

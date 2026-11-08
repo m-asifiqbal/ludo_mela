@@ -1,0 +1,15 @@
+name: ludo_engine
+description: "Ludo Mela's rules, modes, bots, puzzles and fairness stats — pure Dart, no Flutter."
+publish_to: 'none'
+version: 1.0.0
+
+environment:
+  sdk: ^3.13.5
+
+dependencies:
+  collection: ^1.19.1
+  meta: ^1.16.0
+
+dev_dependencies:
+  lints: ^6.0.0
+  test: ^1.26.0

@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1, maximum-scale=1">
+<style>html,body{margin:0;background:#222;overflow:hidden}#stage{width:390px;height:844px;margin:0;overflow:hidden}</style>
+</head>
+<body>
+<div id="stage"></div>
+<script>
+// Minimal local stand-in for the canvas runtime: {{holes}}, sc-for, sc-if, on* handlers, setState.
+(async function () {
+  const q = new URLSearchParams(location.search);
+  const file = q.get('f') || 'Main.dc.html';
+  const src = await (await fetch('project/' + file)).text();
+  const doc = new DOMParser().parseFromString(src, 'text/html');
+  const xdc = doc.querySelector('x-dc');
+  const helmet = xdc.querySelector('helmet');
+  if (helmet) { Array.from(helmet.children).forEach((n) => document.head.appendChild(document.importNode(n, true))); helmet.remove(); }
+  if (q.get('w')) { const st = document.getElementById('stage'); st.style.width = q.get('w') + 'px'; st.style.height = q.get('h') + 'px'; document.querySelector('meta[name=viewport]').setAttribute('content', 'width=' + q.get('w')); document.documentElement.style.overflow = 'auto'; document.body.style.overflow = 'auto'; }
+  if (q.get('still')) { const s = document.createElement('style'); s.textContent = '*{animation-duration:1ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;transition-duration:1ms!important}'; document.head.appendChild(s); }
+  const scriptEl = doc.querySelector('script[data-dc-script]');
+  class DCLogic {
+    constructor(props) { this.props = props || {}; this.state = {}; }
+    setState(p) { const patch = typeof p === 'function' ? p(this.state, this.props) : p; this.state = Object.assign({}, this.state, patch); schedule(); }
+    forceUpdate() { schedule(); }
+  }
+  const Component = new Function('DCLogic', scriptEl.textContent + '\n;return Component;')(DCLogic);
+  const comp = new Component({});
+  const tpl = xdc;
+  const stage = document.getElementById('stage');
+  function lookup(path, scope) {
+    path = path.trim();
+    if (path === 'true') return true;
+    if (path === 'false') return false;
+    if (/^-?\d+(\.\d+)?$/.test(path)) return Number(path);
+    const parts = path.split('.');
+    let cur;
+    for (let i = scope.length - 1; i >= 0; i--) { if (scope[i] && Object.prototype.hasOwnProperty.call(scope[i], parts[0])) { cur = scope[i][parts[0]]; break; } }
+    for (let j = 1; j < parts.length && cur != null; j++) cur = cur[parts[j]];
+    return cur;
+  }
+  const whole = /^\s*\{\{([^}]+)\}\}\s*$/;
+  const interp = (s, scope) => s.replace(/\{\{([^}]+)\}\}/g, (_, p) => { const v = lookup(p, scope); return v == null ? '' : String(v); });
+  function render(node, scope, out) {
+    if (node.nodeType === 3) { out.appendChild(document.createTextNode(interp(node.nodeValue, scope))); return; }
+    if (node.nodeType !== 1) return;
+    const tag = node.localName;
+    if (tag === 'sc-for') {
+      const list = lookup(node.getAttribute('list').replace(/[{}]/g, ''), scope) || [];
+      const as = node.getAttribute('as');
+      list.forEach((item, idx) => { const s = scope.concat([{ [as]: item, $index: idx }]); node.childNodes.forEach((c) => render(c, s, out)); });
+      return;
+    }
+    if (tag === 'sc-if') {
+      const v = lookup(node.getAttribute('value').replace(/[{}]/g, ''), scope);
+      if (v) node.childNodes.forEach((c) => render(c, scope, out));
+      return;
+    }
+    const el = node.cloneNode(false);
+    Array.from(el.attributes).forEach((a) => {
+      const m = a.value.match(whole);
+      if (/^on[A-Z]/.test(a.name) || /^on[a-z]+$/.test(a.name) && m) {
+        el.removeAttribute(a.name);
+        const fn = m ? lookup(m[1], scope) : null;
+        const ev = a.name.slice(2).toLowerCase();
+        if (typeof fn === 'function') el.addEventListener(ev === 'change' ? 'input' : ev, fn);
+        return;
+      }
+      if (m) {
+        const v = lookup(m[1], scope);
+        if (v === false || v == null) { el.removeAttribute(a.name); return; }
+        if (v === true) { el.setAttribute(a.name, ''); return; }
+        el.setAttribute(a.name, String(v));
+      } else if (a.value.includes('{{')) el.setAttribute(a.name, interp(a.value, scope));
+    });
+    node.childNodes.forEach((c) => render(c, scope, el));
+    out.appendChild(el);
+  }
+  let pending = false;
+  function draw() {
+    pending = false;
+    const vals = comp.renderVals();
+    const frag = document.createDocumentFragment();
+    tpl.childNodes.forEach((c) => render(c, [vals], frag));
+    stage.innerHTML = '';
+    stage.appendChild(frag);
+  }
+  function schedule() { if (!pending) { pending = true; requestAnimationFrame(draw); } }
+  draw();
+  if (comp.componentDidMount) comp.componentDidMount();
+  window.__dc = comp;
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ludo Mela — Try on</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#FFE27A}a:hover{color:#FFF3B8}
+:root{--e:cubic-bezier(.2,.8,.2,1);--b:cubic-bezier(.34,1.56,.64,1)}
+button,a{-webkit-tap-highlight-color:transparent;transition:transform 150ms var(--b),filter 160ms var(--e),box-shadow 160ms var(--e),opacity 160ms var(--e)}
+button:focus-visible,a:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
+button:disabled{cursor:default}
+.ttl{font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-shadow:0 -1.5px 0 #0A2A6B,1.5px 0 0 #0A2A6B,0 1.5px 0 #0A2A6B,-1.5px 0 0 #0A2A6B,1.2px 1.2px 0 #0A2A6B,-1.2px 1.2px 0 #0A2A6B,1.2px -1.2px 0 #0A2A6B,-1.2px -1.2px 0 #0A2A6B,0 3px 0 #0A2A6B}
+.gl{position:relative;border:0;cursor:pointer;font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;text-shadow:0 2px 0 rgba(0,0,0,.3);box-sizing:border-box}
+.gl::after{content:'';position:absolute;left:8%;right:8%;top:3px;height:42%;border-radius:999px;background:linear-gradient(rgba(255,255,255,.6),rgba(255,255,255,0));pointer-events:none}
+.gl:active{transform:translateY(3px) scale(.98)}
+.g-green{background:linear-gradient(#8DEB50,#47BA2B 55%,#2E9A1B);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 5px 0 #1D6B0F,0 9px 14px rgba(0,20,60,.35)}
+.g-blue{background:linear-gradient(#6DCEFF,#2F95F2 55%,#1C72DA);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 4px 0 #0D4A9E,0 8px 12px rgba(0,20,60,.3)}
+.g-pink{background:linear-gradient(#FF92D4,#FF3FA4 55%,#DB1F7C);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 5px 0 #8E0F4D,0 9px 14px rgba(0,20,60,.35)}
+.g-grey{background:linear-gradient(#9DAAC2,#73829E 55%,#5E6C88);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 5px 0 #3A4560,0 9px 14px rgba(0,20,60,.35)}
+.g-gold{color:#5A2E00;text-shadow:0 1px 0 rgba(255,255,255,.55);background:linear-gradient(#FFEC8F,#FFC61F 55%,#F59E00);box-shadow:inset 0 -3px 0 rgba(0,0,0,.1),0 4px 0 #B26400,0 8px 12px rgba(0,20,60,.3)}
+.pnl{background:linear-gradient(#2064CC,#1549A6);border-radius:22px;box-shadow:inset 0 0 0 3px #3F86EA,inset 0 5px 0 rgba(255,255,255,.16),0 6px 0 #0A2E70,0 12px 22px rgba(0,10,40,.4)}
+.well{background:#0D3680;border-radius:14px;box-shadow:inset 0 3px 6px rgba(0,0,0,.4),inset 0 -1px 0 rgba(255,255,255,.14)}
+.lm-cube{animation:lmCube 6s linear infinite}
+.lm-rays{animation:lmRays 20s linear infinite;transform-origin:50% 50%}
+.lm-bar{animation:lmBar 900ms var(--e) backwards}
+@keyframes lmCube{from{transform:rotateX(-22deg) rotateY(0deg)}to{transform:rotateX(-22deg) rotateY(360deg)}}
+@keyframes lmRays{to{transform:rotate(360deg)}}
+@keyframes lmBar{from{width:0}}
+@media (prefers-reduced-motion: reduce){*{animation-duration:1ms !important;animation-delay:0ms !important;animation-iteration-count:1 !important;transition-duration:1ms !important}}
+</style>
+</helmet>
+<div style="width:390px;height:844px;position:relative;overflow:hidden;background:#3A0A1E;font-family:'Baloo 2',system-ui,sans-serif;color:#FFFFFF">
+  <div style="position:absolute;inset:0;background:radial-gradient(110% 55% at 50% 38%,#D23A5A 0%,#8E1A3A 40%,#5A0F2E 70%,#2A0614 100%)"></div>
+  <svg class="lm-rays" width="900" height="900" viewBox="-450 -450 900 900" aria-hidden="true" style="position:absolute;left:-255px;top:-140px"><sc-for list="{{rays}}" as="r" hint-placeholder-count="16"><path d="M0 0L-36 -450L36 -450z" fill="#FFD45A" fill-opacity=".07" transform="rotate({{r}})"></path></sc-for></svg>
+
+  <div style="position:relative;z-index:1;height:100%;display:flex;flex-direction:column">
+    <div style="height:47px;flex:none"></div>
+    <div style="flex:none;height:58px;display:flex;align-items:center;padding:0 10px;gap:8px">
+      <a href="Collection.dc.html" aria-label="Back to collection" class="gl g-blue" style="width:42px;height:42px;border-radius:14px;flex:none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position:relative;z-index:1"><path d="M15 5l-7 7 7 7"></path></svg></a>
+      <span style="flex:1;display:flex;flex-direction:column;align-items:center">
+        <span class="ttl" style="font-size:24px">ROYAL PALACE</span>
+        <span style="height:20px;border-radius:10px;background:linear-gradient(#B98BFF,#7A45E6);font:800 11px/20px 'Baloo 2',sans-serif;padding:0 10px;letter-spacing:.06em">EPIC BOARD</span>
+      </span>
+      <span style="width:42px"></span>
+    </div>
+
+    <div style="flex:none;align-self:center;position:relative;width:316px;height:316px;margin-top:8px">
+      <div style="position:absolute;inset:0;border-radius:20px;background:{{frame}};box-shadow:inset 0 0 0 2px #FFD45A,inset 0 3px 0 rgba(255,255,255,.35),inset 0 -3px 0 rgba(0,0,0,.25),0 8px 0 {{frameEdge}},0 18px 30px rgba(0,0,0,.55);transition:background 400ms"></div>
+      <div role="img" aria-label="{{previewLabel}}" style="position:absolute;left:8px;top:8px;width:300px;height:300px;border-radius:12px;overflow:hidden;background:{{base}};box-shadow:0 0 0 2px #FFD45A">
+        <sc-for list="{{yards}}" as="y" hint-placeholder-count="4">
+          <div style="position:absolute;left:{{y.x}}px;top:{{y.y}}px;width:120px;height:120px;background:{{y.mid}}">
+            <div style="position:absolute;left:13px;top:13px;width:94px;height:94px;border-radius:14px;background:{{y.dark}};box-shadow:inset 0 3px 5px rgba(0,0,0,.18),0 1px 0 rgba(255,255,255,.25)"></div>
+          </div>
+        </sc-for>
+        <sc-for list="{{tiles}}" as="c" hint-placeholder-count="72">
+          <div style="position:absolute;left:{{c.x}}px;top:{{c.y}}px;width:19px;height:19px;background:{{c.bg}};display:grid;place-items:center">
+            <sc-if value="{{c.star}}" hint-placeholder-val="{{ false }}"><svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.5 1.4 6.5L12 17l-6 3.3 1.4-6.5-4.9-4.5 6.6-.7z" fill="{{c.starFill}}"></path></svg></sc-if>
+          </div>
+        </sc-for>
+        <div style="position:absolute;left:120px;top:120px;width:60px;height:60px">
+          <div style="position:absolute;inset:0;clip-path:polygon(0 0,100% 0,50% 50%);background:linear-gradient(#FFEA7A,#FFB800)"></div>
+          <div style="position:absolute;inset:0;clip-path:polygon(100% 0,100% 100%,50% 50%);background:linear-gradient(270deg,#5AAEFF,#1F5FC4)"></div>
+          <div style="position:absolute;inset:0;clip-path:polygon(0 100%,100% 100%,50% 50%);background:linear-gradient(0deg,#9A1A22,#C0272D)"></div>
+          <div style="position:absolute;inset:0;clip-path:polygon(0 0,0 100%,50% 50%);background:linear-gradient(90deg,#16703A,#1F8A4A)"></div>
+          <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true" style="position:absolute;left:15px;top:15px"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z" fill="#FFE27A" stroke="#8A4B00" stroke-width="1.2" stroke-linejoin="round"></path></svg>
+        </div>
+      </div>
+      <div style="position:absolute;left:8px;top:8px;width:300px;height:300px;pointer-events:none">
+        <sc-for list="{{tokens}}" as="t" hint-placeholder-count="10">
+          <span style="position:absolute;left:{{t.x}}px;top:{{t.y}}px;width:{{t.s}}px;height:{{t.s}}px">
+            <span style="position:absolute;inset:0;border-radius:50%;background:{{t.side}};transform:translateY(3px);box-shadow:0 3px 5px rgba(0,0,0,.45)"></span>
+            <span style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 50% 28%,{{t.light}} 0%,{{t.mid}} 62%,{{t.dark}} 100%);box-shadow:inset 0 0 0 2px {{t.rim}},inset 0 0 0 3.5px {{t.dark}}"></span>
+            <svg width="{{t.es}}" height="{{t.es}}" viewBox="0 0 24 24" aria-hidden="true" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)"><path d="{{t.emblem}}" fill="#FFFFFF" fill-opacity=".95"></path></svg>
+          </span>
+        </sc-for>
+      </div>
+      <div style="position:absolute;right:-6px;bottom:-12px;width:60px;height:60px;perspective:320px" aria-label="Dice preview">
+        <div class="lm-cube" style="position:relative;width:60px;height:60px;transform-style:preserve-3d">
+          <sc-for list="{{faces}}" as="f" hint-placeholder-count="6">
+            <div style="position:absolute;inset:0;border-radius:13px;background:{{f.bg}};box-shadow:inset 0 0 0 1.5px {{f.edge}},inset 0 -4px 6px rgba(0,0,0,.2);transform:{{f.tf}};display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));grid-template-rows:repeat(3, minmax(0, 1fr));padding:8px;box-sizing:border-box;backface-visibility:hidden">
+              <sc-for list="{{f.pips}}" as="q" hint-placeholder-count="9"><span style="display:grid;place-items:center"><span style="width:{{q.sz}}px;height:{{q.sz}}px;border-radius:50%;background:{{q.bg}};opacity:{{q.on}}"></span></span></sc-for>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <div role="group" aria-label="Preview with" style="flex:none;display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:8px;padding:22px 12px 0">
+      <sc-for list="{{mix}}" as="m" hint-placeholder-count="3">
+        <button type="button" aria-pressed="{{m.pressed}}" onClick="{{m.toggle}}" class="gl {{m.cls}}" style="height:50px;border-radius:15px;flex-direction:column;gap:0;font-size:13px"><span style="position:relative;z-index:1;font:800 10px 'Baloo 2',sans-serif;text-shadow:none;opacity:.9">{{m.kind}}</span><span style="position:relative;z-index:1">{{m.nm}}</span></button>
+      </sc-for>
+    </div>
+
+    <div class="pnl" style="flex:none;margin:16px 12px 0;padding:12px 14px;display:flex;flex-direction:column;gap:10px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <svg width="34" height="34" viewBox="0 0 28 28" aria-hidden="true"><path d="M14 1.5l3.6 7.4 8.1 1.2-5.9 5.7 1.4 8.1L14 20.1l-7.2 3.8 1.4-8.1-5.9-5.7 8.1-1.2z" fill="#FFC61F" stroke="#B26400" stroke-width="2" stroke-linejoin="round"></path><text x="14" y="18.5" text-anchor="middle" font-family="Lilita One" font-size="10" fill="#FFFFFF" stroke="#8A4B00" stroke-width="2.4" paint-order="stroke">12</text></svg>
+        <span style="flex:1;display:flex;flex-direction:column;gap:4px">
+          <span style="font:800 13px 'Baloo 2',sans-serif">Needs level 12 — you're level 7</span>
+          <span class="well" style="height:14px;border-radius:7px;overflow:hidden;display:block"><span class="lm-bar" style="display:block;height:14px;width:58%;border-radius:7px;background:linear-gradient(#FFEC8F,#F59E00)"></span></span>
+        </span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12l4.5 6L12 21.5 1.5 9.5z" fill="#C2186D"></path><path d="M6 3.5h12l4.5 6H1.5z" fill="#FF6CC0"></path><path d="M12 21.5L1.5 9.5h21z" fill="#F0328F"></path></svg>
+        <span style="flex:1;font:800 13px 'Baloo 2',sans-serif">Costs 150 gems — you have 86</span>
+        <a href="Earn.dc.html" style="font:800 12.5px 'Baloo 2',sans-serif;color:#FFE27A;text-decoration:none">Free gems</a>
+      </div>
+    </div>
+
+    <div style="flex:1"></div>
+    <div style="flex:none;padding:0 12px;display:flex;flex-direction:column;gap:8px">
+      <button type="button" disabled="{{true}}" class="gl g-grey" style="height:58px;border-radius:20px;font-size:20px"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="position:relative;z-index:1"><rect x="4" y="11" width="16" height="11" rx="3" fill="#FFFFFF"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="#FFFFFF" stroke-width="3"></path></svg><span style="position:relative;z-index:1">UNLOCKS AT LEVEL 12</span></button>
+      <span style="text-align:center;font:700 12px 'Baloo 2',sans-serif;color:#FFD9E2">Items you unlock are yours forever on this phone and in backups. <a href="Terms.dc.html" style="color:#FFE27A;font-weight:800">Rules</a></span>
+    </div>
+    <div style="height:30px;flex:none"></div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+const C = 20;
+const TRACK = [[13,6],[12,6],[11,6],[10,6],[9,6],[8,5],[8,4],[8,3],[8,2],[8,1],[8,0],[7,0],[6,0],[6,1],[6,2],[6,3],[6,4],[6,5],[5,6],[4,6],[3,6],[2,6],[1,6],[0,6],[0,7],[0,8],[1,8],[2,8],[3,8],[4,8],[5,8],[6,9],[6,10],[6,11],[6,12],[6,13],[6,14],[7,14],[8,14],[8,13],[8,12],[8,11],[8,10],[8,9],[9,8],[10,8],[11,8],[12,8],[13,8],[14,8],[14,7],[14,6]];
+const SEATS = {
+  red: { off: 0, yard: [9, 0], lane: [[13,7],[12,7],[11,7],[10,7],[9,7]] },
+  green: { off: 13, yard: [0, 0], lane: [[7,1],[7,2],[7,3],[7,4],[7,5]] },
+  yellow: { off: 26, yard: [0, 9], lane: [[1,7],[2,7],[3,7],[4,7],[5,7]] },
+  blue: { off: 39, yard: [9, 9], lane: [[7,13],[7,12],[7,11],[7,10],[7,9]] }
+};
+const ORDER = ['red', 'green', 'yellow', 'blue'];
+const SAFE = [0, 8, 13, 21, 26, 34, 39, 47];
+const STARTS = { 0: 'red', 13: 'green', 26: 'yellow', 39: 'blue' };
+const ROYAL = {
+  red: { light: '#E8505A', mid: '#C0272D', dark: '#7A1218', side: '#5A0A10', hole: '#8E141C' },
+  green: { light: '#4CC27A', mid: '#1F8A4A', dark: '#0E5A2C', side: '#08401E', hole: '#146A36' },
+  yellow: { light: '#FFE27A', mid: '#FFB800', dark: '#B87A00', side: '#7A5000', hole: '#C88A00' },
+  blue: { light: '#5AA0F2', mid: '#1F5FC4', dark: '#0E3A86', side: '#082A64', hole: '#14489E' }
+};
+const WOOD = {
+  red: { light: '#FF8A7A', mid: '#EC3B30', dark: '#A71D16', side: '#7E120E', hole: '#B3241C' },
+  green: { light: '#A3EC6A', mid: '#43B32D', dark: '#24781A', side: '#195A11', hole: '#2C8A1E' },
+  yellow: { light: '#FFEA7A', mid: '#FFC21F', dark: '#C88A00', side: '#8E6100', hole: '#D99A00' },
+  blue: { light: '#7CC6FF', mid: '#2381EC', dark: '#114FA8', side: '#0B3878', hole: '#1A62C4' }
+};
+const SPOT = [[1.7, 1.7], [1.7, 3.3], [3.3, 1.7], [3.3, 3.3]];
+const EMB = {
+  crown: 'M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z',
+  lotus: 'M12 4.5c1.9 2.3 2.3 4.8 0 8c-2.3-3.2-1.9-5.7 0-8zM4 9.5c3.4.2 5.9 2.1 8 5.3c-4 .4-6.8-1.3-8-5.3zM20 9.5c-3.4.2-5.9 2.1-8 5.3c4 .4 6.8-1.3 8-5.3zM7.5 17h9a4.5 2 0 0 1-9 0z'
+};
+const POS = { red: [6, 19, -1, -1], green: [3, -1, -1, 27], yellow: [9, -1, -1, -1], blue: [14, 33, -1, -1] };
+function cellOf(k, s, i) {
+  const p = SEATS[k];
+  if (s < 0) return [p.yard[0] + SPOT[i][0], p.yard[1] + SPOT[i][1]];
+  return TRACK[(p.off + s) % 52];
+}
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { board: true, puck: true, dice: true };
+  }
+  renderVals() {
+    const st = this.state;
+    const COL = st.board ? ROYAL : WOOD;
+    const tileBg = st.board ? 'linear-gradient(#FFF9EE,#F2E4C8)' : '#FFFFFF';
+    const tileEdge = st.board ? '#D9BE8A' : '#CBD5E4';
+    const tiles = [];
+    TRACK.forEach((rc, g) => {
+      const own = STARTS[g];
+      tiles.push({ x: rc[1] * C + 0.5, y: rc[0] * C + 0.5, bg: own ? COL[own].mid : tileBg, edge: own ? COL[own].dark : tileEdge, star: SAFE.includes(g), starFill: own ? '#FFFFFF' : (st.board ? '#D9BE8A' : '#C6D0DF') });
+    });
+    ORDER.forEach((k) => SEATS[k].lane.forEach((rc) => tiles.push({ x: rc[1] * C + 0.5, y: rc[0] * C + 0.5, bg: COL[k].mid, edge: COL[k].dark, star: false, starFill: 'none' })));
+    const yards = ORDER.map((k) => Object.assign({
+      x: SEATS[k].yard[1] * C, y: SEATS[k].yard[0] * C,
+      pillowBg: st.board ? 'linear-gradient(rgba(255,226,122,.35),rgba(255,226,122,.08))' : 'rgba(255,255,255,.18)',
+      slots: [[24, 24], [64, 24], [24, 64], [64, 64]].map((s) => ({ x: s[0], y: s[1] }))
+    }, COL[k]));
+    const tokens = [];
+    ORDER.forEach((k) => POS[k].forEach((s, i) => {
+      const rc = cellOf(k, s, i);
+      const size = s < 0 ? 23 : 19;
+      tokens.push(Object.assign({ x: (rc[1] + 0.5) * C - size / 2, y: (rc[0] + 0.5) * C - size / 2 - 2, s: size, es: Math.round(size * 0.62), emblem: st.puck ? EMB.crown : EMB.lotus, rim: st.puck ? '#FFD45A' : 'rgba(255,255,255,.95)' }, WOOD[k]));
+    }));
+    const PIPS = { 1: [4], 2: [0, 8], 3: [0, 4, 8], 4: [0, 2, 6, 8], 5: [0, 2, 4, 6, 8], 6: [0, 2, 3, 5, 6, 8] };
+    const dBg = st.dice ? 'radial-gradient(circle at 50% 35%,#3A4D8F 0 40%,#121C46 100%)' : 'radial-gradient(circle at 50% 35%,#FFFFFF 0 55%,#E1E6EF 100%)';
+    const dPip = st.dice ? 'radial-gradient(circle at 40% 35%,#FFF0A0,#E0A000 72%)' : 'radial-gradient(circle at 40% 35%,#5A6176,#121726 72%)';
+    const faces = [[1, 'rotateY(0deg)'], [6, 'rotateY(180deg)'], [2, 'rotateY(90deg)'], [5, 'rotateY(-90deg)'], [3, 'rotateX(90deg)'], [4, 'rotateX(-90deg)']].map((f) => ({
+      tf: f[1] + ' translateZ(30px)', bg: dBg, edge: st.dice ? '#0A1030' : '#CDD5E1',
+      pips: Array.from({ length: 9 }, (_, x) => ({ on: PIPS[f[0]].includes(x) ? 1 : 0, bg: dPip, sz: f[0] === 1 ? 15 : 9 }))
+    }));
+    const mix = [['board', 'BOARD', 'Royal Palace', 'Classic Wood'], ['puck', 'PUCKS', 'Royal Crown', 'Lotus'], ['dice', 'DICE', 'Midnight Gold', 'Classic Ivory']].map((m) => ({
+      kind: m[1], nm: st[m[0]] ? m[2] : m[3], pressed: st[m[0]] ? 'true' : 'false', cls: st[m[0]] ? 'g-gold' : 'g-blue',
+      toggle: () => this.setState({ [m[0]]: !this.state[m[0]] })
+    }));
+    return {
+      rays: Array.from({ length: 16 }, (_, i) => i * 22.5),
+      frame: st.board ? 'linear-gradient(145deg,#D23A5A,#8E1A3A 45%,#5A0F2E)' : 'linear-gradient(145deg,#E5A257,#B8692A 45%,#8C4A18)',
+      frameEdge: st.board ? '#3A0614' : '#5E2E0C', base: st.board ? '#C9A86A' : '#B6C4DA',
+      tiles, yards, tokens, faces, mix,
+      previewLabel: 'Preview of the ' + (st.board ? 'Royal Palace' : 'Classic Wood') + ' board with ' + (st.puck ? 'Royal Crown' : 'Lotus') + ' pucks'
+    };
+  }
+}
+</script>
+</body>
+</html>

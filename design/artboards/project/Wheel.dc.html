@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ludo Mela — Lucky wheel</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#FFE27A}a:hover{color:#FFF3B8}
+:root{--e:cubic-bezier(.2,.8,.2,1);--b:cubic-bezier(.34,1.56,.64,1)}
+button,a{-webkit-tap-highlight-color:transparent;transition:transform 150ms var(--b),filter 160ms var(--e),box-shadow 160ms var(--e),opacity 160ms var(--e)}
+button:focus-visible,a:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
+button:disabled{cursor:default}
+.ttl{font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-shadow:0 -1.5px 0 #0A2A6B,1.5px 0 0 #0A2A6B,0 1.5px 0 #0A2A6B,-1.5px 0 0 #0A2A6B,1.2px 1.2px 0 #0A2A6B,-1.2px 1.2px 0 #0A2A6B,1.2px -1.2px 0 #0A2A6B,-1.2px -1.2px 0 #0A2A6B,0 3px 0 #0A2A6B}
+.gl{position:relative;border:0;cursor:pointer;font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;text-shadow:0 2px 0 rgba(0,0,0,.3);box-sizing:border-box}
+.gl::after{content:'';position:absolute;left:8%;right:8%;top:3px;height:42%;border-radius:999px;background:linear-gradient(rgba(255,255,255,.6),rgba(255,255,255,0));pointer-events:none}
+.gl:active{transform:translateY(3px) scale(.98)}
+.g-green{background:linear-gradient(#8DEB50,#47BA2B 55%,#2E9A1B);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 5px 0 #1D6B0F,0 9px 14px rgba(0,20,60,.35)}
+.g-blue{background:linear-gradient(#6DCEFF,#2F95F2 55%,#1C72DA);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 5px 0 #0D4A9E,0 9px 14px rgba(0,20,60,.35)}
+.g-pink{background:linear-gradient(#FF92D4,#FF3FA4 55%,#DB1F7C);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 5px 0 #8E0F4D,0 9px 14px rgba(0,20,60,.35)}
+.g-gold{color:#5A2E00;text-shadow:0 1px 0 rgba(255,255,255,.55);background:linear-gradient(#FFEC8F,#FFC61F 55%,#F59E00);box-shadow:inset 0 -3px 0 rgba(0,0,0,.1),0 5px 0 #B26400,0 9px 14px rgba(0,20,60,.35)}
+.g-grey{background:linear-gradient(#9DAAC2,#73829E 55%,#5E6C88);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 5px 0 #3A4560,0 9px 14px rgba(0,20,60,.35)}
+.lm-rays{animation:lmRays 30s linear infinite;transform-origin:50% 50%}
+.lm-twinkle{animation:lmTwinkle .9s ease-in-out infinite}
+.lm-tick{animation:lmTick 160ms ease-in-out infinite;transform-origin:50% 10%}
+.lm-pop{animation:lmPop 560ms var(--b) backwards}
+.lm-sheet{animation:lmSheet 360ms var(--e) backwards}
+.lm-pulse{animation:lmPulse 1.4s ease-in-out infinite}
+@keyframes lmRays{to{transform:rotate(360deg)}}
+@keyframes lmTwinkle{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes lmTick{0%,100%{transform:rotate(0)}50%{transform:rotate(-16deg)}}
+@keyframes lmPop{from{opacity:0;transform:scale(.3)}}
+@keyframes lmSheet{from{opacity:0;transform:translateY(60px)}}
+@keyframes lmPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+@media (prefers-reduced-motion: reduce){*{animation-duration:1ms !important;animation-delay:0ms !important;animation-iteration-count:1 !important;transition-duration:1ms !important}}
+</style>
+</helmet>
+<div style="width:390px;height:844px;position:relative;overflow:hidden;background:#3E1A8E;font-family:'Baloo 2',system-ui,sans-serif;color:#FFFFFF">
+  <div style="position:absolute;inset:0;background:radial-gradient(90% 55% at 50% 45%,#B98BFF 0%,#7A45E6 35%,#4A22A8 65%,#2A0F6E 100%)"></div>
+  <svg class="lm-rays" width="1000" height="1000" viewBox="-500 -500 1000 1000" aria-hidden="true" style="position:absolute;left:-305px;top:-120px"><sc-for list="{{rays}}" as="r" hint-placeholder-count="18"><path d="M0 0L-40 -500L40 -500z" fill="#FFFFFF" fill-opacity=".07" transform="rotate({{r}})"></path></sc-for></svg>
+
+  <div style="position:relative;z-index:1;height:100%;display:flex;flex-direction:column;align-items:center">
+    <div style="height:47px;flex:none"></div>
+    <div style="width:100%;height:58px;flex:none;display:flex;align-items:center;padding:0 10px;box-sizing:border-box;gap:8px">
+      <a href="Earn.dc.html" aria-label="Back" class="gl g-blue" style="width:42px;height:42px;border-radius:14px;flex:none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position:relative;z-index:1"><path d="M15 5l-7 7 7 7"></path></svg></a>
+      <h1 class="ttl" style="margin:0;flex:1;text-align:center;font-size:28px">LUCKY WHEEL</h1>
+      <button type="button" onClick="{{toggleOdds}}" aria-expanded="{{oddsOpen}}" class="gl g-blue" style="height:42px;border-radius:14px;font-size:14px;padding:0 12px;flex:none"><span style="position:relative;z-index:1">ODDS</span></button>
+    </div>
+    <span style="font:800 13px 'Baloo 2',sans-serif;color:#EADDFF">1 free spin every 24 h · +1 with an ad</span>
+
+    <div style="position:relative;width:348px;height:400px;flex:none;margin-top:16px">
+      <div style="position:absolute;left:0;top:18px;width:348px;height:348px;border-radius:50%;background:linear-gradient(#FFE27A,#E89A00);box-shadow:inset 0 4px 0 rgba(255,255,255,.6),inset 0 -6px 0 rgba(0,0,0,.2),0 8px 0 #8A4B00,0 20px 34px rgba(0,0,0,.45)">
+        <sc-for list="{{rim}}" as="b" hint-placeholder-count="20"><span class="lm-twinkle" style="position:absolute;left:{{b.x}}px;top:{{b.y}}px;width:12px;height:12px;border-radius:6px;background:radial-gradient(circle at 40% 35%,#FFFFFF,#FFE27A 60%,#FFB000);box-shadow:0 0 10px #FFF3B0;animation-delay:{{b.d}}"></span></sc-for>
+        <div role="img" aria-label="Prize wheel with 8 prizes" style="position:absolute;left:24px;top:24px;width:300px;height:300px;border-radius:50%;background:conic-gradient(#FF5A4E 0 45deg,#2F95F2 45deg 90deg,#47BA2B 90deg 135deg,#FF3FA4 135deg 180deg,#FFC21F 180deg 225deg,#8B55F0 225deg 270deg,#14B8C8 270deg 315deg,#FF8A1F 315deg 360deg);transform:rotate({{rot}}deg);transition:transform 4.2s cubic-bezier(.12,.8,.18,1);box-shadow:inset 0 0 0 5px rgba(255,255,255,.6),inset 0 0 30px rgba(0,0,0,.25)">
+          <sc-for list="{{segs}}" as="s" hint-placeholder-count="8">
+            <div style="position:absolute;left:150px;top:150px;width:0;height:0;transform:rotate({{s.a}}deg)">
+              <span style="position:absolute;left:-1px;top:-150px;width:2px;height:150px;background:rgba(255,255,255,.55);transform:rotate(22.5deg);transform-origin:50% 100%"></span>
+              <span style="position:absolute;left:-46px;top:-136px;width:92px;display:flex;flex-direction:column;align-items:center;gap:2px">
+                <sc-if value="{{s.coin}}" hint-placeholder-val="{{ true }}"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13.2" r="9" fill="#B86E00"></circle><circle cx="12" cy="11.6" r="9" fill="#FFC928"></circle><circle cx="12" cy="11.6" r="6" fill="#FFAE00" stroke="#FFE680" stroke-width="1.2"></circle></svg></sc-if>
+                <sc-if value="{{s.gem}}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12l4.5 6L12 21.5 1.5 9.5z" fill="#C2186D"></path><path d="M6 3.5h12l4.5 6H1.5z" fill="#FF6CC0"></path><path d="M12 21.5L1.5 9.5h21z" fill="#F0328F"></path></svg></sc-if>
+                <sc-if value="{{s.dice}}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="#FFFFFF" stroke="#0A2A6B" stroke-width="1.4"></rect><circle cx="8" cy="8" r="1.8" fill="#E8322B"></circle><circle cx="12" cy="12" r="1.8" fill="#1B2030"></circle><circle cx="16" cy="16" r="1.8" fill="#1B2030"></circle></svg></sc-if>
+                <span class="ttl" style="font-size:16px;line-height:1">{{s.big}}</span>
+              </span>
+            </div>
+          </sc-for>
+        </div>
+        <button type="button" onClick="{{spin}}" disabled="{{spinOff}}" aria-label="Spin the wheel" class="gl g-gold {{hubPulse}}" style="position:absolute;left:128px;top:128px;width:92px;height:92px;border-radius:46px;font-size:24px;box-shadow:0 0 0 6px #FFFFFF,inset 0 -4px 0 rgba(0,0,0,.12),0 6px 0 6px #8A4B00,0 12px 20px rgba(0,0,0,.4)"><span style="position:relative;z-index:1">SPIN</span></button>
+      </div>
+      <svg class="{{tick}}" width="44" height="54" viewBox="0 0 44 54" aria-hidden="true" style="position:absolute;left:152px;top:0;z-index:3"><path d="M4 4h36L22 50z" fill="#F2463B" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round"></path><circle cx="22" cy="14" r="5" fill="#FFFFFF"></circle></svg>
+    </div>
+
+    <div style="flex:1"></div>
+    <div aria-live="polite" style="width:100%;padding:0 20px;box-sizing:border-box;display:flex;flex-direction:column;gap:12px">
+      <sc-if value="{{hasWin}}" hint-placeholder-val="{{ false }}">
+        <div class="lm-pop" style="height:64px;border-radius:22px;background:linear-gradient(#FFFFFF,#E8F1FF);box-shadow:0 5px 0 #9FB4D6,0 10px 20px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;gap:10px">
+          <span style="font:800 15px 'Baloo 2',sans-serif;color:#0A2A6B">YOU WON</span>
+          <span style="font:400 28px 'Lilita One',sans-serif;color:#2E9A1B;letter-spacing:.4px">{{winText}}</span>
+        </div>
+      </sc-if>
+      <button type="button" onClick="{{spin}}" disabled="{{spinOff}}" class="gl {{ctaCls}}" style="height:60px;border-radius:20px;font-size:22px">
+        <sc-if value="{{ctaAd}}" hint-placeholder-val="{{ false }}"><span style="position:relative;z-index:1;font:800 11px/1 'Baloo 2',sans-serif;color:#3A2200;background:#FFC61F;border-radius:4px;padding:4px 6px 2px;text-shadow:none">Ad</span></sc-if>
+        <span style="position:relative;z-index:1">{{cta}}</span>
+      </button>
+      <span style="text-align:center;font:700 12px 'Baloo 2',sans-serif;color:#EADDFF">Dice you already own turn into 2,000 coins. Spins can't be bought.</span>
+    </div>
+    <div style="height:40px;flex:none"></div>
+  </div>
+
+  <sc-if value="{{oddsShown}}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;inset:0;z-index:10;background:rgba(10,6,40,.6)">
+      <div class="lm-sheet" role="dialog" aria-label="Wheel odds" style="position:absolute;left:12px;right:12px;bottom:24px;border-radius:26px;background:linear-gradient(#2064CC,#1549A6);box-shadow:inset 0 0 0 4px #3F86EA,0 8px 0 #0A2E70,0 20px 40px rgba(0,0,0,.5);padding:18px;display:flex;flex-direction:column;gap:6px">
+        <span class="ttl" style="font-size:22px;text-align:center">ODDS FOR EVERY SPIN</span>
+        <sc-for list="{{odds}}" as="o" hint-placeholder-count="8">
+          <span style="display:flex;align-items:center;gap:10px;height:30px"><span style="width:16px;height:16px;border-radius:5px;background:{{o.c}};box-shadow:0 0 0 2px #FFFFFF"></span><span style="flex:1;font:800 14px 'Baloo 2',sans-serif">{{o.label}}</span><span class="ttl" style="font-size:15px">{{o.p}}%</span></span>
+        </sc-for>
+        <span style="font:700 12px/1.4 'Baloo 2',sans-serif;color:#CFE3FF">Free and ad spins have the same odds.</span>
+        <button type="button" onClick="{{toggleOdds}}" class="gl g-green" style="height:50px;border-radius:16px;font-size:19px;margin-top:4px"><span style="position:relative;z-index:1">GOT IT</span></button>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+const SEGS = [
+  ['100', 'coins', 30, '#FF5A4E', 'coin'], ['2', 'gems', 15, '#2F95F2', 'gem'], ['250', 'coins', 22, '#47BA2B', 'coin'], ['5', 'gems', 9, '#FF3FA4', 'gem'],
+  ['500', 'coins', 12, '#FFC21F', 'coin'], ['10', 'gems', 2, '#8B55F0', 'gem'], ['1,000', 'coins', 6, '#14B8C8', 'coin'], ['RARE', 'dice', 4, '#FF8A1F', 'dice']
+];
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { rot: 0, spinning: false, win: -1, free: 1, adSpins: 1, odds: false };
+  }
+  componentWillUnmount() { clearTimeout(this.t); }
+  spin() {
+    const st = this.state;
+    if (st.spinning || (st.free < 1 && st.adSpins < 1)) return;
+    let r = Math.random() * 100;
+    let i = 0;
+    while (i < SEGS.length - 1 && r >= SEGS[i][2]) { r -= SEGS[i][2]; i += 1; }
+    const rot = st.rot - (st.rot % 360) + 360 * 5 + (360 - (i * 45 + 22.5));
+    const free = st.free > 0 ? st.free - 1 : 0;
+    const adSpins = st.free > 0 ? st.adSpins : st.adSpins - 1;
+    this.setState({ rot, spinning: true, win: -1, free, adSpins });
+    this.t = setTimeout(() => this.setState({ spinning: false, win: i }), 4300);
+  }
+  renderVals() {
+    const st = this.state;
+    const rim = Array.from({ length: 20 }, (_, i) => {
+      const a = (i / 20) * Math.PI * 2;
+      return { x: (174 + Math.sin(a) * 162 - 6).toFixed(1), y: (174 - Math.cos(a) * 162 - 6).toFixed(1), d: (i % 2) * 0.45 + 's' };
+    });
+    const none = st.free < 1 && st.adSpins < 1;
+    const ad = st.free < 1 && st.adSpins > 0;
+    const w = st.win >= 0 ? SEGS[st.win] : null;
+    return {
+      rays: Array.from({ length: 18 }, (_, i) => i * 20),
+      rim, rot: st.rot,
+      segs: SEGS.map((s, i) => ({ a: i * 45 + 22.5, big: s[0], coin: s[4] === 'coin', gem: s[4] === 'gem', dice: s[4] === 'dice' })),
+      spin: () => this.spin(), spinOff: st.spinning || none,
+      tick: st.spinning ? 'lm-tick' : '', hubPulse: !st.spinning && !none ? 'lm-pulse' : '',
+      hasWin: !!w && !st.spinning, winText: w ? w[0] + ' ' + w[1] : '',
+      cta: st.spinning ? 'SPINNING…' : none ? 'NEXT FREE SPIN IN 24 H' : ad ? 'SPIN AGAIN' : 'SPIN FREE',
+      ctaAd: ad && !st.spinning,
+      ctaCls: none || st.spinning ? 'g-grey' : ad ? 'g-pink' : 'g-green',
+      oddsShown: st.odds, oddsOpen: st.odds ? 'true' : 'false',
+      toggleOdds: () => this.setState({ odds: !this.state.odds }),
+      odds: SEGS.map((s) => ({ label: s[0] + ' ' + s[1], p: s[2], c: s[3] }))
+    };
+  }
+}
+</script>
+</body>
+</html>

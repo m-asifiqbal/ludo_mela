@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The game's deep blue (LmColors.deep): what the window shows before the first Flutter frame,
+         so launching never flashes white. -->
+    <color name="launch_background">#FF0F45A6</color>
+</resources>

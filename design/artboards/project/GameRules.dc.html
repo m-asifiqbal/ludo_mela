@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ludo Mela — Rules and AI engine</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#FFE27A}a:hover{color:#FFF3B8}
+.ttl{font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-shadow:0 -1.5px 0 #0A2A6B,1.5px 0 0 #0A2A6B,0 1.5px 0 #0A2A6B,-1.5px 0 0 #0A2A6B,1.2px 1.2px 0 #0A2A6B,-1.2px 1.2px 0 #0A2A6B,1.2px -1.2px 0 #0A2A6B,-1.2px -1.2px 0 #0A2A6B,0 3px 0 #0A2A6B}
+.pnl{background:linear-gradient(#2064CC,#1549A6);border-radius:24px;box-shadow:inset 0 0 0 3px #3F86EA,inset 0 5px 0 rgba(255,255,255,.16),0 6px 0 #0A2E70,0 12px 22px rgba(0,10,40,.4)}
+.well{background:#0D3680;border-radius:12px;box-shadow:inset 0 3px 6px rgba(0,0,0,.4),inset 0 -1px 0 rgba(255,255,255,.14)}
+.hd{display:grid;font:800 12px 'Baloo 2',sans-serif;color:#9CC2FF;letter-spacing:.05em;padding:0 10px;margin-top:10px;gap:10px}
+.tr{display:grid;background:#0D3680;border-radius:10px;margin-top:6px;padding:9px 10px;gap:10px;font:700 13.5px/1.35 'Baloo 2',sans-serif;color:#FFFFFF;box-shadow:inset 0 2px 4px rgba(0,0,0,.3)}
+.tr .k{font-family:'Lilita One',sans-serif;font-weight:400;letter-spacing:.3px}
+li{margin-bottom:4px}
+</style>
+</helmet>
+<div style="width:1280px;height:2140px;position:relative;overflow:hidden;background:#1250C2;font-family:'Baloo 2',system-ui,sans-serif;color:#FFFFFF">
+  <div style="position:absolute;inset:0;background:radial-gradient(90% 60% at 50% 20%,#3E9CFA 0%,#1F6EE0 40%,#1250C2 70%,#0B3592 100%)"></div>
+  <svg width="1280" height="2140" aria-hidden="true" style="position:absolute;inset:0"><defs><pattern id="jali" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M22 8l14 14-14 14L8 22zM12.5 12.5h19v19h-19z" fill="none" stroke="#FFFFFF" stroke-opacity=".06" stroke-width="1.6"></path></pattern></defs><rect width="1280" height="2140" fill="url(#jali)"></rect></svg>
+
+  <div style="position:relative;z-index:1;padding:48px 56px;display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <h1 class="ttl" style="margin:0;font-size:52px;letter-spacing:1px">RULES, MODES &amp; THE MELA ENGINE</h1>
+      <p style="margin:0;font:700 18px/1.45 'Baloo 2',sans-serif;color:#DDEEFF;max-width:1000px">“Advanced play” here means smarter opponents, richer modes and helpful previews — never rigged dice. Every die is a fair 1-in-6 roll for everyone, and the game proves it in Insights.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:24px">
+      <div class="pnl" style="padding:22px">
+        <span class="ttl" style="font-size:24px">The board &amp; a turn</span>
+        <ul style="margin:12px 0 0;padding-left:20px;font:700 14px/1.5 'Baloo 2',sans-serif;color:#DDEEFF">
+          <li>15×15 grid, 52-square loop, 5-square home lane + home: 57 positions per puck (0 = start, 56 = home).</li>
+          <li>Start squares at loop index 0 / 13 / 26 / 39; stars at 8 / 21 / 34 / 47. Starts and stars are safe.</li>
+          <li>Turn order runs clockwise from the roll-off winner (highest single roll; ties re-roll).</li>
+          <li>A 6 brings a puck out (house rule: 1 or 6). A 6, a capture or a puck reaching home gives one more roll.</li>
+          <li>Three 6s in a row: the turn ends and the third move is not played.</li>
+          <li>Landing on a rival on a non-safe square sends it back to its yard (gentle rule: 6 squares back).</li>
+          <li>Exact roll needed for home (house rule off: overshoot counts). No legal move = the turn passes after a 1 s toast.</li>
+          <li>Blockades (house rule): two of your pucks on one square can't be passed or landed on.</li>
+          <li>One legal move (or identical moves) plays itself after 0.4 s — "auto-move" in Settings.</li>
+        </ul>
+      </div>
+      <div class="pnl" style="padding:22px">
+        <span class="ttl" style="font-size:24px">Modes</span>
+        <div class="hd" style="grid-template-columns:96px 1fr 80px 46px"><span>MODE</span><span>GOAL / TWIST</span><span>TIME</span><span>SEATS</span></div>
+        <sc-for list="{{modes}}" as="m" hint-placeholder-count="6"><div class="tr" style="grid-template-columns:96px 1fr 80px 46px"><span class="k" style="color:{{m.c}}">{{m.nm}}</span><span>{{m.goal}}</span><span>{{m.t}}</span><span>{{m.p}}</span></div></sc-for>
+      </div>
+    </div>
+
+    <div class="pnl" style="padding:22px">
+      <span class="ttl" style="font-size:24px">Mela Mayhem — the party mode</span>
+      <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:24px;margin-top:12px">
+        <div>
+          <ul style="margin:0;padding-left:20px;font:700 14px/1.5 'Baloo 2',sans-serif;color:#DDEEFF">
+            <li><b style="color:#FFE27A">4 arrow tiles</b> (loop 3, 16, 29, 42): land exactly and zip 4 squares ahead (can capture at the end).</li>
+            <li><b style="color:#C49BFF">8 power tiles</b>: draw a power card; hold at most 2; play one before or after your roll.</li>
+            <li><b style="color:#FFC61F">2 chest tiles</b>: 50–300 coins (shown in the match result, kept only if you finish).</li>
+            <li><b style="color:#FF92D4">Mela events</b> every 5 rounds, announced by a banner, last 2 rounds.</li>
+            <li><b>Underdog draw</b>: the player in last place draws a card on their next 6 — visible to all, no hidden help.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="hd" style="grid-template-columns:76px 1fr 120px;margin-top:0"><span>CARD</span><span>EFFECT</span><span>COUNTER</span></div>
+          <sc-for list="{{cards}}" as="c" hint-placeholder-count="6"><div class="tr" style="grid-template-columns:76px 1fr 120px"><span class="k" style="color:{{c.c}}">{{c.nm}}</span><span>{{c.e}}</span><span>{{c.k}}</span></div></sc-for>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4, minmax(0, 1fr));gap:12px;margin-top:12px">
+        <sc-for list="{{events}}" as="e" hint-placeholder-count="4"><div class="well" style="padding:10px 12px"><span class="ttl" style="font-size:15px;color:#FFE27A">{{e.nm}}</span><p style="margin:4px 0 0;font:700 12.5px/1.4 'Baloo 2',sans-serif;color:#DDEEFF">{{e.d}}</p></div></sc-for>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:24px">
+      <div class="pnl" style="padding:22px">
+        <span class="ttl" style="font-size:24px">The Mela engine — how bots think</span>
+        <p style="margin:10px 0 0;font:700 14px/1.5 'Baloo 2',sans-serif;color:#DDEEFF">Every legal move gets a score; personality is a set of weights on the same score:</p>
+        <div class="well" style="margin-top:10px;padding:12px 14px;font:700 13.5px/1.6 'Baloo 2',sans-serif;color:#FFFFFF">
+          score = 0.5·run·to <br>+ 50 (leave yard) + 80 (reach home) + 30 (enter home lane)<br>+ 18·safe (land on a star) + 90·hunt (capture)<br>+ 28·safe · (threat<sub>before</sub> − threat<sub>after</sub>) + noise
+        </div>
+        <p style="margin:10px 0 0;font:700 13px/1.45 'Baloo 2',sans-serif;color:#DDEEFF">threat = rival pucks 1–6 squares behind that could legally land there next roll (Hard+ also counts 7–12 via 6-then-k at 1/36 each).</p>
+        <div class="hd" style="grid-template-columns:70px 1fr 72px 92px"><span>LEVEL</span><span>SEARCH</span><span>MISTAKES</span><span>THINK TIME</span></div>
+        <sc-for list="{{levels}}" as="l" hint-placeholder-count="4"><div class="tr" style="grid-template-columns:70px 1fr 72px 92px"><span class="k">{{l.nm}}</span><span>{{l.s}}</span><span>{{l.m}}</span><span>{{l.t}}</span></div></sc-for>
+      </div>
+      <div class="pnl" style="padding:22px">
+        <span class="ttl" style="font-size:24px">Personalities</span>
+        <div class="hd" style="grid-template-columns:56px 40px 40px 40px 1fr"><span>BOT</span><span>RUN</span><span>SAFE</span><span>HUNT</span><span>HABIT</span></div>
+        <sc-for list="{{bots}}" as="b" hint-placeholder-count="5"><div class="tr" style="grid-template-columns:56px 40px 40px 40px 1fr"><span class="k" style="color:{{b.c}}">{{b.nm}}</span><span>{{b.run}}</span><span>{{b.safe}}</span><span>{{b.hunt}}</span><span>{{b.h}}</span></div></sc-for>
+        <ul style="margin:12px 0 0;padding-left:20px;font:700 13.5px/1.5 'Baloo 2',sans-serif;color:#DDEEFF">
+          <li>Bots never see future dice. They roll through the same fair generator as you.</li>
+          <li>Bots react with stickers (captured → angry, capture → cool) at most once every 3 turns, and can be muted.</li>
+          <li>Expert runs in a background isolate and is cut off at 300 ms so the frame never drops.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:24px">
+      <div class="pnl" style="padding:22px">
+        <span class="ttl" style="font-size:22px">Fair dice, proven</span>
+        <ul style="margin:10px 0 0;padding-left:20px;font:700 13.5px/1.5 'Baloo 2',sans-serif;color:#DDEEFF">
+          <li>Random.secure(), uniform 1–6, one roll per press.</li>
+          <li>No rubber-banding, no streak shaping, same for bots.</li>
+          <li>Every roll is logged; Insights shows the 1–6 split against the 1-in-6 line.</li>
+          <li>“Helping dice” is an opt-in house rule, labelled on the board, and never allowed at coin tables or in Wi-Fi rooms unless the host turns it on.</li>
+        </ul>
+      </div>
+      <div class="pnl" style="padding:22px">
+        <span class="ttl" style="font-size:22px">Play helpers</span>
+        <ul style="margin:10px 0 0;padding-left:20px;font:700 13.5px/1.5 'Baloo 2',sans-serif;color:#DDEEFF">
+          <li>Move preview tags: CAPTURE · HOME · SAFE · RISKY on each destination.</li>
+          <li>Hold a puck: path dots, destination ring and the % chance of being hit.</li>
+          <li>Hint (3 per match; unlimited in practice) uses the Hard evaluation.</li>
+          <li>Smart moves %: your choice vs the Expert's, shown after every match.</li>
+          <li>Undo last move in practice only.</li>
+        </ul>
+      </div>
+      <div class="pnl" style="padding:22px">
+        <span class="ttl" style="font-size:22px">Rush &amp; Teams scoring</span>
+        <ul style="margin:10px 0 0;padding-left:20px;font:700 13.5px/1.5 'Baloo 2',sans-serif;color:#DDEEFF">
+          <li>Rush: +1 per square, +20 per capture, −10 when captured, +50 per puck home; 5-minute clock, pucks start out.</li>
+          <li>Ties in Rush: most pucks home, then furthest puck.</li>
+          <li>Teams: partners sit opposite, can share squares (forming a safe block) and never capture each other; when you finish, you roll for your partner.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":2140}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      modes: [
+        ['CLASSIC', 'All four pucks home', '20–30 min', '2–4', '#FFE27A'],
+        ['QUICK', 'Pucks start out; first two home wins', '~8 min', '2–4', '#A3F06A'],
+        ['MASTER', 'Capture once before any puck may enter your lane; blockades on', '25 min', '2–4', '#FF9A8A'],
+        ['RUSH', '5-minute clock, points decide', '5 min', '2–4', '#7CC6FF'],
+        ['MAYHEM', 'Arrows, power cards, Mela events', '12 min', '2–4', '#FF92D4'],
+        ['TEAMS', 'Opposite seats are partners', '20 min', '4', '#C49BFF']
+      ].map((m) => ({ nm: m[0], goal: m[1], t: m[2], p: m[3], c: m[4] })),
+      cards: [
+        ['SHIELD', 'Puck can’t be captured for 2 rounds', 'Freeze it', '#7DF0E4'],
+        ['DOUBLE', 'Roll two dice; use one or both', 'Shield your front puck', '#FFE27A'],
+        ['HOP +3', 'Move any of your pucks 3 squares', '—', '#A3F06A'],
+        ['SWAP', 'Trade places with a rival up to 6 ahead (not in lanes)', 'Shield', '#FF92D4'],
+        ['FREEZE', 'One rival puck skips its next move', 'Reroll', '#7CC6FF'],
+        ['REROLL', 'Roll again once this turn', '—', '#C49BFF']
+      ].map((c) => ({ nm: c[0], e: c[1], k: c[2], c: c[3] })),
+      events: [
+        ['Lucky hour', 'Captures give 2 extra rolls instead of 1.'],
+        ['Monsoon', 'Star squares drift one square forward each round.'],
+        ['Fog', 'Threat marks and RISKY tags are hidden — trust your eyes.'],
+        ['Festival lights', 'Every star and arrow glows: double chest coins.']
+      ].map((e) => ({ nm: e[0], d: e[1] })),
+      levels: [
+        ['EASY', 'Weighted random over legal moves', '35%', '0.9–1.2 s'],
+        ['NORMAL', 'Score every move, take the best', '15% noise', '0.6–0.9 s'],
+        ['HARD', 'Expectimax over the next round of rival rolls', '5%', '0.5–0.8 s'],
+        ['EXPERT', '200 Monte-Carlo rollouts per move + rival modelling', '0%', '≤ 0.3 s + 0.4 s show']
+      ].map((l) => ({ nm: l[0], s: l[1], m: l[2], t: l[3] })),
+      bots: [
+        ['Raja', '1.0', '0.6', '1.8', 'Chases captures, leaves pucks exposed', '#A3F06A'],
+        ['Mitu', '0.8', '1.8', '0.7', 'Waits on stars, rarely risks a puck', '#FFE27A'],
+        ['Tara', '1.7', '0.7', '1.0', 'Races one puck home early', '#7CC6FF'],
+        ['Golu', '1.0', '0.9', '1.2', 'Hoards power cards, loves Swap', '#FFB070'],
+        ['Nani', '1.1', '1.3', '1.2', 'Expert-only; balanced and patient', '#C49BFF']
+      ].map((b) => ({ nm: b[0], run: b[1], safe: b[2], hunt: b[3], h: b[4], c: b[5] }))
+    };
+  }
+}
+</script>
+</body>
+</html>

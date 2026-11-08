@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ludo Mela — Settings</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@600;700;800&family=Baloo+Da+2:wght@700&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#FFE27A}a:hover{color:#FFF3B8}
+:root{--e:cubic-bezier(.2,.8,.2,1);--b:cubic-bezier(.34,1.56,.64,1)}
+button,a{-webkit-tap-highlight-color:transparent;transition:transform 150ms var(--b),filter 160ms var(--e),box-shadow 160ms var(--e),opacity 160ms var(--e)}
+button:focus-visible,a:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
+.ttl{font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-shadow:0 -1.5px 0 #0A2A6B,1.5px 0 0 #0A2A6B,0 1.5px 0 #0A2A6B,-1.5px 0 0 #0A2A6B,1.2px 1.2px 0 #0A2A6B,-1.2px 1.2px 0 #0A2A6B,1.2px -1.2px 0 #0A2A6B,-1.2px -1.2px 0 #0A2A6B,0 3px 0 #0A2A6B}
+.gl{position:relative;border:0;cursor:pointer;font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;text-shadow:0 2px 0 rgba(0,0,0,.3);box-sizing:border-box}
+.gl::after{content:'';position:absolute;left:8%;right:8%;top:3px;height:42%;border-radius:999px;background:linear-gradient(rgba(255,255,255,.6),rgba(255,255,255,0));pointer-events:none}
+.gl:active{transform:translateY(3px) scale(.98)}
+.g-blue{background:linear-gradient(#6DCEFF,#2F95F2 55%,#1C72DA);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 4px 0 #0D4A9E,0 8px 12px rgba(0,20,60,.3)}
+.g-gold{color:#5A2E00;text-shadow:0 1px 0 rgba(255,255,255,.55);background:linear-gradient(#FFEC8F,#FFC61F 55%,#F59E00);box-shadow:inset 0 -3px 0 rgba(0,0,0,.1),0 4px 0 #B26400,0 8px 12px rgba(0,20,60,.3)}
+.pnl{background:linear-gradient(#2064CC,#1549A6);border-radius:22px;box-shadow:inset 0 0 0 3px #3F86EA,inset 0 5px 0 rgba(255,255,255,.16),0 6px 0 #0A2E70,0 12px 22px rgba(0,10,40,.4)}
+.well{background:#0D3680;border-radius:14px;box-shadow:inset 0 3px 6px rgba(0,0,0,.4),inset 0 -1px 0 rgba(255,255,255,.14)}
+@media (prefers-reduced-motion: reduce){*{animation-duration:1ms !important;animation-delay:0ms !important;animation-iteration-count:1 !important;transition-duration:1ms !important}}
+</style>
+</helmet>
+<div style="width:390px;height:844px;position:relative;overflow:hidden;background:#1250C2;font-family:'Baloo 2',system-ui,sans-serif;color:#FFFFFF">
+  <div style="position:absolute;inset:0;background:radial-gradient(130% 70% at 50% 30%,#3E9CFA 0%,#1F6EE0 40%,#1250C2 70%,#0B3592 100%)"></div>
+  <svg width="390" height="844" aria-hidden="true" style="position:absolute;inset:0"><defs><pattern id="jali" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M22 8l14 14-14 14L8 22zM12.5 12.5h19v19h-19z" fill="none" stroke="#FFFFFF" stroke-opacity=".07" stroke-width="1.6"></path></pattern></defs><rect width="390" height="844" fill="url(#jali)"></rect></svg>
+
+  <div style="position:relative;z-index:1;height:100%;display:flex;flex-direction:column">
+    <div style="height:47px;flex:none"></div>
+    <div style="flex:none;height:56px;display:flex;align-items:center;gap:8px;padding:0 12px;margin-top:4px">
+      <a href="Main.dc.html" aria-label="Back to lobby" class="gl g-blue" style="width:42px;height:42px;border-radius:14px;flex:none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position:relative;z-index:1"><path d="M15 5l-7 7 7 7"></path></svg></a>
+      <h1 class="ttl" style="margin:0;flex:1;font-size:26px">SETTINGS</h1>
+    </div>
+
+    <div style="flex:1;min-height:0;overflow-y:auto;padding:6px 12px 16px;display:flex;flex-direction:column;gap:10px">
+      <a href="Profile.dc.html" class="pnl" style="flex:none;height:74px;display:flex;align-items:center;gap:12px;padding:0 14px;text-decoration:none">
+        <span style="width:50px;height:50px;border-radius:14px;overflow:hidden;box-shadow:0 0 0 3px #FFFFFF;flex:none"><svg width="50" height="50" viewBox="0 0 48 48" aria-hidden="true"><path d="M0 0h48v48H0z" fill="#FFB02E"></path><path d="M5 48c1-9 9-13 19-13s18 4 19 13z" fill="#E8322B"></path><path d="M13 22a11 11 0 1 0 22 0a11 11 0 1 0-22 0z" fill="#F2B48A"></path><path d="M13 21c0-8 5-12.5 11-12.5S35 13 35 21c-2.5-3.5-6-5-11-5s-8.5 1.5-11 5z" fill="#3A2416"></path><path d="M18.2 22.5a1.7 1.7 0 1 0 3.4 0a1.7 1.7 0 1 0-3.4 0zM26.4 22.5a1.7 1.7 0 1 0 3.4 0a1.7 1.7 0 1 0-3.4 0z" fill="#2A1A12"></path><path d="M20.2 27.2q3.8 3.4 7.6 0" fill="none" stroke="#7A2E1A" stroke-width="1.6" stroke-linecap="round"></path></svg></span>
+        <span style="flex:1;display:flex;flex-direction:column"><span class="ttl" style="font-size:18px">Player</span><span style="font:800 12px 'Baloo 2',sans-serif;color:#CFE3FF">Level 7 · 340 / 450 XP · edit name and avatar</span></span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg>
+      </a>
+
+      <sc-for list="{{sections}}" as="sec" hint-placeholder-count="6">
+        <span class="ttl" style="font-size:15px;margin:8px 4px 0">{{sec.title}}</span>
+        <div class="pnl" style="flex:none;padding:2px 14px">
+          <sc-for list="{{sec.rows}}" as="r" hint-placeholder-count="4">
+            <div style="min-height:58px;display:flex;align-items:center;gap:12px;border-top:1px solid {{r.line}};padding:7px 0;box-sizing:border-box">
+              <span style="flex:1;display:flex;flex-direction:column;gap:1px"><span id="{{r.id}}" style="font:800 14.5px/1.25 'Baloo 2',sans-serif;color:{{r.ink}}">{{r.title}}</span><sc-if value="{{r.hasSub}}" hint-placeholder-val="{{ true }}"><span style="font:700 12px/1.3 'Baloo 2',sans-serif;color:#CFE3FF">{{r.sub}}</span></sc-if></span>
+              <sc-if value="{{r.isSwitch}}" hint-placeholder-val="{{ true }}"><button type="button" role="switch" aria-checked="{{r.checked}}" aria-labelledby="{{r.id}}" onClick="{{r.toggle}}" style="position:relative;width:56px;height:34px;border:0;border-radius:17px;background:{{r.bg}};box-shadow:inset 0 2px 4px rgba(0,0,0,.35);padding:0;cursor:pointer;flex:none"><span style="position:absolute;left:3px;top:3px;width:28px;height:28px;border-radius:14px;background:linear-gradient(#FFFFFF,#DDE6F2);box-shadow:0 2px 0 rgba(0,0,0,.25);transform:translateX({{r.x}}px);transition:transform 220ms cubic-bezier(.34,1.56,.64,1)"></span></button></sc-if>
+              <sc-if value="{{r.isSeg}}" hint-placeholder-val="{{ false }}"><div role="radiogroup" aria-labelledby="{{r.id}}" class="well" style="height:38px;padding:3px;display:flex;gap:3px;box-sizing:border-box;flex:none"><sc-for list="{{r.opts}}" as="o" hint-placeholder-count="3"><button type="button" role="radio" aria-checked="{{o.checked}}" onClick="{{o.pick}}" class="gl {{o.cls}}" style="height:32px;min-width:46px;border-radius:10px;font-size:12.5px;padding:0 8px;font-family:{{o.font}}"><span style="position:relative;z-index:1">{{o.label}}</span></button></sc-for></div></sc-if>
+              <sc-if value="{{r.isLink}}" hint-placeholder-val="{{ false }}"><span style="display:flex;align-items:center;gap:6px"><span style="font:800 12.5px 'Baloo 2',sans-serif;color:#FFE27A">{{r.value}}</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></span></sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
+    <div style="height:30px;flex:none"></div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      sky: 1, cvd: false, big: false, speed: 1, cam: 0, lang: 0,
+      autoMove: true, tags: true, hintsArena: false, lefty: false,
+      sound: true, music: true, buzz: true, reduce: false, voice: false,
+      giftAlert: true, spinAlert: true, parent: false
+    };
+  }
+  renderVals() {
+    const st = this.state;
+    let n = 0;
+    const sw = (key, title, sub) => ({
+      id: 'set' + (n++), title, sub: sub || '', hasSub: !!sub, isSwitch: true, isSeg: false, isLink: false, ink: '#FFFFFF',
+      checked: st[key] ? 'true' : 'false', bg: st[key] ? '#47BA2B' : '#3A5A94', x: st[key] ? 22 : 0,
+      toggle: () => this.setState({ [key]: !this.state[key] })
+    });
+    const seg = (key, title, labels, sub, fonts) => ({
+      id: 'set' + (n++), title, sub: sub || '', hasSub: !!sub, isSwitch: false, isSeg: true, isLink: false, ink: '#FFFFFF',
+      opts: labels.map((l, i) => ({ label: l, checked: st[key] === i ? 'true' : 'false', cls: st[key] === i ? 'g-gold' : 'g-blue', font: fonts ? fonts[i] : "'Lilita One',sans-serif", pick: () => this.setState({ [key]: i }) }))
+    });
+    const link = (title, sub, value, danger) => ({ id: 'set' + (n++), title, sub: sub || '', hasSub: !!sub, isSwitch: false, isSeg: false, isLink: true, value: value || '', ink: danger ? '#FF9A8A' : '#FFFFFF' });
+    const lines = (rows) => rows.map((r, i) => Object.assign(r, { line: i ? 'rgba(255,255,255,.14)' : 'transparent' }));
+    const sections = [
+      { title: 'Look', rows: lines([
+        seg('sky', 'Background', ['DAY', 'MELA', 'AUTO'], st.sky === 0 ? 'Bright sky blue' : st.sky === 1 ? 'Festival blue with lights' : 'Follows your phone'),
+        seg('cam', 'Board camera', ['2D', '3D'], 'You can switch any time in a match'),
+        sw('cvd', 'Colour-blind shapes', 'Adds ● ▲ ■ ◆ marks to pucks and yards'),
+        sw('big', 'Big pucks', 'Larger pucks and tap areas on small phones')
+      ]) },
+      { title: 'Gameplay', rows: lines([
+        seg('speed', 'Game speed', ['1×', '1.5×', '2×'], 'Hops, bots and dice'),
+        sw('autoMove', 'Auto-move when there’s one choice', ''),
+        sw('tags', 'Move preview tags', 'Shows CAPTURE · SAFE · RISKY on the destination'),
+        sw('hintsArena', 'Hints at coin tables', 'Off keeps venues fair; practice always has hints'),
+        sw('lefty', 'Left-handed dice tray', 'Puts your dice on the right of your avatar')
+      ]) },
+      { title: 'Sound & feel', rows: lines([
+        sw('sound', 'Sound effects', 'Dice rattle, hops, dhol on a capture'),
+        sw('music', 'Mela music', ''),
+        sw('buzz', 'Vibration', 'Light tap on landing, strong on a capture'),
+        sw('voice', 'Voice announcer', 'Reads rolls and moves aloud'),
+        sw('reduce', 'Reduce motion', 'Also on when your phone asks for it')
+      ]) },
+      { title: 'Reminders', rows: lines([
+        sw('giftAlert', 'Daily gift is ready', 'One notification, 24 h after you claim'),
+        sw('spinAlert', 'Free spin is ready', '')
+      ]) },
+      { title: 'Language', rows: lines([
+        seg('lang', 'App language', ['English', 'বাংলা', 'हिंदी'], '', ["'Lilita One',sans-serif", "'Baloo Da 2',sans-serif", "'Baloo 2',sans-serif"])
+      ]) },
+      { title: 'Data, privacy & ads', rows: lines([
+        link('Local backup', 'Automatic weekly · last 28 Oct', 'Back up now'),
+        link('Export or import progress', 'Move to a new phone with a file'),
+        sw('parent', 'Parent controls', 'Turns off reward ads, coin tables and stickers'),
+        link('Ad privacy choices', 'Personalised or basic ads'),
+        link('Remove banner & break ads', 'One-time purchase · reward ads stay optional', '[YOUR PRICE]'),
+        link('Reset all progress…', 'A backup is saved first', '', true)
+      ]) },
+      { title: 'About', rows: lines([
+        link('How to play each mode', ''),
+        link('Gems & coins rules', ''),
+        link('Licences', ''),
+        link('Version', '', '1.0.0 (1)')
+      ]) }
+    ];
+    return { sections };
+  }
+}
+</script>
+</body>
+</html>

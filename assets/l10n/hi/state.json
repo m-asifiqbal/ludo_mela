@@ -1,0 +1,18 @@
+{
+  "{n, plural, one {+# coin} other {+# coins}}": "{n, plural, one {+# सिक्का} other {+# सिक्के}}",
+  "{n, plural, one {+# gem} other {+# gems}}": "{n, plural, one {+# जेम} other {+# जेम}}",
+  "{n, plural, one {+# free spin} other {+# free spins}}": "{n, plural, one {+# फ़्री स्पिन} other {+# फ़्री स्पिन}}",
+  "New: {name}": "नया: {name}",
+  "{name} unlocked!": "{name} अनलॉक हो गया!",
+  "You already had it, so you got {n} coins instead.": "यह पहले से तुम्हारे पास था, इसलिए बदले में {n} सिक्के मिले।",
+  "{pot} added to your shelf.": "{pot} तुम्हारी शेल्फ़ पर रख दिया गया।",
+  "{pot} is waiting for a free spot on your shelf.": "{pot} शेल्फ़ पर खाली जगह का इंतज़ार कर रहा है।",
+  "This item is not available.": "यह आइटम उपलब्ध नहीं है।",
+  "You already have this.": "यह तुम्हारे पास पहले से है।",
+  "Get it first, then you can upgrade it.": "पहले इसे पाओ, फिर अपग्रेड कर सकोगे।",
+  "This one cannot be bought. Earn it in the game.": "इसे खरीदा नहीं जा सकता। खेलकर कमाओ।",
+  "Reach level {n} to unlock this.": "इसे अनलॉक करने के लिए लेवल {n} तक पहुँचो।",
+  "Not enough gems.": "जेम काफ़ी नहीं हैं।",
+  "Not enough coins.": "सिक्के काफ़ी नहीं हैं।",
+  "Already at the top level.": "यह पहले से सबसे ऊँचे लेवल पर है।"
+}

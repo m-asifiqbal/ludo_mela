@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ludo Mela — Mela Road</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#FFE27A}a:hover{color:#FFF3B8}
+:root{--e:cubic-bezier(.2,.8,.2,1);--b:cubic-bezier(.34,1.56,.64,1)}
+button,a{-webkit-tap-highlight-color:transparent;transition:transform 150ms var(--b),filter 160ms var(--e),box-shadow 160ms var(--e),opacity 160ms var(--e)}
+button:focus-visible,a:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
+.ttl{font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-shadow:0 -1.5px 0 #0A2A6B,1.5px 0 0 #0A2A6B,0 1.5px 0 #0A2A6B,-1.5px 0 0 #0A2A6B,1.2px 1.2px 0 #0A2A6B,-1.2px 1.2px 0 #0A2A6B,1.2px -1.2px 0 #0A2A6B,-1.2px -1.2px 0 #0A2A6B,0 3px 0 #0A2A6B}
+.gl{position:relative;border:0;cursor:pointer;font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;text-shadow:0 2px 0 rgba(0,0,0,.3);box-sizing:border-box}
+.gl::after{content:'';position:absolute;left:8%;right:8%;top:3px;height:42%;border-radius:999px;background:linear-gradient(rgba(255,255,255,.6),rgba(255,255,255,0));pointer-events:none}
+.gl:active{transform:translateY(3px) scale(.98)}
+.g-green{background:linear-gradient(#8DEB50,#47BA2B 55%,#2E9A1B);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 4px 0 #1D6B0F,0 8px 12px rgba(0,20,60,.35)}
+.g-blue{background:linear-gradient(#6DCEFF,#2F95F2 55%,#1C72DA);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 4px 0 #0D4A9E,0 8px 12px rgba(0,20,60,.3)}
+.well{background:#0D3680;border-radius:14px;box-shadow:inset 0 3px 6px rgba(0,0,0,.4),inset 0 -1px 0 rgba(255,255,255,.14)}
+.lm-glow{animation:lmGlow 1.3s ease-in-out infinite}
+.lm-bob{animation:lmBob 1.4s ease-in-out infinite}
+.lm-rise{animation:lmRise 420ms var(--e) backwards}
+.lm-bar{animation:lmBar 900ms var(--e) backwards}
+@keyframes lmGlow{0%,100%{box-shadow:0 0 0 4px #FFFFFF,0 0 0 8px #FFC61F,0 0 0 8px rgba(255,198,31,.6)}50%{box-shadow:0 0 0 4px #FFFFFF,0 0 0 8px #FFC61F,0 0 0 18px rgba(255,198,31,0)}}
+@keyframes lmBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes lmRise{from{opacity:0;transform:translateY(12px)}}
+@keyframes lmBar{from{width:0}}
+@media (prefers-reduced-motion: reduce){*{animation-duration:1ms !important;animation-delay:0ms !important;animation-iteration-count:1 !important;transition-duration:1ms !important}}
+</style>
+</helmet>
+<div style="width:390px;height:844px;position:relative;overflow:hidden;background:#1250C2;font-family:'Baloo 2',system-ui,sans-serif;color:#FFFFFF">
+  <div style="position:absolute;inset:0;background:linear-gradient(#0B3592,#1F6EE0 45%,#3E9CFA)"></div>
+  <svg width="390" height="844" aria-hidden="true" style="position:absolute;inset:0"><defs><pattern id="jali" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M22 8l14 14-14 14L8 22zM12.5 12.5h19v19h-19z" fill="none" stroke="#FFFFFF" stroke-opacity=".07" stroke-width="1.6"></path></pattern></defs><rect width="390" height="844" fill="url(#jali)"></rect></svg>
+
+  <div style="position:relative;z-index:1;height:100%;display:flex;flex-direction:column">
+    <div style="height:47px;flex:none"></div>
+    <div style="flex:none;height:58px;background:linear-gradient(#FFEC8F,#F2A100);box-shadow:inset 0 3px 0 rgba(255,255,255,.55),inset 0 -4px 0 #B26400,0 4px 10px rgba(0,0,0,.25);display:flex;align-items:center;padding:0 10px;gap:8px">
+      <a href="Main.dc.html" aria-label="Back to lobby" class="gl g-blue" style="width:42px;height:42px;border-radius:14px;flex:none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position:relative;z-index:1"><path d="M15 5l-7 7 7 7"></path></svg></a>
+      <h1 class="ttl" style="margin:0;flex:1;font-size:26px;text-align:center;padding-right:50px">MELA ROAD</h1>
+    </div>
+    <div style="flex:none;padding:12px 14px 4px;display:flex;align-items:center;gap:10px">
+      <svg width="40" height="40" viewBox="0 0 28 28" aria-hidden="true"><path d="M14 1.5l3.6 7.4 8.1 1.2-5.9 5.7 1.4 8.1L14 20.1l-7.2 3.8 1.4-8.1-5.9-5.7 8.1-1.2z" fill="#FFC61F" stroke="#B26400" stroke-width="2" stroke-linejoin="round"></path><text x="14" y="18.5" text-anchor="middle" font-family="Lilita One" font-size="11" fill="#FFFFFF" stroke="#8A4B00" stroke-width="2.4" paint-order="stroke">7</text></svg>
+      <span style="flex:1;display:flex;flex-direction:column;gap:4px">
+        <span style="font:800 13px 'Baloo 2',sans-serif">340 / 450 XP to level 8</span>
+        <span class="well" style="height:16px;border-radius:8px;overflow:hidden;display:block"><span class="lm-bar" style="display:block;height:16px;width:75%;border-radius:8px;background:linear-gradient(#A3F06A,#47BA2B);box-shadow:inset 0 3px 0 rgba(255,255,255,.35)"></span></span>
+      </span>
+    </div>
+    <span style="flex:none;padding:0 14px;font:700 12px 'Baloo 2',sans-serif;color:#DDEEFF">XP: 20 per game, +30 for a win, +5 per capture and per puck home.</span>
+
+    <div style="flex:1;min-height:0;overflow-y:auto;position:relative;margin-top:8px">
+      <div style="position:relative;height:{{h}}px">
+        <svg width="390" height="{{h}}" viewBox="0 0 390 {{h}}" aria-hidden="true" style="position:absolute;inset:0"><path d="{{road}}" fill="none" stroke="#0A2A6B" stroke-opacity=".45" stroke-width="34" stroke-linecap="round"></path><path d="{{road}}" fill="none" stroke="#FFE7B0" stroke-width="24" stroke-linecap="round"></path><path d="{{road}}" fill="none" stroke="#E8B860" stroke-width="3" stroke-dasharray="10 12" stroke-linecap="round"></path><path d="{{done}}" fill="none" stroke="#8DEB50" stroke-width="10" stroke-linecap="round"></path></svg>
+        <sc-for list="{{nodes}}" as="n" hint-placeholder-count="8">
+          <div class="lm-rise" style="position:absolute;left:{{n.x}}px;top:{{n.y}}px;width:56px;height:56px;animation-delay:{{n.d}}">
+            <span class="{{n.glow}}" style="position:absolute;inset:0;border-radius:28px;background:{{n.bg}};box-shadow:0 0 0 4px #FFFFFF,0 5px 0 4px {{n.edge}},0 10px 16px 4px rgba(0,0,0,.3);display:grid;place-items:center">
+              <span class="ttl" style="font-size:22px">{{n.lv}}</span>
+            </span>
+            <sc-if value="{{n.done}}" hint-placeholder-val="{{ false }}"><span style="position:absolute;right:-6px;top:-6px;width:24px;height:24px;border-radius:12px;background:#47BA2B;box-shadow:0 0 0 2px #FFFFFF;display:grid;place-items:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span></sc-if>
+          </div>
+          <div class="lm-rise" style="position:absolute;left:{{n.cx}}px;top:{{n.cy}}px;width:178px;min-height:62px;border-radius:18px;background:{{n.cardBg}};box-shadow:inset 0 0 0 3px rgba(255,255,255,.3),inset 0 4px 0 rgba(255,255,255,.2),0 5px 0 {{n.cardEdge}},0 10px 16px rgba(0,10,40,.3);display:flex;align-items:center;gap:8px;padding:8px 10px;box-sizing:border-box;opacity:{{n.op}};animation-delay:{{n.d}}">
+            <span class="{{n.bob}}" style="width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.22);display:grid;place-items:center;flex:none"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="{{n.icon}}" fill="{{n.iconFill}}" stroke="{{n.iconInk}}" stroke-width="1.4" stroke-linejoin="round"></path></svg></span>
+            <span style="display:flex;flex-direction:column;min-width:0"><span class="ttl" style="font-size:14px;line-height:1.1">{{n.title}}</span><span style="font:800 11px/1.25 'Baloo 2',sans-serif;color:#FFFFFF;opacity:.9">{{n.sub}}</span></span>
+          </div>
+        </sc-for>
+        <div class="lm-bob" style="position:absolute;left:{{me.x}}px;top:{{me.y}}px;width:44px;height:44px;border-radius:13px;overflow:hidden;box-shadow:0 0 0 3px #FFFFFF,0 6px 10px rgba(0,0,0,.35)" aria-label="You are here">
+          <svg width="44" height="44" viewBox="0 0 48 48" aria-hidden="true"><path d="M0 0h48v48H0z" fill="#FFB02E"></path><path d="M5 48c1-9 9-13 19-13s18 4 19 13z" fill="#E8322B"></path><path d="M13 22a11 11 0 1 0 22 0a11 11 0 1 0-22 0z" fill="#F2B48A"></path><path d="M13 21c0-8 5-12.5 11-12.5S35 13 35 21c-2.5-3.5-6-5-11-5s-8.5 1.5-11 5z" fill="#3A2416"></path><path d="M18.2 22.5a1.7 1.7 0 1 0 3.4 0a1.7 1.7 0 1 0-3.4 0zM26.4 22.5a1.7 1.7 0 1 0 3.4 0a1.7 1.7 0 1 0-3.4 0z" fill="#2A1A12"></path><path d="M20.2 27.2q3.8 3.4 7.6 0" fill="none" stroke="#7A2E1A" stroke-width="1.6" stroke-linecap="round"></path></svg>
+        </div>
+      </div>
+    </div>
+    <div style="height:30px;flex:none"></div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+const COIN = 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z';
+const GEM = 'M6 3.5h12l4.5 6L12 21.5 1.5 9.5z';
+const BOARD = 'M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z';
+const PUCK = 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18z';
+const VENUE = 'M3 21h18M5 21V10l7-6 7 6v11M10 21v-5h4v5';
+const CHEST = 'M8 7q4-1 8 0l-1 2q4 2 4 6.5q0 5-7 5.5q-7-.5-7-5.5q0-4.5 4-6.5zM7.5 4q4.5-2 9 0l-.8 3q-3.7-1-7.4 0z';
+const ROWS = [
+  [13, 'Ocean Pier opens', 'New venue · win up to 16,000', VENUE, '#7DF0E4', '#06564F', 'linear-gradient(135deg,#5CC2FF,#1F86E6)', '#0D4A9E'],
+  [12, 'Royal Palace', 'Venue + Royal board can be unlocked', VENUE, '#FFE27A', '#8A4B00', 'linear-gradient(135deg,#FF8A7A,#C8261E)', '#7A1218'],
+  [11, '+10 gems', 'Free', GEM, '#FF6CC0', '#8E0F4D', 'linear-gradient(135deg,#FF92D4,#DB1F7C)', '#7E0B44'],
+  [10, 'Epic pot', 'Coins + a chance of an Epic dice', CHEST, '#FFC61F', '#5A2E05', 'linear-gradient(135deg,#B98BFF,#6A35D6)', '#3E1A8E'],
+  [9, 'Desert Carnival', 'New venue · win up to 5,000', VENUE, '#FFE27A', '#8A4B00', 'linear-gradient(135deg,#FFB070,#E8752A)', '#8A3A00'],
+  [8, 'Wooden Peg pucks', 'Free Rare puck set', PUCK, '#E5A257', '#5E2E0C', 'linear-gradient(135deg,#5CC2FF,#1F86E6)', '#0D4A9E'],
+  [7, 'You are here', '110 XP to go', BOARD, '#FFFFFF', '#0A2A6B', 'linear-gradient(135deg,#FFE27A,#F29A00)', '#9A5600'],
+  [6, '+500 coins', 'Claimed', COIN, '#FFC928', '#B86E00', 'linear-gradient(135deg,#8DEB50,#2E9A1B)', '#1D6B0F'],
+  [5, 'Monsoon board deal', 'Claimed · 20% off', BOARD, '#7DF0E4', '#06564F', 'linear-gradient(135deg,#8DEB50,#2E9A1B)', '#1D6B0F']
+];
+const CUR = 7;
+class Component extends DCLogic {
+  renderVals() {
+    const STEP = 92;
+    const top = 30;
+    const pts = ROWS.map((r, i) => ({ x: i % 2 ? 268 : 78, y: top + i * STEP }));
+    const h = top + ROWS.length * STEP + 20;
+    const curve = (list) => list.map((p, i) => {
+      const cx = p.x + 28; const cy = p.y + 28;
+      if (!i) return 'M' + cx + ' ' + cy;
+      const q = list[i - 1];
+      const my = (q.y + 28 + cy) / 2;
+      return 'C' + (q.x + 28) + ' ' + my + ' ' + cx + ' ' + my + ' ' + cx + ' ' + cy;
+    }).join(' ');
+    const curIdx = ROWS.findIndex((r) => r[0] === CUR);
+    const nodes = ROWS.map((r, i) => {
+      const lv = r[0];
+      const done = lv < CUR;
+      const cur = lv === CUR;
+      const p = pts[i];
+      return {
+        lv, done, x: p.x, y: p.y, d: (i * 50) + 'ms',
+        bg: done ? 'linear-gradient(#8DEB50,#2E9A1B)' : cur ? 'linear-gradient(#FFEC8F,#F59E00)' : 'linear-gradient(#6DCEFF,#1C72DA)',
+        edge: done ? '#1D6B0F' : cur ? '#B26400' : '#0D4A9E', glow: cur ? 'lm-glow' : '',
+        cx: i % 2 ? 72 : 150, cy: p.y - 2, cardBg: r[6], cardEdge: r[7], op: done ? 0.75 : 1,
+        title: r[1], sub: r[2], icon: r[3], iconFill: r[4], iconInk: r[5], bob: cur || lv === CUR + 1 ? 'lm-bob' : ''
+      };
+    });
+    const me = { x: pts[curIdx].x - 54, y: pts[curIdx].y + 6 };
+    return { h, road: curve(pts), done: curve(pts.slice(curIdx)), nodes, me };
+  }
+}
+</script>
+</body>
+</html>

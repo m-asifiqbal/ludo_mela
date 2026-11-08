@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The notification's small icon: a gift box. Android draws status-bar icons as a flat white
+     silhouette, so this is one white shape (the ribbon is a gap), not the coloured launcher icon. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:fillType="evenOdd"
+        android:pathData="M3,8h18v4H3z M11,8h2v4h-2z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:fillType="evenOdd"
+        android:pathData="M4,13h16v7a1,1 0 0 1 -1,1H5a1,1 0 0 1 -1,-1z M11,13h2v7h-2z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M12,8C12,8 9.5,7.6 8.5,6.2C7.5,4.8 8.4,3 10,3C11.6,3 12,5.2 12,8z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M12,8C12,8 14.5,7.6 15.5,6.2C16.5,4.8 15.6,3 14,3C12.4,3 12,5.2 12,8z" />
+</vector>

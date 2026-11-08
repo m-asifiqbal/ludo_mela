@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ludo Mela — Motion and build spec</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#FFE27A}a:hover{color:#FFF3B8}
+:root{--e:cubic-bezier(.2,.8,.2,1);--b:cubic-bezier(.34,1.56,.64,1)}
+button{-webkit-tap-highlight-color:transparent;transition:transform 150ms var(--b),filter 160ms var(--e),box-shadow 160ms var(--e)}
+button:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
+.ttl{font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-shadow:0 -1.5px 0 #0A2A6B,1.5px 0 0 #0A2A6B,0 1.5px 0 #0A2A6B,-1.5px 0 0 #0A2A6B,1.2px 1.2px 0 #0A2A6B,-1.2px 1.2px 0 #0A2A6B,1.2px -1.2px 0 #0A2A6B,-1.2px -1.2px 0 #0A2A6B,0 3px 0 #0A2A6B}
+.gl{position:relative;border:0;cursor:pointer;font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;display:flex;align-items:center;justify-content:center;gap:6px;text-shadow:0 2px 0 rgba(0,0,0,.3);box-sizing:border-box}
+.gl::after{content:'';position:absolute;left:8%;right:8%;top:3px;height:42%;border-radius:999px;background:linear-gradient(rgba(255,255,255,.6),rgba(255,255,255,0));pointer-events:none}
+.gl:active{transform:translateY(3px) scale(.98)}
+.g-green{background:linear-gradient(#8DEB50,#47BA2B 55%,#2E9A1B);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 5px 0 #1D6B0F,0 9px 14px rgba(0,20,60,.35)}
+.g-blue{background:linear-gradient(#6DCEFF,#2F95F2 55%,#1C72DA);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 5px 0 #0D4A9E,0 9px 14px rgba(0,20,60,.35)}
+.pnl{background:linear-gradient(#2064CC,#1549A6);border-radius:24px;box-shadow:inset 0 0 0 3px #3F86EA,inset 0 5px 0 rgba(255,255,255,.16),0 6px 0 #0A2E70,0 12px 22px rgba(0,10,40,.4)}
+.well{background:#0D3680;border-radius:12px;box-shadow:inset 0 3px 6px rgba(0,0,0,.4),inset 0 -1px 0 rgba(255,255,255,.14)}
+.hd{display:grid;font:800 12px 'Baloo 2',sans-serif;color:#9CC2FF;letter-spacing:.05em;padding:0 10px;margin-top:10px;gap:10px}
+.tr{display:grid;background:#0D3680;border-radius:10px;margin-top:6px;padding:8px 10px;gap:10px;font:700 13.5px/1.35 'Baloo 2',sans-serif;color:#FFFFFF;box-shadow:inset 0 2px 4px rgba(0,0,0,.3)}
+.tr .k{font-family:'Lilita One',sans-serif;font-weight:400;letter-spacing:.3px}
+li{margin-bottom:4px}
+.lm-hopA{animation:lmHop 170ms var(--e)}
+.lm-hopB{animation:lmHop2 170ms var(--e)}
+.lm-knock{animation:lmKnock 600ms var(--e)}
+.lm-burst{animation:lmBurst 760ms var(--e) forwards}
+.lm-pop{animation:lmPop 460ms var(--b)}
+.lm-pop2{animation:lmPop2 460ms var(--b)}
+@keyframes lmHop{0%{transform:translateY(0) scale(1,1)}45%{transform:translateY(-14px) scale(.9,1.12)}85%{transform:translateY(0) scale(1.14,.84)}100%{transform:none}}
+@keyframes lmHop2{0%{transform:translateY(0) scale(1,1)}45%{transform:translateY(-14px) scale(.9,1.12)}85%{transform:translateY(0) scale(1.14,.84)}100%{transform:none}}
+@keyframes lmKnock{0%{transform:scale(1) rotate(0)}30%{transform:scale(1.5) rotate(180deg)}100%{transform:scale(1) rotate(720deg)}}
+@keyframes lmBurst{0%{opacity:1;transform:scale(.2) rotate(0)}60%{opacity:1;transform:scale(1.15) rotate(20deg)}100%{opacity:0;transform:scale(1.4) rotate(30deg)}}
+@keyframes lmPop{from{opacity:0;transform:scale(.4)}}
+@keyframes lmPop2{from{opacity:0;transform:scale(.4)}}
+@media (prefers-reduced-motion: reduce){*{animation-duration:1ms !important;animation-iteration-count:1 !important;transition-duration:1ms !important}}
+</style>
+</helmet>
+<div style="width:1280px;height:2280px;position:relative;overflow:hidden;background:#1250C2;font-family:'Baloo 2',system-ui,sans-serif;color:#FFFFFF">
+  <div style="position:absolute;inset:0;background:radial-gradient(90% 60% at 50% 20%,#3E9CFA 0%,#1F6EE0 40%,#1250C2 70%,#0B3592 100%)"></div>
+  <svg width="1280" height="2280" aria-hidden="true" style="position:absolute;inset:0"><defs><pattern id="jali" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M22 8l14 14-14 14L8 22zM12.5 12.5h19v19h-19z" fill="none" stroke="#FFFFFF" stroke-opacity=".06" stroke-width="1.6"></path></pattern></defs><rect width="1280" height="2280" fill="url(#jali)"></rect></svg>
+
+  <div style="position:relative;z-index:1;padding:48px 56px;display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <h1 class="ttl" style="margin:0;font-size:52px;letter-spacing:1px">MOTION, 2D/3D &amp; BUILD SPEC</h1>
+      <p style="margin:0;font:700 18px/1.45 'Baloo 2',sans-serif;color:#DDEEFF;max-width:1060px">Every tap answers back: buttons sink, dice tumble, pucks hop square by square, captures go POW, coins count up. Press Play on this board to try the core moments.</p>
+    </div>
+
+    <div class="pnl" style="padding:22px">
+      <span class="ttl" style="font-size:24px">Try the micro-interactions</span>
+      <div style="display:grid;grid-template-columns:repeat(4, minmax(0, 1fr));gap:18px;margin-top:14px">
+        <div class="well" style="height:190px;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:14px">
+          <div style="width:64px;height:64px;perspective:300px;margin-top:8px">
+            <div style="position:relative;width:64px;height:64px;transform-style:preserve-3d;transform:rotateX(-18deg) rotateY(22deg)">
+              <div style="position:absolute;inset:0;transform-style:preserve-3d;transform:{{dice.rot}};transition:transform 820ms cubic-bezier(.2,.9,.25,1.1)">
+                <sc-for list="{{dice.faces}}" as="f" hint-placeholder-count="6"><div style="position:absolute;inset:0;border-radius:14px;background:radial-gradient(circle at 50% 30%,#FF7A6C 0 40%,#E8322B 75%,#B11F1A 100%);box-shadow:inset 0 0 0 1px #7A100D,inset 0 3px 0 rgba(255,255,255,.35);transform:{{f.tf}};display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));grid-template-rows:repeat(3, minmax(0, 1fr));padding:8px;box-sizing:border-box;backface-visibility:hidden"><sc-for list="{{f.pips}}" as="q" hint-placeholder-count="9"><span style="display:grid;place-items:center"><span style="width:{{q.sz}}px;height:{{q.sz}}px;border-radius:50%;background:{{q.bg}};opacity:{{q.on}}"></span></span></sc-for></div></sc-for>
+              </div>
+            </div>
+          </div>
+          <button type="button" onClick="{{roll}}" class="gl g-green" style="height:42px;width:100%;border-radius:14px;font-size:16px"><span style="position:relative;z-index:1">ROLL · 820 ms</span></button>
+        </div>
+        <div class="well" style="height:190px;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:14px">
+          <div style="position:relative;width:100%;height:96px">
+            <sc-for list="{{tiles}}" as="t" hint-placeholder-count="6"><span style="position:absolute;left:{{t.x}}px;top:60px;width:30px;height:30px;border-radius:6px;background:linear-gradient(#FFFFFF,#EEF2F8);box-shadow:inset 0 -3px 0 #CBD5E4"></span></sc-for>
+            <span style="position:absolute;left:{{hopX}}px;top:56px;width:28px;height:28px;transition:left 160ms cubic-bezier(.2,.8,.2,1)">
+              <span class="{{hopAnim}}" style="position:absolute;inset:0;display:block"><span style="position:absolute;inset:0;border-radius:50%;background:#7E120E;transform:translateY(4px)"></span><span style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 50% 28%,#FF8A7A,#EC3B30 62%,#A71D16);box-shadow:inset 0 0 0 2.5px #FFFFFF,inset 0 0 0 4px #A71D16"></span></span>
+            </span>
+          </div>
+          <button type="button" onClick="{{hop}}" class="gl g-blue" style="height:42px;width:100%;border-radius:14px;font-size:16px"><span style="position:relative;z-index:1">HOP 5 · 170 ms/sq</span></button>
+        </div>
+        <div class="well" style="height:190px;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:14px">
+          <div style="position:relative;width:120px;height:110px;display:grid;place-items:center">
+            <sc-if value="{{burstOn}}" hint-placeholder-val="{{ false }}"><svg class="lm-burst" width="110" height="110" viewBox="0 0 90 90" aria-hidden="true" style="position:absolute;left:5px;top:0"><path d="M45 4l7 22 21-10-10 21 22 8-22 8 10 21-21-10-7 22-7-22-21 10 10-21-22-8 22-8-10-21 21 10z" fill="#F2463B" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"></path><text x="45" y="52" text-anchor="middle" font-family="Lilita One" font-size="17" fill="#FFFFFF" stroke="#0A2A6B" stroke-width="3" paint-order="stroke">POW!</text></svg></sc-if>
+            <span class="{{knockAnim}}" style="position:relative;width:32px;height:32px;display:block"><span style="position:absolute;inset:0;border-radius:50%;background:#0B3878;transform:translateY(4px)"></span><span style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 50% 28%,#7CC6FF,#2381EC 62%,#114FA8);box-shadow:inset 0 0 0 2.5px #FFFFFF,inset 0 0 0 4px #114FA8"></span></span>
+          </div>
+          <button type="button" onClick="{{capture}}" class="gl g-green" style="height:42px;width:100%;border-radius:14px;font-size:16px;background:linear-gradient(#FF9384,#F2463B 55%,#D22A21);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 5px 0 #8A1410"><span style="position:relative;z-index:1">CAPTURE · 600 ms</span></button>
+        </div>
+        <div class="well" style="height:190px;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:14px">
+          <div style="height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px">
+            <span class="ttl {{coinAnim}}" style="font-size:40px;color:#FFE27A;font-variant-numeric:tabular-nums">+{{coins}}</span>
+            <span style="font:800 12px 'Baloo 2',sans-serif;color:#CFE3FF">count-up 40 ms per step · pop on finish</span>
+          </div>
+          <button type="button" onClick="{{count}}" class="gl g-blue" style="height:42px;width:100%;border-radius:14px;font-size:16px"><span style="position:relative;z-index:1">COINS · 1 s</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:24px">
+      <div class="pnl" style="padding:22px">
+        <span class="ttl" style="font-size:24px">Motion tokens</span>
+        <div class="hd" style="grid-template-columns:160px 90px 1fr"><span>MOMENT</span><span>TIME</span><span>FEEL</span></div>
+        <sc-for list="{{tokens}}" as="t" hint-placeholder-count="12"><div class="tr" style="grid-template-columns:160px 90px 1fr"><span class="k">{{t.m}}</span><span>{{t.t}}</span><span>{{t.f}}</span></div></sc-for>
+        <p style="margin:10px 0 0;font:700 13px/1.45 'Baloo 2',sans-serif;color:#DDEEFF">Curves: standard (.2,.8,.2,1) · pop (.34,1.56,.64,1) · dice land (.2,.9,.25,1.1). Game speed 1.5× / 2× scales hop, bot think and toast times — never the dice roll. Reduce motion: 1 ms transitions, no tilt camera, no confetti, dice show the face with a soft fade.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <div class="pnl" style="padding:22px">
+          <span class="ttl" style="font-size:24px">Haptics &amp; sound</span>
+          <div class="hd" style="grid-template-columns:120px 1fr 1fr"><span>EVENT</span><span>HAPTIC</span><span>SOUND</span></div>
+          <sc-for list="{{feel}}" as="f" hint-placeholder-count="7"><div class="tr" style="grid-template-columns:120px 1fr 1fr"><span class="k">{{f.e}}</span><span>{{f.h}}</span><span>{{f.s}}</span></div></sc-for>
+        </div>
+        <div class="pnl" style="padding:22px">
+          <span class="ttl" style="font-size:24px">Where 2D, where 3D</span>
+          <div class="hd" style="grid-template-columns:110px 1fr"><span>ELEMENT</span><span>CHOICE &amp; WHY</span></div>
+          <sc-for list="{{dims}}" as="d" hint-placeholder-count="6"><div class="tr" style="grid-template-columns:110px 1fr"><span class="k" style="color:{{d.c}}">{{d.e}}</span><span>{{d.w}}</span></div></sc-for>
+        </div>
+      </div>
+    </div>
+
+    <div class="pnl" style="padding:22px">
+      <span class="ttl" style="font-size:24px">What the best Ludo games do — and what we take</span>
+      <div class="hd" style="grid-template-columns:160px 1fr 1fr"><span>GAME</span><span>KNOWN FOR</span><span>OUR TAKE</span></div>
+      <sc-for list="{{research}}" as="r" hint-placeholder-count="5"><div class="tr" style="grid-template-columns:160px 1fr 1fr"><span class="k">{{r.g}}</span><span>{{r.k}}</span><span>{{r.t}}</span></div></sc-for>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:24px">
+      <div class="pnl" style="padding:22px">
+        <span class="ttl" style="font-size:24px">Flutter build</span>
+        <ul style="margin:12px 0 0;padding-left:20px;font:700 13.5px/1.5 'Baloo 2',sans-serif;color:#DDEEFF">
+          <li><b style="color:#FFE27A">engine/</b> pure Dart: board geometry, rules per mode, house rules, Mayhem cards &amp; events, bots (Hard/Expert in an isolate), seeded replays for tests.</li>
+          <li><b style="color:#FFE27A">Board</b>: CustomPainter for frame, tiles, yards and pyramid, cached as a Picture per skin; pucks are widgets (44 px hit box, Semantics label each); 3D camera = Transform with a Matrix4 perspective entry.</li>
+          <li><b style="color:#FFE27A">Dice</b>: six faces in a Transform-ed Stack (or pre-rendered sprite sheet per skin for low-end phones).</li>
+          <li><b style="color:#FFE27A">State</b>: flutter_riverpod; routing go_router; saves in drift (SQLite) + local backups; flutter_local_notifications for the gift.</li>
+          <li><b style="color:#FFE27A">Ads/IAP</b>: google_mobile_ads (banner, interstitial, rewarded, UMP), in_app_purchase for Remove ads.</li>
+          <li><b style="color:#FFE27A">Wi-Fi</b>: bonsoir (mDNS <code>_ludomela._tcp</code>), dart:io WebSocket server on the host, mobile_scanner + qr_flutter for join-by-QR.</li>
+          <li><b style="color:#FFE27A">Audio</b>: audioplayers with a small sound bank; haptics via HapticFeedback.</li>
+        </ul>
+      </div>
+      <div class="pnl" style="padding:22px">
+        <span class="ttl" style="font-size:24px">Wi-Fi rooms protocol</span>
+        <ul style="margin:12px 0 0;padding-left:20px;font:700 13.5px/1.5 'Baloo 2',sans-serif;color:#DDEEFF">
+          <li>Host-authoritative: the host rolls every die with Random.secure() and validates every move; guests send intents only.</li>
+          <li>Join by nearby list, 4-digit code or QR (<code>ludomela://join?h=IP&amp;p=PORT&amp;c=CODE</code>); app versions must match.</li>
+          <li>Messages (JSON): hello, seat, rules, start, turn, roll, move, sticker, state (full snapshot + seq), bye.</li>
+          <li>Heartbeat 2 s · "reconnecting" after 6 s · a bot holds the seat after 15 s · seat freed after 30 s.</li>
+          <li>Host leaves: game pauses 60 s, then ends with no winner. No coins at stake in rooms.</li>
+          <li>iOS: NSLocalNetworkUsageDescription + NSBonjourServices; Android: multicast lock while browsing.</li>
+        </ul>
+        <span class="ttl" style="font-size:20px;display:block;margin-top:14px">Still to decide</span>
+        <ul style="margin:8px 0 0;padding-left:20px;font:700 13.5px/1.5 'Baloo 2',sans-serif;color:#DDEEFF">
+          <li>Final name (working title "Ludo Mela"), store audience (under-13s?), Remove-ads price, real AdMob ids.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":2280}}'>
+function dice(D, v, spins) {
+  const PIPS = { 1: [4], 2: [0, 8], 3: [0, 4, 8], 4: [0, 2, 6, 8], 5: [0, 2, 4, 6, 8], 6: [0, 2, 3, 5, 6, 8] };
+  const FACES = [[1, 'rotateY(0deg)'], [6, 'rotateY(180deg)'], [2, 'rotateY(90deg)'], [5, 'rotateY(-90deg)'], [3, 'rotateX(90deg)'], [4, 'rotateX(-90deg)']];
+  const SHOW = { 1: [0, 0], 2: [0, -90], 3: [-90, 0], 4: [90, 0], 5: [0, 90], 6: [0, 180] };
+  const turn = spins * 360;
+  return {
+    rot: 'rotateX(' + (SHOW[v][0] + turn) + 'deg) rotateY(' + (SHOW[v][1] + turn) + 'deg)',
+    faces: FACES.map((f) => ({ tf: f[1] + ' translateZ(' + D / 2 + 'px)', pips: Array.from({ length: 9 }, (_, i) => ({ on: PIPS[f[0]].includes(i) ? 1 : 0, bg: '#FFFFFF', sz: Math.round(D * (f[0] === 1 ? 0.27 : 0.18)) })) }))
+  };
+}
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { die: 5, spins: 0, hop: 0, hops: 0, burst: 0, knock: 0, coins: 0, coinPop: 0 };
+    this.timers = [];
+  }
+  componentWillUnmount() { this.timers.forEach((t) => clearTimeout(t)); clearInterval(this.tick); }
+  later(ms, fn) { this.timers.push(setTimeout(fn, ms)); }
+  renderVals() {
+    const st = this.state;
+    return {
+      dice: dice(64, st.die, st.spins),
+      roll: () => this.setState({ die: 1 + Math.floor(Math.random() * 6), spins: this.state.spins + 2 }),
+      tiles: [0, 1, 2, 3, 4, 5].map((i) => ({ x: 10 + i * 36 })),
+      hopX: 11 + st.hop * 36, hopAnim: st.hops % 2 ? 'lm-hopA' : 'lm-hopB',
+      hop: () => {
+        this.setState({ hop: 0 });
+        [1, 2, 3, 4, 5].forEach((s, j) => this.later(170 * (j + 1), () => this.setState({ hop: s, hops: this.state.hops + 1 })));
+      },
+      burstOn: st.burst > 0, knockAnim: st.knock % 2 ? 'lm-knock' : '',
+      capture: () => { this.setState({ burst: this.state.burst + 1, knock: this.state.knock + 1 }); this.later(800, () => this.setState({ burst: 0 })); },
+      coins: st.coins.toLocaleString('en-US'), coinAnim: st.coinPop % 2 ? 'lm-pop' : 'lm-pop2',
+      count: () => {
+        clearInterval(this.tick);
+        this.setState({ coins: 0 });
+        this.tick = setInterval(() => {
+          const c = Math.min(1000, this.state.coins + 50);
+          this.setState({ coins: c });
+          if (c >= 1000) { clearInterval(this.tick); this.setState({ coinPop: this.state.coinPop + 1 }); }
+        }, 40);
+      },
+      tokens: [
+        ['Button press', '120 ms', 'Sinks 3 px onto its lip, springs back'],
+        ['Screen change', '240 ms', 'Slide + fade; sheets rise 340 ms'],
+        ['Dice roll', '820 ms', 'Toss arc in the tray, two tumbles, lands with a tiny overshoot'],
+        ['Puck hop', '170 ms / square', 'Arc 12 px, squash .9/1.12, land 1.14/.84'],
+        ['Puck out of yard', '260 ms', 'Pops out of its slot with a ring flash'],
+        ['Capture', '600 ms + 760 ms', 'Victim spins 720° home; POW! burst; screen nudge'],
+        ['Home', '900 ms', 'HOME! burst, puck settles on its pyramid face'],
+        ['Turn timer', '15 s', 'Pie inside the avatar, green → gold → red'],
+        ['Your turn', '1 s loop', 'Tray appears by your avatar, green arrow bobs, pucks get dashed rings'],
+        ['Toast', '460 ms', 'Pop-in, auto-hide after 1.4 s'],
+        ['Rewards', '40 ms / step', 'Coins count up, XP bar fills, pot wobbles'],
+        ['Win', '1.2 s', 'Title slams, podium grows, confetti 3–6 s']
+      ].map((t) => ({ m: t[0], t: t[1], f: t[2] })),
+      feel: [
+        ['Roll', 'Light tick on land', 'Wooden dice rattle'], ['Hop', 'Selection click per square', 'Soft wooden tok'],
+        ['Six', 'Medium', 'Dhol beat'], ['Capture', 'Heavy', 'Pop + crowd “oooh”'], ['Home', 'Success pattern', 'Shehnai flourish'],
+        ['Reward', 'Light ×3', 'Coin jingle'], ['Win', 'Success pattern', 'Mela cheer + music sting']
+      ].map((f) => ({ e: f[0], h: f[1], s: f[2] })),
+      dims: [
+        ['Board', '2D top-down by default for clarity; optional 30° 3D camera (pure transform, same tap squares).', '#FFE27A'],
+        ['Dice', 'True 3D cube — the roll is the moment everyone watches.', '#A3F06A'],
+        ['Pucks', '2.5D thick coins with emblem; lie flat in 3D like real pucks.', '#7CC6FF'],
+        ['Avatars', '2D illustrated characters — fast, friendly, scalable.', '#FF92D4'],
+        ['Menus', '2D glossy UI with bevels and lips for a tactile feel.', '#C49BFF'],
+        ['Results', '2.5D podium + 3D-styled title for celebration.', '#FFB070']
+      ].map((d) => ({ e: d[0], w: d[1], c: d[2] })),
+      research: [
+        ['Ludo King', 'Classic + Quick modes, board themes, plays on almost any phone', 'Keep both classic and quick; make every board skin earnable offline'],
+        ['Ludo Club', 'Fast variants for short sessions, polished visuals, social feel', 'Quick (8 min) and Rush (5 min) modes; stickers and quick chat vs bots and in rooms'],
+        ['Ludo STAR', 'Power-ups, custom boards, themed tokens; players complain dice feel rigged', 'Mela Mayhem for power-ups; fair dice proven in Insights; no rubber-banding'],
+        ['Ludo Party', 'Themed venues with rising stakes, collectable dice and pucks, emotes', 'Mela Tour venues + Collection — with our own festival art and earn-only gems'],
+        ['All of them', 'Need internet for multiplayer; heavy ads', 'Fully offline: bots, pass & play, tabletop, same-Wi-Fi rooms; banner only during matches']
+      ].map((r) => ({ g: r[0], k: r[1], t: r[2] }))
+    };
+  }
+}
+</script>
+</body>
+</html>

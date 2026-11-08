@@ -1,0 +1,411 @@
+{
+  "v": 3,
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-10-30T10:00:00Z"
+  },
+  "title": "Ludo Mela — game design",
+  "launch": {
+    "view": "canvas",
+    "page": "screens"
+  },
+  "pages": [
+    {
+      "id": "screens",
+      "name": "Screens"
+    },
+    {
+      "id": "spec",
+      "name": "Game design specs"
+    }
+  ],
+  "boards": {
+    "Splash.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "01 · Splash",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "Main.dc.html": {
+      "x": 470,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "02 · Lobby — Mela ground",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "DailyReward.dc.html": {
+      "x": 940,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "03 · Daily gift (every 24 h)",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "Earn.dc.html": {
+      "x": 1410,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "04 · Free rewards (pop-up, reward ads)",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "Wheel.dc.html": {
+      "x": 1880,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "05 · Lucky wheel",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "Venues.dc.html": {
+      "x": 0,
+      "y": 1500,
+      "w": 390,
+      "h": 844,
+      "title": "06 · Mela Tour — venues",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "VsAiSetup.dc.html": {
+      "x": 470,
+      "y": 1500,
+      "w": 390,
+      "h": 844,
+      "title": "07 · Game options (pop-up)",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "PassPlaySetup.dc.html": {
+      "x": 940,
+      "y": 1500,
+      "w": 390,
+      "h": 844,
+      "title": "08 · Pass & play (one phone)",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "VsIntro.dc.html": {
+      "x": 1410,
+      "y": 1500,
+      "w": 390,
+      "h": 844,
+      "title": "09 · VS — who goes first",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "Cup.dc.html": {
+      "x": 1880,
+      "y": 1500,
+      "w": 390,
+      "h": 844,
+      "title": "10 · Mela Cup (offline knockout)",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "Puzzle.dc.html": {
+      "x": 2350,
+      "y": 1500,
+      "w": 390,
+      "h": 844,
+      "title": "11 · Daily Ludo puzzle",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "Match.dc.html": {
+      "x": 0,
+      "y": 3000,
+      "w": 390,
+      "h": 844,
+      "title": "12 · Match — playable prototype",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "Mayhem.dc.html": {
+      "x": 470,
+      "y": 3000,
+      "w": 390,
+      "h": 844,
+      "title": "13 · Mela Mayhem (power-ups)",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "Tabletop.dc.html": {
+      "x": 940,
+      "y": 3000,
+      "w": 390,
+      "h": 844,
+      "title": "14 · Tabletop pass & play",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "Pause.dc.html": {
+      "x": 1410,
+      "y": 3000,
+      "w": 390,
+      "h": 844,
+      "title": "15 · Menu during a match",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "Win.dc.html": {
+      "x": 1880,
+      "y": 3000,
+      "w": 390,
+      "h": 844,
+      "title": "16 · You won! — rewards",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "MatchReport.dc.html": {
+      "x": 2350,
+      "y": 3000,
+      "w": 390,
+      "h": 844,
+      "title": "17 · Match insights",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "WifiHub.dc.html": {
+      "x": 0,
+      "y": 4500,
+      "w": 390,
+      "h": 844,
+      "title": "18 · Wi-Fi party — create or join",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "WifiLobby.dc.html": {
+      "x": 470,
+      "y": 4500,
+      "w": 390,
+      "h": 844,
+      "title": "19 · Wi-Fi room (host)",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "Collection.dc.html": {
+      "x": 0,
+      "y": 6000,
+      "w": 390,
+      "h": 844,
+      "title": "20 · Collection — dice, pieces, boards",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "TryOn.dc.html": {
+      "x": 470,
+      "y": 6000,
+      "w": 390,
+      "h": 844,
+      "title": "21 · Try on & unlock",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "MelaRoad.dc.html": {
+      "x": 940,
+      "y": 6000,
+      "w": 390,
+      "h": 844,
+      "title": "22 · Mela Road (level rewards)",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "Terms.dc.html": {
+      "x": 1410,
+      "y": 6000,
+      "w": 390,
+      "h": 844,
+      "title": "23 · Gems & coins rules",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "Insights.dc.html": {
+      "x": 0,
+      "y": 7500,
+      "w": 390,
+      "h": 844,
+      "title": "24 · Insights",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "Profile.dc.html": {
+      "x": 470,
+      "y": 7500,
+      "w": 390,
+      "h": 844,
+      "title": "25 · Profile, avatar picker & family",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "Settings.dc.html": {
+      "x": 940,
+      "y": 7500,
+      "w": 390,
+      "h": 844,
+      "title": "26 · Settings",
+      "page": "screens",
+      "is_interactive": true
+    },
+    "DesignSystem.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1280,
+      "h": 4010,
+      "title": "A · Design system (build spec v3)",
+      "page": "spec",
+      "is_interactive": true
+    },
+    "GameRules.dc.html": {
+      "x": 1360,
+      "y": 0,
+      "w": 1280,
+      "h": 2140,
+      "title": "B · Rules, modes & the Mela engine (AI)",
+      "page": "spec"
+    },
+    "Economy.dc.html": {
+      "x": 2720,
+      "y": 0,
+      "w": 1280,
+      "h": 2720,
+      "title": "C · Economy, unlocks & ads",
+      "page": "spec"
+    },
+    "MotionBuild.dc.html": {
+      "x": 4080,
+      "y": 0,
+      "w": 1280,
+      "h": 2280,
+      "title": "D · Motion, 2D/3D & build spec",
+      "page": "spec",
+      "is_interactive": true
+    },
+    "Missions.dc.html": {
+      "x": 2350,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "05b · Daily missions (pop-up)",
+      "page": "screens",
+      "is_interactive": true
+    }
+  },
+  "order": [
+    "Splash.dc.html",
+    "Main.dc.html",
+    "DailyReward.dc.html",
+    "Earn.dc.html",
+    "Wheel.dc.html",
+    "Missions.dc.html",
+    "Venues.dc.html",
+    "VsAiSetup.dc.html",
+    "PassPlaySetup.dc.html",
+    "VsIntro.dc.html",
+    "Cup.dc.html",
+    "Puzzle.dc.html",
+    "Match.dc.html",
+    "Mayhem.dc.html",
+    "Tabletop.dc.html",
+    "Pause.dc.html",
+    "Win.dc.html",
+    "MatchReport.dc.html",
+    "WifiHub.dc.html",
+    "WifiLobby.dc.html",
+    "Collection.dc.html",
+    "TryOn.dc.html",
+    "MelaRoad.dc.html",
+    "Terms.dc.html",
+    "Insights.dc.html",
+    "Profile.dc.html",
+    "Settings.dc.html",
+    "DesignSystem.dc.html",
+    "GameRules.dc.html",
+    "Economy.dc.html",
+    "MotionBuild.dc.html"
+  ],
+  "notes": {
+    "rowA": {
+      "x": 0,
+      "y": -300,
+      "text": "Lobby & rewards",
+      "kind": "title1",
+      "maxW": 2740,
+      "page": "screens"
+    },
+    "rowB": {
+      "x": 0,
+      "y": 1200,
+      "text": "Pick a game",
+      "kind": "title1",
+      "maxW": 2740,
+      "page": "screens"
+    },
+    "rowC": {
+      "x": 0,
+      "y": 2700,
+      "text": "In the match",
+      "kind": "title1",
+      "maxW": 2740,
+      "page": "screens"
+    },
+    "rowD": {
+      "x": 0,
+      "y": 4200,
+      "text": "Wi-Fi party (no internet)",
+      "kind": "title1",
+      "maxW": 2740,
+      "page": "screens"
+    },
+    "rowE": {
+      "x": 0,
+      "y": 5700,
+      "text": "Collection, progress & gems",
+      "kind": "title1",
+      "maxW": 2740,
+      "page": "screens"
+    },
+    "rowF": {
+      "x": 0,
+      "y": 7200,
+      "text": "Insights, profile & settings",
+      "kind": "title1",
+      "maxW": 2740,
+      "page": "screens"
+    },
+    "playNote": {
+      "x": 2820,
+      "y": 3000,
+      "w": 340,
+      "size": "m",
+      "fill": "orange",
+      "text": "Screen 12 is playable: tap the red dice in the tray beside your avatar, then tap a puck with a dashed ring. The pie inside each avatar is the 15 s turn timer. Raja, Mitu and Tara are bots with their own play styles.",
+      "page": "screens"
+    },
+    "wifiNote": {
+      "x": 940,
+      "y": 4500,
+      "w": 340,
+      "size": "m",
+      "fill": "teal",
+      "text": "Wi-Fi party needs no internet: one phone hosts, the others find it on the same network or scan its QR. The host's phone rolls every die, so nobody can cheat by changing their own app.",
+      "page": "screens"
+    },
+    "specTitle": {
+      "x": 0,
+      "y": -300,
+      "text": "Game design specs",
+      "kind": "title1",
+      "maxW": 5360,
+      "page": "spec"
+    }
+  },
+  "designSystems": []
+}

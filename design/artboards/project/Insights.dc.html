@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ludo Mela — Insights</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#FFE27A}a:hover{color:#FFF3B8}
+:root{--e:cubic-bezier(.2,.8,.2,1);--b:cubic-bezier(.34,1.56,.64,1)}
+button,a{-webkit-tap-highlight-color:transparent;transition:transform 150ms var(--b),filter 160ms var(--e),box-shadow 160ms var(--e),opacity 160ms var(--e)}
+button:focus-visible,a:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
+.ttl{font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-shadow:0 -1.5px 0 #0A2A6B,1.5px 0 0 #0A2A6B,0 1.5px 0 #0A2A6B,-1.5px 0 0 #0A2A6B,1.2px 1.2px 0 #0A2A6B,-1.2px 1.2px 0 #0A2A6B,1.2px -1.2px 0 #0A2A6B,-1.2px -1.2px 0 #0A2A6B,0 3px 0 #0A2A6B}
+.gl{position:relative;border:0;cursor:pointer;font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;text-shadow:0 2px 0 rgba(0,0,0,.3);box-sizing:border-box}
+.gl::after{content:'';position:absolute;left:8%;right:8%;top:3px;height:42%;border-radius:999px;background:linear-gradient(rgba(255,255,255,.6),rgba(255,255,255,0));pointer-events:none}
+.gl:active{transform:translateY(3px) scale(.98)}
+.g-blue{background:linear-gradient(#6DCEFF,#2F95F2 55%,#1C72DA);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 4px 0 #0D4A9E,0 8px 12px rgba(0,20,60,.3)}
+.g-gold{color:#5A2E00;text-shadow:0 1px 0 rgba(255,255,255,.55);background:linear-gradient(#FFEC8F,#FFC61F 55%,#F59E00);box-shadow:inset 0 -3px 0 rgba(0,0,0,.1),0 4px 0 #B26400,0 8px 12px rgba(0,20,60,.3)}
+.pnl{background:linear-gradient(#2064CC,#1549A6);border-radius:22px;box-shadow:inset 0 0 0 3px #3F86EA,inset 0 5px 0 rgba(255,255,255,.16),0 6px 0 #0A2E70,0 12px 22px rgba(0,10,40,.4)}
+.well{background:#0D3680;border-radius:14px;box-shadow:inset 0 3px 6px rgba(0,0,0,.4),inset 0 -1px 0 rgba(255,255,255,.14)}
+.lm-grow{animation:lmGrow 700ms var(--b) backwards;transform-origin:50% 100%}
+.lm-bar{animation:lmBar 900ms var(--e) backwards}
+.lm-rise{animation:lmRise 420ms var(--e) backwards}
+@keyframes lmGrow{from{transform:scaleY(0)}}
+@keyframes lmBar{from{width:0}}
+@keyframes lmRise{from{opacity:0;transform:translateY(12px)}}
+@media (prefers-reduced-motion: reduce){*{animation-duration:1ms !important;animation-delay:0ms !important;animation-iteration-count:1 !important;transition-duration:1ms !important}}
+</style>
+</helmet>
+<div style="width:390px;height:844px;position:relative;overflow:hidden;background:#1250C2;font-family:'Baloo 2',system-ui,sans-serif;color:#FFFFFF">
+  <div style="position:absolute;inset:0;background:radial-gradient(130% 70% at 50% 30%,#3E9CFA 0%,#1F6EE0 40%,#1250C2 70%,#0B3592 100%)"></div>
+  <svg width="390" height="844" aria-hidden="true" style="position:absolute;inset:0"><defs><pattern id="jali" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M22 8l14 14-14 14L8 22zM12.5 12.5h19v19h-19z" fill="none" stroke="#FFFFFF" stroke-opacity=".07" stroke-width="1.6"></path></pattern></defs><rect width="390" height="844" fill="url(#jali)"></rect></svg>
+
+  <div style="position:relative;z-index:1;height:100%;display:flex;flex-direction:column">
+    <div style="height:47px;flex:none"></div>
+    <div style="flex:none;height:52px;display:flex;align-items:center;gap:8px;padding:0 12px;margin-top:6px">
+      <a href="Main.dc.html" aria-label="Back to lobby" class="gl g-blue" style="width:42px;height:42px;border-radius:14px;flex:none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position:relative;z-index:1"><path d="M15 5l-7 7 7 7"></path></svg></a>
+      <h1 class="ttl" style="margin:0;flex:1;font-size:26px">INSIGHTS</h1>
+      <div role="radiogroup" aria-label="Whose stats" style="display:flex;gap:4px">
+        <sc-for list="{{who}}" as="w" hint-placeholder-count="3"><button type="button" role="radio" aria-checked="{{w.checked}}" aria-label="{{w.nm}}" onClick="{{w.pick}}" style="width:36px;height:36px;border:0;border-radius:11px;background:{{w.bg}};color:#0A2A6B;font:400 16px 'Lilita One',sans-serif;cursor:pointer;box-shadow:0 0 0 {{w.ring}}px #FFFFFF">{{w.i}}</button></sc-for>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;overflow-y:auto;padding:8px 12px 14px;display:flex;flex-direction:column;gap:14px">
+      <div role="radiogroup" aria-label="Time range" class="well" style="flex:none;height:44px;padding:4px;display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:4px;box-sizing:border-box">
+        <sc-for list="{{ranges}}" as="r" hint-placeholder-count="3"><button type="button" role="radio" aria-checked="{{r.checked}}" onClick="{{r.pick}}" class="gl {{r.cls}}" style="border-radius:11px;font-size:14px"><span style="position:relative;z-index:1">{{r.label}}</span></button></sc-for>
+      </div>
+
+      <div style="flex:none;display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:10px">
+        <sc-for list="{{kpis}}" as="k" hint-placeholder-count="4">
+          <div class="lm-rise" style="height:84px;border-radius:20px;background:{{k.bg}};box-shadow:inset 0 0 0 3px rgba(255,255,255,.3),inset 0 4px 0 rgba(255,255,255,.2),0 5px 0 {{k.edge}};display:flex;flex-direction:column;justify-content:center;padding:0 14px;animation-delay:{{k.d}}">
+            <span class="ttl" style="font-size:28px;line-height:1">{{k.v}}</span>
+            <span style="font:800 12px 'Baloo 2',sans-serif">{{k.l}}</span>
+          </div>
+        </sc-for>
+      </div>
+
+      <div class="pnl" style="flex:none;padding:12px 14px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between"><span class="ttl" style="font-size:17px">Fair dice check</span><span style="font:800 11px 'Baloo 2',sans-serif;color:#9CC2FF">{{rolls}} rolls</span></div>
+        <div role="img" aria-label="{{diceLabel}}" style="position:relative;height:130px;margin-top:10px;display:grid;grid-template-columns:repeat(6, minmax(0, 1fr));gap:10px;align-items:end">
+          <div style="position:absolute;left:0;right:0;bottom:{{expect}}px;border-top:2px dashed #FFE27A;z-index:2"><span style="position:absolute;right:0;top:-18px;font:800 10.5px 'Baloo 2',sans-serif;color:#FFE27A">1 in 6</span></div>
+          <sc-for list="{{dice}}" as="d" hint-placeholder-count="6">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end">
+              <span style="font:800 10.5px 'Baloo 2',sans-serif;color:#CFE3FF">{{d.p}}</span>
+              <span class="lm-grow" style="width:100%;height:{{d.h}}px;border-radius:8px 8px 3px 3px;background:linear-gradient(#7CC6FF,#2381EC);box-shadow:inset 0 3px 0 rgba(255,255,255,.4);animation-delay:{{d.delay}}"></span>
+              <span style="width:22px;height:22px;border-radius:6px;background:#FFFFFF;display:grid;place-items:center;font:400 13px 'Lilita One',sans-serif;color:{{d.ink}}">{{d.n}}</span>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin:10px 0 0;font:700 12.5px/1.4 'Baloo 2',sans-serif;color:#DDEEFF">Every face is within 0.6% of 1 in 6. The game never nudges the dice — for you or the bots.</p>
+      </div>
+
+      <div class="pnl" style="flex:none;padding:12px 14px">
+        <span class="ttl" style="font-size:17px">Win rate by mode</span>
+        <div style="display:flex;flex-direction:column;gap:9px;margin-top:10px">
+          <sc-for list="{{modes}}" as="m" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="width:66px;font:800 12.5px 'Baloo 2',sans-serif">{{m.nm}}</span>
+              <span class="well" style="flex:1;height:18px;border-radius:9px;overflow:hidden;display:block"><span class="lm-bar" style="display:block;height:18px;width:{{m.pct}}%;border-radius:9px;background:{{m.c}};box-shadow:inset 0 3px 0 rgba(255,255,255,.35)"></span></span>
+              <span class="ttl" style="width:40px;text-align:right;font-size:14px">{{m.pct}}%</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="flex:none;display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:10px">
+        <div class="pnl" style="padding:12px;display:flex;flex-direction:column;gap:6px">
+          <span class="ttl" style="font-size:15px">Danger map</span>
+          <svg width="140" height="140" viewBox="0 0 15 15" role="img" aria-label="Where you get captured most: the squares just after Raja's start" style="border-radius:10px;background:#E8EEF6">
+            <rect x="0" y="0" width="6" height="6" fill="#43B32D"></rect><rect x="9" y="0" width="6" height="6" fill="#FFC21F"></rect><rect x="0" y="9" width="6" height="6" fill="#EC3B30"></rect><rect x="9" y="9" width="6" height="6" fill="#2381EC"></rect>
+            <sc-for list="{{heat}}" as="h" hint-placeholder-count="10"><rect x="{{h.x}}" y="{{h.y}}" width="1" height="1" fill="#F2463B" fill-opacity="{{h.o}}"></rect></sc-for>
+          </svg>
+          <span style="font:700 11.5px/1.3 'Baloo 2',sans-serif;color:#DDEEFF">Most captures happen just past Raja's start.</span>
+        </div>
+        <div class="pnl" style="padding:12px;display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center">
+          <span class="ttl" style="font-size:15px">Your nemesis</span>
+          <span style="width:64px;height:64px;border-radius:18px;overflow:hidden;box-shadow:0 0 0 3px #FFFFFF,0 0 0 6px #47BA2B;margin:6px 0">
+            <svg width="64" height="64" viewBox="0 0 48 48" aria-hidden="true"><path d="M0 0h48v48H0z" fill="#47BA2B"></path><path d="M5 48c1-9 9-13 19-13s18 4 19 13z" fill="#7A1FA2"></path><path d="M13 22a11 11 0 1 0 22 0a11 11 0 1 0-22 0z" fill="#C98B5E"></path><path d="M13 21c0-8 5-12.5 11-12.5S35 13 35 21c-2.5-3.5-6-5-11-5s-8.5 1.5-11 5z" fill="#1F1410"></path><path d="M14 13.5l3.5 4.5 6.5-7.5 6.5 7.5 3.5-4.5v6H14z" fill="#FFC61F" stroke="#B26400" stroke-width="1"></path><path d="M18.2 22.5a1.7 1.7 0 1 0 3.4 0a1.7 1.7 0 1 0-3.4 0zM26.4 22.5a1.7 1.7 0 1 0 3.4 0a1.7 1.7 0 1 0-3.4 0z" fill="#2A1A12"></path><path d="M18.5 27.4q2.8-2 5.5-.3q2.7-1.7 5.5.3q-2.8 1.4-5.5.2q-2.7 1.2-5.5-.2z" fill="#1F1410"></path></svg>
+          </span>
+          <span class="ttl" style="font-size:16px">Raja · Hunter</span>
+          <span style="font:700 11.5px/1.3 'Baloo 2',sans-serif;color:#DDEEFF">Beats you 58% of the time. Stay on stars when he's 6 behind.</span>
+        </div>
+      </div>
+
+      <div class="pnl" style="flex:none;padding:12px 14px;display:flex;align-items:center;gap:12px">
+        <span style="flex:1;display:flex;flex-direction:column;gap:2px"><span class="ttl" style="font-size:16px">Smart moves</span><span style="font:700 12px/1.3 'Baloo 2',sans-serif;color:#DDEEFF">78% → 84% over 30 days. You've stopped leaving pucks 1–3 squares ahead of rivals.</span></span>
+        <svg width="110" height="50" viewBox="0 0 110 50" aria-hidden="true"><path d="M4 40L18 36L32 38L46 30L60 28L74 22L88 18L106 12" fill="none" stroke="#8DEB50" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="106" cy="12" r="5" fill="#FFFFFF" stroke="#8DEB50" stroke-width="3"></circle></svg>
+      </div>
+    </div>
+    <div style="height:30px;flex:none"></div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+const TRACK = [[13,6],[12,6],[11,6],[10,6],[9,6],[8,5],[8,4],[8,3],[8,2],[8,1],[8,0],[7,0],[6,0],[6,1],[6,2],[6,3],[6,4],[6,5],[5,6],[4,6],[3,6],[2,6],[1,6],[0,6],[0,7],[0,8],[1,8],[2,8],[3,8],[4,8],[5,8],[6,9],[6,10],[6,11],[6,12],[6,13],[6,14],[7,14],[8,14],[8,13],[8,12],[8,11],[8,10],[8,9],[9,8],[10,8],[11,8],[12,8],[13,8],[14,8],[14,7],[14,6]];
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { range: 1, who: 0 };
+  }
+  renderVals() {
+    const st = this.state;
+    const scale = [0.3, 1, 2.6][st.range];
+    const counts = [402, 409, 396, 412, 398, 401].map((c) => Math.round(c * scale));
+    const total = counts.reduce((a, b) => a + b, 0);
+    const maxH = 96;
+    const expect = (1 / 6) / 0.2 * maxH;
+    const dice = counts.map((c, i) => {
+      const p = c / total;
+      return { n: i + 1, p: (p * 100).toFixed(1) + '%', h: Math.round((p / 0.2) * maxH), ink: i === 0 || i === 3 ? '#D7263D' : '#1B2030', delay: (i * 60) + 'ms' };
+    });
+    const heat = [[16, 1], [17, 0.85], [18, 0.6], [19, 0.45], [12, 0.3], [40, 0.5], [41, 0.35], [3, 0.4], [29, 0.3], [30, 0.25]]
+      .map((h) => ({ x: TRACK[h[0]][1], y: TRACK[h[0]][0], o: h[1] }));
+    return {
+      who: [['Player', 'P', '#FFB02E'], ['Nadia', 'N', '#8DEB50'], ['Rafi', 'R', '#7CC6FF']].map((w, i) => ({ nm: w[0] + '’s stats', i: w[1], bg: w[2], checked: st.who === i ? 'true' : 'false', ring: st.who === i ? 3 : 0, pick: () => this.setState({ who: i }) })),
+      ranges: ['7 DAYS', '30 DAYS', 'ALL TIME'].map((l, i) => ({ label: l, checked: st.range === i ? 'true' : 'false', cls: st.range === i ? 'g-gold' : 'g-blue', pick: () => this.setState({ range: i }) })),
+      kpis: [[[24, 86, 231][st.range], 'Games played', 'linear-gradient(135deg,#5CC2FF,#1F86E6)', '#0D4A9E'], [['50%', '54%', '52%'][st.range], 'Win rate', 'linear-gradient(135deg,#8DEB50,#2E9A1B)', '#1D6B0F'], [[61, 212, 590][st.range], 'Captures', 'linear-gradient(135deg,#FF8A7A,#C8261E)', '#7A1218'], ['14 min', 'Average game', 'linear-gradient(135deg,#B98BFF,#6A35D6)', '#3E1A8E']]
+        .map((k, i) => ({ v: k[0], l: k[1], bg: k[2], edge: k[3], d: (i * 50) + 'ms' })),
+      rolls: total.toLocaleString('en-US'), dice, expect: Math.round(expect) + 26,
+      diceLabel: 'Dice faces 1 to 6 each landed about one time in six over ' + total + ' rolls',
+      modes: [['Classic', 56, 'linear-gradient(#FFEC8F,#F59E00)'], ['Quick', 61, 'linear-gradient(#8DEB50,#2E9A1B)'], ['Master', 44, 'linear-gradient(#FF9A8A,#D22A21)'], ['Rush', 49, 'linear-gradient(#7CC6FF,#1C72DA)'], ['Mayhem', 58, 'linear-gradient(#FF92D4,#DB1F7C)']]
+        .map((m) => ({ nm: m[0], pct: m[1], c: m[2] })),
+      heat,
+      tabs: [['Collection.dc.html', 'Collection', 'M4 4h16v16H4zM8.5 8.5h.01M15.5 15.5h.01', false], ['MelaRoad.dc.html', 'Road', 'M5 21V4M5 4h12l-2.5 4L17 12H5', false], ['Main.dc.html', 'Play', 'M7 4l13 8-13 8z', false], ['Insights.dc.html', 'Insights', 'M4 20V11M10 20V5M16 20v-7M21 20H3', true], ['Profile.dc.html', 'Profile', 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21c0-4 3.6-7 8-7s8 3 8 7', false]]
+        .map((t) => ({ href: t[0], label: t[1], icon: t[2], current: t[3] ? 'page' : 'false', ink: t[3] ? '#FFE27A' : '#FFFFFF', op: t[3] ? 1 : 0.85 }))
+    };
+  }
+}
+</script>
+</body>
+</html>

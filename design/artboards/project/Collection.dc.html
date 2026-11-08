@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ludo Mela — Collection</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+:root{--e:cubic-bezier(.2,.8,.2,1);--b:cubic-bezier(.34,1.56,.64,1)}
+button,a{-webkit-tap-highlight-color:transparent;transition:transform 150ms var(--b),filter 160ms var(--e),background 160ms var(--e),box-shadow 160ms var(--e)}
+button:focus-visible,a:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
+.ttl{font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-shadow:0 -1.5px 0 #0A2A6B,1.5px 0 0 #0A2A6B,0 1.5px 0 #0A2A6B,-1.5px 0 0 #0A2A6B,1.2px 1.2px 0 #0A2A6B,-1.2px 1.2px 0 #0A2A6B,1.2px -1.2px 0 #0A2A6B,-1.2px -1.2px 0 #0A2A6B,0 3px 0 #0A2A6B}
+.gl{position:relative;border:0;cursor:pointer;font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:5px;text-shadow:0 2px 0 rgba(0,0,0,.3);box-sizing:border-box}
+.gl::after{content:'';position:absolute;left:6%;right:6%;top:3px;height:40%;border-radius:999px;background:linear-gradient(rgba(255,255,255,.55),rgba(255,255,255,0));pointer-events:none}
+.gl:active{transform:translateY(3px) scale(.98)}
+.g-green{background:linear-gradient(#8DEB50,#47BA2B 55%,#2E9A1B);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 3px 0 #1D6B0F}
+.g-blue{background:linear-gradient(#6DCEFF,#2F95F2 55%,#1C72DA);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 3px 0 #0D4A9E}
+.g-gold{color:#5A2E00;text-shadow:0 1px 0 rgba(255,255,255,.55);background:linear-gradient(#FFEC8F,#FFC61F 55%,#F59E00);box-shadow:inset 0 -3px 0 rgba(0,0,0,.1),0 3px 0 #B26400}
+.g-grey{background:linear-gradient(#9DAAC0,#6E7C96);box-shadow:inset 0 -3px 0 rgba(0,0,0,.12),0 3px 0 #3E4A60;cursor:default}
+.g-navy{background:linear-gradient(#21457F,#132D5E);box-shadow:inset 0 0 0 2px #2F5FA8,0 3px 0 #091A3C}
+.badge{position:absolute;min-width:22px;height:22px;border-radius:11px;font:400 12px/22px 'Lilita One',sans-serif;color:#FFFFFF;text-align:center;padding:0 5px;box-sizing:border-box;box-shadow:0 0 0 2px #FFFFFF,0 2px 0 2px rgba(0,0,0,.25)}
+.scroll{scrollbar-width:none}.scroll::-webkit-scrollbar{display:none}
+.lm-rise{animation:lmRise 380ms var(--e) backwards}
+.lm-pop{animation:lmPop 360ms var(--b) backwards}
+.lm-float{animation:lmFloat 2.8s ease-in-out infinite}
+@keyframes lmRise{from{opacity:0;transform:translateY(14px)}}
+@keyframes lmPop{from{opacity:0;transform:scale(.7)}}
+@keyframes lmFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@media (prefers-reduced-motion: reduce){*{animation-duration:1ms !important;animation-iteration-count:1 !important;transition-duration:1ms !important}}
+</style>
+</helmet>
+<div style="width:390px;height:844px;position:relative;overflow:hidden;background:#1764D2;font-family:'Baloo 2',system-ui,sans-serif;color:#FFFFFF">
+  <svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>
+    <linearGradient id="gGold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFEC8F"></stop><stop offset=".55" stop-color="#FFC21F"></stop><stop offset="1" stop-color="#E08A00"></stop></linearGradient>
+    <linearGradient id="gRed" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF8A7A"></stop><stop offset=".55" stop-color="#E8322B"></stop><stop offset="1" stop-color="#A8150F"></stop></linearGradient>
+    <linearGradient id="gWood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0A85A"></stop><stop offset=".6" stop-color="#C06A22"></stop><stop offset="1" stop-color="#7A3E0E"></stop></linearGradient>
+    <linearGradient id="gSteel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9FD0FF"></stop><stop offset=".6" stop-color="#3D86E0"></stop><stop offset="1" stop-color="#1C4FA0"></stop></linearGradient>
+    <linearGradient id="gGreenL" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A6F070"></stop><stop offset="1" stop-color="#2E9A1B"></stop></linearGradient>
+    <linearGradient id="gHouse" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB25A"></stop><stop offset="1" stop-color="#E06A12"></stop></linearGradient>
+  </defs></svg>
+  <div style="position:absolute;inset:0;background:radial-gradient(120% 70% at 50% 40%,#3EA2FF 0%,#1F78E6 40%,#1659C4 72%,#0F45A6 100%)"></div>
+  <svg width="390" height="844" aria-hidden="true" style="position:absolute;inset:0"><defs><pattern id="jali" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M22 8l14 14-14 14L8 22zM12.5 12.5h19v19h-19z" fill="none" stroke="#FFFFFF" stroke-opacity=".07" stroke-width="1.6"></path></pattern></defs><rect width="390" height="844" fill="url(#jali)"></rect></svg>
+
+  <div style="position:relative;z-index:1;height:100%;display:flex;flex-direction:column">
+    <div style="flex:none;position:relative;padding-top:47px;background:linear-gradient(#123A8A,#0A2464);box-shadow:inset 0 -2px 0 rgba(143,182,255,.4),0 4px 10px rgba(0,20,60,.3)">
+      <div aria-hidden="true" style="position:absolute;left:0;right:0;top:0;height:40px;background:repeating-linear-gradient(90deg,#E8322B 0 26px,#FFF1D0 26px 52px)"></div><svg aria-hidden="true" width="390" height="12" viewBox="0 0 390 12" style="position:absolute;left:0;top:39px"><path d="M0 0h26a13 11 0 0 1-26 0z" fill="#E8322B"></path><path d="M26 0h26a13 11 0 0 1-26 0z" fill="#FFF1D0"></path><path d="M52 0h26a13 11 0 0 1-26 0z" fill="#E8322B"></path><path d="M78 0h26a13 11 0 0 1-26 0z" fill="#FFF1D0"></path><path d="M104 0h26a13 11 0 0 1-26 0z" fill="#E8322B"></path><path d="M130 0h26a13 11 0 0 1-26 0z" fill="#FFF1D0"></path><path d="M156 0h26a13 11 0 0 1-26 0z" fill="#E8322B"></path><path d="M182 0h26a13 11 0 0 1-26 0z" fill="#FFF1D0"></path><path d="M208 0h26a13 11 0 0 1-26 0z" fill="#E8322B"></path><path d="M234 0h26a13 11 0 0 1-26 0z" fill="#FFF1D0"></path><path d="M260 0h26a13 11 0 0 1-26 0z" fill="#E8322B"></path><path d="M286 0h26a13 11 0 0 1-26 0z" fill="#FFF1D0"></path><path d="M312 0h26a13 11 0 0 1-26 0z" fill="#E8322B"></path><path d="M338 0h26a13 11 0 0 1-26 0z" fill="#FFF1D0"></path><path d="M364 0h26a13 11 0 0 1-26 0z" fill="#E8322B"></path></svg>
+      <div style="position:relative;height:56px;display:flex;align-items:center;gap:8px;padding:0 10px;margin-top:4px">
+        <h1 class="ttl" style="margin:0;font-size:26px;flex:1">Collection</h1>
+        <button type="button" onClick="{{toggleInfo}}" aria-label="How the collection works" aria-expanded="{{infoOpen}}" class="gl g-navy" style="width:36px;height:36px;border-radius:18px;font-size:20px"><span style="position:relative;z-index:1">i</span></button>
+        <span style="height:30px;border-radius:15px;background:#14336E;box-shadow:inset 0 2px 4px rgba(0,0,0,.4);display:flex;align-items:center;gap:4px;padding:0 10px 0 4px"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12l4.5 6L12 21.5 1.5 9.5z" fill="#C2186D"></path><path d="M6 3.5h12l4.5 6H1.5z" fill="#FF6CC0"></path><path d="M12 21.5L1.5 9.5h21z" fill="#F0328F"></path></svg><span class="ttl" style="font-size:14px">86</span></span>
+        <span style="height:30px;border-radius:15px;background:#14336E;box-shadow:inset 0 2px 4px rgba(0,0,0,.4);display:flex;align-items:center;gap:4px;padding:0 10px 0 4px"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13.4" r="10" fill="#B86E00"></circle><circle cx="12" cy="11.6" r="10" fill="url(#gGold)"></circle><circle cx="12" cy="11.6" r="7" fill="#FFAE00" stroke="#FFE680" stroke-width="1.3"></circle></svg><span class="ttl" style="font-size:14px">12,450</span></span>
+      </div>
+    </div>
+
+    <div role="tablist" aria-label="Collection type" style="flex:none;display:flex;gap:8px;padding:12px 12px 8px">
+      <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3">
+        <button type="button" role="tab" aria-selected="{{t.on}}" onClick="{{t.tap}}" class="{{t.cls}}" style="flex:1;height:46px;border-radius:12px;font-size:18px">
+          <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true" style="position:relative;z-index:1"><sc-for list="{{t.icon}}" as="q" hint-placeholder-count="4"><path d="{{q.d}}" fill="{{q.f}}" stroke="{{q.s}}" stroke-width="{{q.w}}" stroke-linejoin="round"></path></sc-for></svg>
+          <span style="position:relative;z-index:1">{{t.label}}</span>
+          <sc-if value="{{t.hasNew}}" hint-placeholder-val="{{ false }}"><span class="badge" style="right:-6px;top:-8px;background:#47BA2B">{{t.newN}}</span></sc-if>
+        </button>
+      </sc-for>
+    </div>
+
+    <div style="flex:none;display:flex;gap:6px;padding:0 12px 8px">
+      <sc-for list="{{legend}}" as="l" hint-placeholder-count="4"><span style="height:20px;border-radius:10px;background:{{l.bg}};font:400 11px/20px 'Lilita One',sans-serif;padding:0 8px;color:#FFFFFF;text-shadow:0 1px 0 rgba(0,0,0,.35);box-shadow:inset 0 0 0 1.5px {{l.rim}}">{{l.label}}</span></sc-for>
+    </div>
+
+    <div class="scroll" style="flex:1;min-height:0;overflow-y:auto;padding:4px 12px 16px">
+      <div role="tabpanel" style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:12px">
+        <sc-for list="{{items}}" as="it" hint-placeholder-count="6">
+          <div class="lm-rise" style="position:relative;border-radius:14px;background:{{it.bg}};box-shadow:inset 0 0 0 2.5px {{it.rim}},inset 0 4px 0 rgba(255,255,255,.25),0 4px 0 {{it.edge}},0 8px 12px rgba(0,20,60,.3);padding:8px 8px 10px;display:flex;flex-direction:column;align-items:center;animation-delay:{{it.d}}">
+            <span class="ttl" style="font-size:14.5px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis">{{it.name}}</span>
+            <span style="font:400 10.5px 'Lilita One',sans-serif;color:rgba(255,255,255,.85);letter-spacing:.6px;text-transform:uppercase">{{it.rarity}}</span>
+            <a href="TryOn.dc.html" aria-label="{{it.tryLabel}}" style="position:relative;width:132px;height:96px;margin:4px 0 2px;border-radius:12px;background:radial-gradient(circle at 50% 45%,rgba(255,255,255,.35),rgba(255,255,255,0) 70%);display:block">
+              <sc-if value="{{it.isDice}}" hint-placeholder-val="{{ true }}">
+                <svg class="lm-float" width="86" height="86" viewBox="0 0 64 64" aria-hidden="true" style="position:absolute;left:23px;top:4px;animation-delay:{{it.d}}"><path d="M32 6l24 12-24 12L8 18z" fill="{{it.top}}" stroke="{{it.edgeInk}}" stroke-width="1.6" stroke-linejoin="round"></path><path d="M8 18l24 12v28L8 46z" fill="{{it.left}}" stroke="{{it.edgeInk}}" stroke-width="1.6" stroke-linejoin="round"></path><path d="M56 18L32 30v28l24-12z" fill="{{it.right}}" stroke="{{it.edgeInk}}" stroke-width="1.6" stroke-linejoin="round"></path><path d="M14 18l18-9" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.4" stroke-linecap="round"></path><ellipse cx="32" cy="18" rx="4.2" ry="2.4" fill="{{it.pipTop}}"></ellipse><circle cx="14" cy="29" r="2.5" fill="{{it.pip}}"></circle><circle cx="26" cy="47" r="2.5" fill="{{it.pip}}"></circle><circle cx="20" cy="38" r="2.5" fill="{{it.pip}}"></circle><circle cx="40" cy="34" r="2.5" fill="{{it.pip}}"></circle><circle cx="50" cy="29" r="2.5" fill="{{it.pip}}"></circle><circle cx="40" cy="47" r="2.5" fill="{{it.pip}}"></circle><circle cx="50" cy="42" r="2.5" fill="{{it.pip}}"></circle></svg>
+              </sc-if>
+              <sc-if value="{{it.isPuck}}" hint-placeholder-val="{{ false }}">
+                <sc-for list="{{it.set}}" as="p" hint-placeholder-count="4"><span style="position:absolute;left:{{p.x}}px;top:{{p.y}}px;width:36px;height:36px;display:block"><span style="position:absolute;inset:0;border-radius:{{it.shape}};background:{{p.side}};transform:translateY(5px)"></span><span style="position:absolute;inset:0;border-radius:{{it.shape}};background:radial-gradient(circle at 50% 30%,{{p.light}},{{p.main}} 58%,{{p.dark}});box-shadow:inset 0 0 0 3px {{it.ring}},inset 0 0 0 5px {{p.dark}}"></span><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="position:absolute;left:8px;top:8px"><path d="{{it.emblem}}" fill="#FFFFFF"></path></svg></span></sc-for>
+              </sc-if>
+              <sc-if value="{{it.isBoard}}" hint-placeholder-val="{{ false }}">
+                <span style="position:absolute;left:24px;top:6px;width:84px;height:84px;border-radius:8px;background:{{it.frame}};box-shadow:0 5px 0 {{it.frameEdge}},0 9px 12px rgba(0,0,0,.3);transform:rotate(-5deg);display:block">
+                  <span style="position:absolute;left:4px;top:4px;width:76px;height:76px;border-radius:5px;overflow:hidden;background:{{it.cell}};display:block">
+                    <sc-for list="{{it.yards}}" as="y" hint-placeholder-count="4"><span style="position:absolute;left:{{y.x}}px;top:{{y.y}}px;width:30px;height:30px;background:{{y.c}}"><span style="position:absolute;left:5px;top:5px;width:20px;height:20px;border-radius:5px;background:{{y.d}}"></span></span></sc-for>
+                    <span style="position:absolute;left:30px;top:30px;width:16px;height:16px;background:conic-gradient(from -45deg,{{it.cY}} 0 90deg,{{it.cB}} 90deg 180deg,{{it.cR}} 180deg 270deg,{{it.cG}} 270deg 360deg)"></span>
+                    <span style="position:absolute;left:33px;top:2px;width:10px;height:28px;background:repeating-linear-gradient({{it.lane}} 0 8px,{{it.cell}} 8px 9px)"></span>
+                    <span style="position:absolute;left:2px;top:33px;width:28px;height:10px;background:repeating-linear-gradient(90deg,{{it.lane}} 0 8px,{{it.cell}} 8px 9px)"></span>
+                  </span>
+                </span>
+              </sc-if>
+              <sc-if value="{{it.using}}" hint-placeholder-val="{{ false }}"><span class="ttl lm-pop" style="position:absolute;left:-8px;top:-2px;height:20px;border-radius:5px;background:#47BA2B;font-size:11px;line-height:21px;padding:0 6px;box-shadow:0 2px 0 #1D6B0F;transform:rotate(-8deg)">USING</span></sc-if>
+              <sc-if value="{{it.hasLv}}" hint-placeholder-val="{{ false }}"><span class="ttl" style="position:absolute;right:-6px;top:-2px;width:30px;height:30px;border-radius:50%;background:linear-gradient(#5CC2FF,#1C72DA);box-shadow:0 0 0 2px #FFFFFF,0 2px 0 2px rgba(0,0,0,.25);font-size:11px;line-height:30px;text-align:center">Lv{{it.lv}}</span></sc-if>
+            </a>
+            <div style="width:100%;display:flex;flex-direction:column;gap:3px;margin-bottom:8px">
+              <sc-for list="{{it.stats}}" as="s" hint-placeholder-count="3">
+                <div style="display:flex;align-items:center;gap:4px"><span style="width:50px;flex:none;font:700 10.5px 'Baloo 2',sans-serif;color:#FFFFFF;text-shadow:0 1px 0 rgba(0,0,0,.35)">{{s.label}}</span><span style="flex:1;height:8px;border-radius:4px;background:rgba(0,0,0,.3);overflow:hidden"><span style="display:block;height:8px;width:{{s.w}};border-radius:4px;background:{{s.fill}}"></span></span><span style="width:30px;flex:none;text-align:end;font:400 10.5px 'Lilita One',sans-serif;color:#FFFFFF">{{s.val}}</span></div>
+              </sc-for>
+            </div>
+            <sc-if value="{{it.hasShards}}" hint-placeholder-val="{{ false }}">
+              <div style="width:100%;height:36px;display:flex;align-items:center;gap:4px">
+                <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l7 7-7 13-7-13z" fill="#C77DFF" stroke="#FFFFFF" stroke-width="1.6" stroke-linejoin="round"></path></svg>
+                <span style="position:relative;flex:1;height:20px;border-radius:10px;background:rgba(0,0,0,.35);overflow:hidden"><span style="display:block;height:20px;width:{{it.shardW}};background:linear-gradient(#D7A6FF,#8E44E8)"></span><span style="position:absolute;inset:0;text-align:center;font:400 12px/20px 'Lilita One',sans-serif;color:#FFFFFF;text-shadow:0 1px 0 #000">{{it.shards}}</span></span>
+              </div>
+            </sc-if>
+            <sc-if value="{{it.hasBtn}}" hint-placeholder-val="{{ true }}">
+              <button type="button" onClick="{{it.tap}}" aria-label="{{it.btnAria}}" class="{{it.btnCls}}" style="width:100%;height:36px;border-radius:10px;font-size:14px">
+                <sc-if value="{{it.btnCoin}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="position:relative;z-index:1"><circle cx="12" cy="13" r="10" fill="#B86E00"></circle><circle cx="12" cy="11.5" r="10" fill="url(#gGold)"></circle></svg></sc-if>
+                <sc-if value="{{it.btnGem}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="position:relative;z-index:1"><path d="M6 3.5h12l4.5 6L12 21.5 1.5 9.5z" fill="#C2186D"></path><path d="M6 3.5h12l4.5 6H1.5z" fill="#FF6CC0"></path></svg></sc-if>
+                <span style="position:relative;z-index:1;white-space:nowrap">{{it.btn}}</span>
+              </button>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <nav aria-label="Main" style="flex:none;margin:6px 12px 0;height:64px;border-radius:32px;background:linear-gradient(#123A8A,#0A2464);box-shadow:inset 0 0 0 2px rgba(143,182,255,.45),inset 0 2px 0 rgba(255,255,255,.18),0 6px 14px rgba(0,8,30,.45);display:grid;grid-template-columns:repeat(5, minmax(0, 1fr));align-items:center;padding:0 6px">
+      <sc-for list="{{nav}}" as="t" hint-placeholder-count="5">
+        <a href="{{t.href}}" aria-current="{{t.current}}" aria-label="{{t.label}}" style="position:relative;display:flex;flex-direction:column;align-items:center;gap:1px;text-decoration:none;transform:translateY({{t.lift}}px)">
+          <span style="width:{{t.size}}px;height:{{t.size}}px;border-radius:50%;background:{{t.bg}};box-shadow:{{t.sh}};display:grid;place-items:center">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{t.ink}}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{t.icon}}"></path></svg>
+          </span>
+          <span style="font:400 10.5px 'Lilita One',sans-serif;color:{{t.labelInk}};letter-spacing:.3px">{{t.label}}</span>
+        </a>
+      </sc-for>
+    </nav>
+    <div style="height:22px;flex:none"></div>
+  </div>
+
+  <sc-if value="{{showInfo}}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;inset:0;z-index:5;background:rgba(4,14,40,.7);display:flex;align-items:center;justify-content:center;padding:0 22px">
+      <div role="dialog" aria-label="How the collection works" class="lm-pop" style="position:relative;border-radius:18px;background:linear-gradient(#2C7BDA,#1B57B4);box-shadow:inset 0 0 0 3px #5FB0FF,0 6px 0 #0A2A6B,0 18px 30px rgba(0,0,0,.45);padding:18px 16px 16px">
+        <button type="button" onClick="{{toggleInfo}}" aria-label="Close" class="gl" style="position:absolute;right:-8px;top:-12px;width:38px;height:38px;border-radius:11px;background:linear-gradient(#FF8A7A,#F2463B 55%,#C4251B);box-shadow:0 4px 0 #7E120B"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="position:relative;z-index:1"><path d="M5 5l14 14M19 5L5 19" stroke="#FFFFFF" stroke-width="4.2" stroke-linecap="round"></path></svg></button>
+        <h2 class="ttl" style="margin:0 0 8px;font-size:21px">Fair play promise</h2>
+        <sc-for list="{{rules}}" as="r" hint-placeholder-count="4"><p style="margin:0 0 6px;font:600 13px/1.4 'Baloo 2',sans-serif;color:#E3F0FF;display:flex;gap:6px"><span style="color:#FFE27A">●</span><span>{{r}}</span></p></sc-for>
+        <a href="Terms.dc.html" style="display:inline-block;margin-top:4px;font:800 13px 'Baloo 2',sans-serif;color:#FFE27A">Full gems &amp; coins rules</a>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+const P = (d, f, s, w) => ({ d, f: f || 'none', s: s || 'none', w: w || 0 });
+const RAR = {
+  standard: ['Standard', 'linear-gradient(#56AEF7,#2470CF)', '#A6D8FF', '#0D4A9E'],
+  rare: ['Rare', 'linear-gradient(#FFB64D,#EE7A0E)', '#FFDDA6', '#9A4A00'],
+  epic: ['Epic', 'linear-gradient(#FF7C6C,#D6302A)', '#FFC4BA', '#7E120B'],
+  legend: ['Legendary', 'linear-gradient(#C99BFF,#7B37D6)', '#E6D0FF', '#3E1A8E']
+};
+const TAB_ICONS = {
+  dice: [P('M16 3l12 6-12 6L4 9z', '#FFFFFF', '#5E6C88', 1.2), P('M4 9l12 6v14L4 23z', '#D5DEEC', '#5E6C88', 1.2), P('M28 9L16 15v14l12-6z', '#B7C4D8', '#5E6C88', 1.2), P('M16 7.6a1.6 1 0 1 0 .01 0z', '#E8322B')],
+  pucks: [P('M16 8a11 7 0 1 0 .01 0z', '#7A100D'), P('M16 5a11 7 0 1 0 .01 0z', 'url(#gRed)', '#FFFFFF', 1.5)],
+  boards: [P('M3 3h26v26H3z', '#FFFFFF', '#6B3E16', 2), P('M3 3h10v10H3z', '#76BE2E'), P('M19 3h10v10H19z', '#F8C21C'), P('M3 19h10v10H3z', '#E8322B'), P('M19 19h10v10H19z', '#1E8BEA')]
+};
+const EMB = {
+  lotus: 'M12 4.5c1.9 2.3 2.3 4.8 0 8c-2.3-3.2-1.9-5.7 0-8zM4 9.5c3.4.2 5.9 2.1 8 5.3c-4 .4-6.8-1.3-8-5.3zM20 9.5c-3.4.2-5.9 2.1-8 5.3c4 .4 6.8-1.3 8-5.3z',
+  star: 'M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6-4.5-4.1 6-.7z',
+  crown: 'M3 8l4.5 4L12 5l4.5 7L21 8l-2 10H5z',
+  moon: 'M15 3a9 9 0 1 0 6 13A7 7 0 0 1 15 3z',
+  peacock: 'M12 3a5 6 0 0 1 0 12a5 6 0 0 1 0-12zM12 7a2 2.5 0 1 0 .01 0zM11 15h2v6h-2z',
+  diya: 'M12 3c2 3 2 5 0 7c-2-2-2-4 0-7zM3 13h18c-1 4-5 7-9 7s-8-3-9-7z'
+};
+const PC = { red: ['#FF8A7E', '#E8322B', '#B11F1A', '#7A100D'], green: ['#BDEB7E', '#76BE2E', '#55961C', '#356A0E'], yellow: ['#FFE98A', '#F8C21C', '#D29A12', '#946600'], blue: ['#86CBFF', '#1E8BEA', '#1265C2', '#0A3C82'] };
+const SET_POS = [['green', 22, 4], ['yellow', 70, 4], ['red', 22, 52], ['blue', 70, 52]];
+const DICE = [
+  { name: 'Mela Classic', r: 'standard', top: '#FFFFFF', left: '#E6ECF5', right: '#C9D3E3', pip: '#1B2030', pipTop: '#E8322B', ink: '#5E6C88', st: [2, 2, 0], state: 'owned', lv: 3 },
+  { name: 'Ruby Jelly', r: 'rare', top: '#FF6B5E', left: '#E8322B', right: '#B11F1A', pip: '#FFFFFF', pipTop: '#FFFFFF', ink: '#7A100D', st: [3, 3, 1], state: 'using', lv: 2, cost: '1,500' },
+  { name: 'Ocean Glass', r: 'rare', top: '#9FE3FF', left: '#3FB3F0', right: '#1C7FC8', pip: '#FFFFFF', pipTop: '#FFFFFF', ink: '#0A3C82', st: [3, 4, 1], state: 'shards', have: 6, need: 33 },
+  { name: 'Gold Mohur', r: 'epic', top: '#FFF0A8', left: '#FFC61F', right: '#D98E00', pip: '#7A3E0E', pipTop: '#B11F1A', ink: '#8A4B00', st: [4, 4, 2], state: 'gems', price: 140 },
+  { name: 'Midnight Gold', r: 'epic', top: '#4A5BA0', left: '#26336E', right: '#151C48', pip: '#FFD84A', pipTop: '#FFD84A', ink: '#0A0F2E', st: [4, 5, 2], state: 'road', lvl: 18 },
+  { name: 'Peacock Royal', r: 'legend', top: '#7FE7E0', left: '#1AA6A0', right: '#0D6C8A', pip: '#FFD84A', pipTop: '#FFD84A', ink: '#08404F', st: [5, 5, 3], state: 'shards', have: 2, need: 60 }
+];
+const PUCKS = [
+  { name: 'Lotus Coins', r: 'standard', emblem: EMB.lotus, ring: 'rgba(255,255,255,.85)', shape: '50%', st: [2, 1, 0], state: 'usingP' },
+  { name: 'Star Coins', r: 'standard', emblem: EMB.star, ring: 'rgba(255,255,255,.85)', shape: '50%', st: [2, 2, 0], state: 'owned', lv: 1 },
+  { name: 'Moon Gems', r: 'rare', emblem: EMB.moon, ring: '#BFE6FF', shape: '30%', st: [3, 3, 1], state: 'coins', price: '3,000' },
+  { name: 'Royal Crown', r: 'epic', emblem: EMB.crown, ring: '#FFD84A', shape: '50%', st: [4, 4, 2], state: 'shards', have: 14, need: 40 },
+  { name: 'Diya Lights', r: 'epic', emblem: EMB.diya, ring: '#FFE7A0', shape: '50% 50% 42% 42%', st: [4, 5, 2], state: 'gems', price: 160 },
+  { name: 'Peacock Fan', r: 'legend', emblem: EMB.peacock, ring: '#7FE7E0', shape: '50%', st: [5, 5, 3], state: 'road', lvl: 30 }
+];
+const BOARDS = [
+  { name: 'Mela Wood', r: 'standard', frame: 'linear-gradient(#EBB984,#BE7F44)', frameEdge: '#6B3E16', cell: '#FFFFFF', lane: '#D2D2D2', pal: ['#76BE2E', '#F8C21C', '#E8322B', '#1E8BEA'], st: [2, 1, 0], state: 'using', lv: 1, cost: '800' },
+  { name: 'Night Bazaar', r: 'rare', frame: 'linear-gradient(#3A3F7A,#1E2150)', frameEdge: '#0C0E2E', cell: '#2A2F62', lane: '#3C4380', pal: ['#59E08A', '#FFD84A', '#FF6B6B', '#5CC2FF'], st: [3, 3, 1], state: 'coins', price: '4,000' },
+  { name: 'Marble Palace', r: 'rare', frame: 'linear-gradient(#F4F1EA,#C9C2B2)', frameEdge: '#7E7666', cell: '#FBF8F2', lane: '#E3DDCF', pal: ['#3CA36A', '#E3B23C', '#C8443C', '#3A78C8'], st: [3, 2, 1], state: 'shards', have: 9, need: 30 },
+  { name: 'Royal Palace', r: 'epic', frame: 'linear-gradient(#C24A58,#6E1424)', frameEdge: '#3A0610', cell: '#FFF8EC', lane: '#F0DFC0', pal: ['#1F8A4A', '#FFB800', '#C0272D', '#1F5FC4'], st: [4, 4, 2], state: 'gems', price: 150 },
+  { name: 'Monsoon Garden', r: 'epic', frame: 'linear-gradient(#5FBF7A,#2C7A45)', frameEdge: '#123D22', cell: '#F1FFF4', lane: '#CDEBD5', pal: ['#2F9E55', '#F0C33C', '#E05A47', '#3C8DDE'], st: [4, 4, 2], state: 'road', lvl: 22 },
+  { name: 'Royal Durbar', r: 'legend', frame: 'linear-gradient(#FFE27A,#C98A00)', frameEdge: '#6B4300', cell: '#FFFBEA', lane: '#F3E3A8', pal: ['#1F9E6E', '#F2B200', '#C8232C', '#2259C9'], st: [5, 5, 3], state: 'shards', have: 3, need: 60 }
+];
+const STAT_LABELS = { dice: ['Roll fx', 'Bounce', 'XP boost'], pucks: ['Hop fx', 'Trail', 'XP boost'], boards: ['Ambience', 'Detail', 'XP boost'] };
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tab: 'dice', info: false, using: { dice: 1, pucks: 0, boards: 0 } };
+  }
+  renderVals() {
+    const st = this.state;
+    const tabs = [['dice', 'Dice', 2], ['pucks', 'Pieces', 1], ['boards', 'Boards', 0]].map((t) => ({
+      label: t[1], icon: TAB_ICONS[t[0]], on: st.tab === t[0] ? 'true' : 'false', cls: 'gl ' + (st.tab === t[0] ? 'g-gold' : 'g-navy'),
+      hasNew: t[2] > 0, newN: t[2], tap: () => this.setState({ tab: t[0] })
+    }));
+    const legend = ['standard', 'rare', 'epic', 'legend'].map((k) => ({ label: RAR[k][0], bg: RAR[k][1], rim: RAR[k][2] }));
+    const list = st.tab === 'dice' ? DICE : (st.tab === 'pucks' ? PUCKS : BOARDS);
+    const labels = STAT_LABELS[st.tab];
+    const items = list.map((x, i) => {
+      const R = RAR[x.r];
+      const using = st.using[st.tab] === i;
+      const state = using ? (st.tab === 'pucks' ? 'usingP' : 'using') : (x.state === 'using' || x.state === 'usingP' ? 'owned' : x.state);
+      const stats = x.st.map((v, k) => ({ label: labels[k], w: k === 2 ? (v * 33) + '%' : (v * 20) + '%', val: k === 2 ? (v ? '+' + (v * 5) + '%' : '—') : v + '/5',
+        fill: k === 2 ? 'linear-gradient(#A3F06A,#47BA2B)' : 'linear-gradient(#FFF3B0,#FFC61F)' }));
+      const btn = {
+        using: ['Upgrade ' + (x.cost || '1,000'), 'gl g-green', true, false, 'Upgrade ' + x.name + ' for ' + (x.cost || '1,000') + ' coins'],
+        usingP: ['Select color', 'gl g-green', false, false, 'Choose your piece colour'],
+        owned: ['Use', 'gl g-blue', false, false, 'Use ' + x.name],
+        coins: [x.price, 'gl g-gold', true, false, 'Buy ' + x.name + ' for ' + x.price + ' coins'],
+        gems: [String(x.price), 'gl g-gold', false, true, 'Unlock ' + x.name + ' for ' + x.price + ' gems'],
+        road: ['Road Lv ' + x.lvl, 'gl g-grey', false, false, x.name + ' unlocks at Mela Road level ' + x.lvl]
+      }[state];
+      const base = {
+        name: x.name, rarity: R[0], bg: R[1], rim: R[2], edge: R[3], d: (i * 45) + 'ms', tryLabel: 'Try on ' + x.name,
+        isDice: st.tab === 'dice', isPuck: st.tab === 'pucks', isBoard: st.tab === 'boards',
+        using, hasLv: !!x.lv && (state === 'using' || state === 'usingP' || state === 'owned'), lv: x.lv || 1, stats,
+        hasShards: state === 'shards', shards: (x.have || 0) + '/' + (x.need || 1), shardW: Math.round(100 * (x.have || 0) / (x.need || 1)) + '%',
+        hasBtn: state !== 'shards', btn: btn ? btn[0] : '', btnCls: btn ? btn[1] : '', btnCoin: btn ? btn[2] : false, btnGem: btn ? btn[3] : false, btnAria: btn ? btn[4] : '',
+        tap: () => { if (state === 'owned') { const u = Object.assign({}, this.state.using); u[this.state.tab] = i; this.setState({ using: u }); } },
+        top: x.top || '', left: x.left || '', right: x.right || '', pip: x.pip || '', pipTop: x.pipTop || '', edgeInk: x.ink || '',
+        emblem: x.emblem || '', ring: x.ring || '', shape: x.shape || '50%', set: [],
+        frame: x.frame || '', frameEdge: x.frameEdge || '', cell: x.cell || '', lane: x.lane || '', yards: [], cG: '', cY: '', cR: '', cB: ''
+      };
+      if (x.emblem) base.set = SET_POS.map((s) => ({ x: s[1], y: s[2], light: PC[s[0]][0], main: PC[s[0]][1], dark: PC[s[0]][2], side: PC[s[0]][3] }));
+      if (x.pal) {
+        base.yards = [[x.pal[0], 0, 0], [x.pal[1], 46, 0], [x.pal[2], 0, 46], [x.pal[3], 46, 46]].map((y) => ({ c: y[0], d: 'rgba(0,0,0,.18)', x: y[1], y: y[2] }));
+        base.cG = x.pal[0]; base.cY = x.pal[1]; base.cR = x.pal[2]; base.cB = x.pal[3];
+      }
+      return base;
+    });
+    const nav = [
+      ['Main.dc.html', 'Home', 'M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10'],
+      ['WifiHub.dc.html', 'Friends', 'M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM2 21c0-4 3-7 7-7s7 3 7 7M17 11a3 3 0 1 0 0-6M22 20c0-3-2-5.5-5-6'],
+      ['Collection.dc.html', 'Collection', 'M4 7l8-4 8 4-8 4zM4 7v10l8 4 8-4V7M12 11v10'],
+      ['MelaRoad.dc.html', 'Road', 'M6 21V4M6 4h11l-2.5 4 2.5 4H6'],
+      ['Cup.dc.html', 'Events', 'M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8 21h8']
+    ].map((t, i) => { const on = i === 2; return { href: t[0], label: t[1], icon: t[2], current: on ? 'page' : 'false',
+      size: on ? 46 : 34, lift: on ? -10 : 0, bg: on ? 'radial-gradient(circle at 50% 30%,#FFE680,#FFB800 60%,#F07800)' : 'transparent',
+      sh: on ? '0 0 0 3px #0A2464,0 4px 0 3px #9A4A00' : 'none', ink: on ? '#5A2E00' : '#CFE0FF', labelInk: on ? '#FFE27A' : '#AFC6EE' }; });
+    return {
+      tabs, legend, items, nav, showInfo: st.info, infoOpen: st.info ? 'true' : 'false',
+      toggleInfo: () => this.setState({ info: !this.state.info }),
+      rules: [
+        'Everything here is cosmetic. Every roll is a fair 1–6 with any dice, at any level.',
+        'XP boost only speeds up Mela Road. It never changes moves, captures or coins won.',
+        'Shards come from Mela pots and Mela Road. Duplicates turn into shards, never lost.',
+        'Gems are earned in play. The only real-money item is “Remove ads”.'
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

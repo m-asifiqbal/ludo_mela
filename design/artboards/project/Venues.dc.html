@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ludo Mela — Mela Tour venues</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#FFE27A}a:hover{color:#FFF3B8}
+:root{--e:cubic-bezier(.2,.8,.2,1);--b:cubic-bezier(.34,1.56,.64,1)}
+button,a{-webkit-tap-highlight-color:transparent;transition:transform 150ms var(--b),filter 160ms var(--e),box-shadow 160ms var(--e),opacity 160ms var(--e)}
+button:focus-visible,a:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
+.ttl{font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-shadow:0 -1.5px 0 #0A2A6B,1.5px 0 0 #0A2A6B,0 1.5px 0 #0A2A6B,-1.5px 0 0 #0A2A6B,1.2px 1.2px 0 #0A2A6B,-1.2px 1.2px 0 #0A2A6B,1.2px -1.2px 0 #0A2A6B,-1.2px -1.2px 0 #0A2A6B,0 3px 0 #0A2A6B}
+.gl{position:relative;border:0;cursor:pointer;font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;text-shadow:0 2px 0 rgba(0,0,0,.3);box-sizing:border-box}
+.gl::after{content:'';position:absolute;left:8%;right:8%;top:3px;height:42%;border-radius:999px;background:linear-gradient(rgba(255,255,255,.6),rgba(255,255,255,0));pointer-events:none}
+.gl:active{transform:translateY(3px) scale(.98)}
+.g-green{background:linear-gradient(#8DEB50,#47BA2B 55%,#2E9A1B);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 4px 0 #1D6B0F,0 8px 12px rgba(0,20,60,.35)}
+.g-blue{background:linear-gradient(#6DCEFF,#2F95F2 55%,#1C72DA);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 4px 0 #0D4A9E,0 8px 12px rgba(0,20,60,.35)}
+.g-grey{background:linear-gradient(#9DAAC2,#73829E 55%,#5E6C88);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 4px 0 #3A4560,0 8px 12px rgba(0,20,60,.35)}
+.well{background:#0D3680;border-radius:12px;box-shadow:inset 0 3px 6px rgba(0,0,0,.4),inset 0 -1px 0 rgba(255,255,255,.14)}
+.lm-rise{animation:lmRise 460ms var(--e) backwards}
+.lm-twinkle{animation:lmTwinkle 1.8s ease-in-out infinite}
+@keyframes lmRise{from{opacity:0;transform:translateX(30px)}}
+@keyframes lmTwinkle{0%,100%{opacity:1}50%{opacity:.35}}
+@media (prefers-reduced-motion: reduce){*{animation-duration:1ms !important;animation-delay:0ms !important;animation-iteration-count:1 !important;transition-duration:1ms !important}}
+</style>
+</helmet>
+<div style="width:390px;height:844px;position:relative;overflow:hidden;background:#1250C2;font-family:'Baloo 2',system-ui,sans-serif;color:#FFFFFF">
+  <div style="position:absolute;inset:0;background:radial-gradient(130% 70% at 50% 30%,#3E9CFA 0%,#1F6EE0 40%,#1250C2 70%,#0B3592 100%)"></div>
+  <svg width="390" height="844" aria-hidden="true" style="position:absolute;inset:0"><defs><pattern id="jali" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M22 8l14 14-14 14L8 22zM12.5 12.5h19v19h-19z" fill="none" stroke="#FFFFFF" stroke-opacity=".07" stroke-width="1.6"></path></pattern></defs><rect width="390" height="844" fill="url(#jali)"></rect></svg>
+
+  <div style="position:relative;z-index:1;height:100%;display:flex;flex-direction:column">
+    <div style="height:47px;flex:none"></div>
+    <div style="flex:none;height:58px;background:linear-gradient(#5ED8FF,#1FA2EE);box-shadow:inset 0 3px 0 rgba(255,255,255,.5),inset 0 -4px 0 #0E78C2,0 4px 10px rgba(0,0,0,.25);display:flex;align-items:center;padding:0 10px;gap:8px">
+      <a href="Main.dc.html" aria-label="Back to lobby" class="gl g-blue" style="width:42px;height:42px;border-radius:14px;flex:none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position:relative;z-index:1"><path d="M15 5l-7 7 7 7"></path></svg></a>
+      <h1 class="ttl" style="margin:0;flex:1;font-size:26px;text-align:center">MELA TOUR</h1>
+      <span class="well" style="height:34px;border-radius:17px;display:flex;align-items:center;gap:4px;padding:0 10px 0 4px;background:rgba(10,42,107,.55)"><svg width="26" height="26" viewBox="0 0 28 28" aria-hidden="true"><path d="M14 1.5l3.6 7.4 8.1 1.2-5.9 5.7 1.4 8.1L14 20.1l-7.2 3.8 1.4-8.1-5.9-5.7 8.1-1.2z" fill="#FFC61F" stroke="#B26400" stroke-width="2" stroke-linejoin="round"></path><text x="14" y="18.5" text-anchor="middle" font-family="Lilita One" font-size="11" fill="#FFFFFF" stroke="#8A4B00" stroke-width="2.4" paint-order="stroke">7</text></svg><span class="ttl" style="font-size:14px">LEVEL</span></span>
+    </div>
+    <p style="margin:12px 16px 4px;font:700 13px/1.4 'Baloo 2',sans-serif;color:#DDEEFF;text-align:center">Every venue has its own board and a bigger prize. Climb levels to open the next one.</p>
+
+    <div style="flex:1;min-height:0;overflow-y:auto;padding:8px 12px 16px;display:flex;flex-direction:column;gap:14px">
+      <sc-for list="{{venues}}" as="v" hint-placeholder-count="8">
+        <div class="lm-rise" style="position:relative;flex:none;height:132px;border-radius:22px;overflow:hidden;background:linear-gradient(#2064CC,#1549A6);box-shadow:inset 0 0 0 3px {{v.ring}},0 6px 0 #0A2E70,0 12px 20px rgba(0,10,40,.35);animation-delay:{{v.delay}}">
+          <svg width="160" height="132" viewBox="0 0 160 132" preserveAspectRatio="xMidYMax slice" aria-hidden="true" style="position:absolute;left:0;top:0">
+            <defs><linearGradient id="{{v.gid}}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{{v.s0}}"></stop><stop offset="1" stop-color="{{v.s1}}"></stop></linearGradient></defs>
+            <rect width="160" height="132" fill="{{v.gurl}}"></rect>
+            <circle cx="{{v.sunX}}" cy="34" r="14" fill="{{v.sun}}" opacity=".9"></circle>
+            <path d="M0 132V104q40-16 80-6t80-4V132z" fill="{{v.far}}"></path>
+            <path d="{{v.near}}" fill="{{v.nearFill}}" transform="translate(-8 26) scale(.52)"></path>
+            <path d="M-4 18Q80 46 164 16" fill="none" stroke="#000000" stroke-opacity=".35" stroke-width="1.2"></path>
+            <sc-for list="{{v.bulbs}}" as="b" hint-placeholder-count="7"><circle class="lm-twinkle" cx="{{b.x}}" cy="{{b.y}}" r="3.2" fill="{{b.c}}" style="animation-delay:{{b.d}}"></circle></sc-for>
+          </svg>
+          <div style="position:absolute;left:150px;top:0;bottom:0;width:30px;background:linear-gradient(90deg,rgba(21,73,166,0),#1A54B4)"></div>
+          <div style="position:absolute;left:160px;right:12px;top:12px;bottom:12px;display:flex;flex-direction:column;gap:6px">
+            <span style="display:flex;align-items:center;gap:6px"><span class="ttl" style="font-size:19px;line-height:1.05">{{v.nm}}</span></span>
+            <span style="font:800 11px 'Baloo 2',sans-serif;color:#9CC2FF;letter-spacing:.05em">{{v.board}}</span>
+            <span style="display:flex;gap:6px">
+              <span class="well" style="height:28px;display:flex;align-items:center;gap:4px;padding:0 8px"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="10" fill="#B86E00"></circle><circle cx="12" cy="11.5" r="10" fill="#FFC928"></circle></svg><span class="ttl" style="font-size:13px">{{v.entry}}</span></span>
+              <span class="well" style="height:28px;display:flex;align-items:center;gap:4px;padding:0 8px"><span style="font:800 10px 'Baloo 2',sans-serif;color:#9CC2FF">WIN</span><span class="ttl" style="font-size:13px;color:#FFE27A">{{v.win}}</span></span>
+            </span>
+            <span style="flex:1"></span>
+            <a href="{{v.href}}" class="gl {{v.cls}}" style="height:34px;border-radius:12px;font-size:15px;align-self:flex-end;padding:0 16px;min-width:96px">
+              <sc-if value="{{v.locked}}" hint-placeholder-val="{{ false }}"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="position:relative;z-index:1"><rect x="4" y="11" width="16" height="11" rx="3" fill="#FFFFFF"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="#FFFFFF" stroke-width="3"></path></svg></sc-if>
+              <span style="position:relative;z-index:1">{{v.cta}}</span>
+            </a>
+          </div>
+          <sc-if value="{{v.current}}" hint-placeholder-val="{{ false }}"><span style="position:absolute;left:10px;top:10px;height:22px;border-radius:11px;background:#FFC61F;color:#5A2E00;font:800 11px/22px 'Baloo 2',sans-serif;padding:0 9px;box-shadow:0 2px 0 #B26400">YOUR BEST</span></sc-if>
+          <sc-if value="{{v.locked}}" hint-placeholder-val="{{ false }}"><span style="position:absolute;left:0;top:0;width:160px;height:132px;background:rgba(6,16,50,.5)"></span></sc-if>
+        </div>
+      </sc-for>
+    </div>
+    <div style="height:30px;flex:none"></div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+const V = [
+  ['Village Haat', 'CLASSIC WOOD BOARD', 1, '100', '200', ['#7FD8FF', '#FFF2C2'], '#FFF59A', 120, '#55B85A', '#2E7D32', 'M0 128V100l20-16 20 16v28h10V96l24-20 24 20v32h14V86q14-30 28 0v42h16V98l18-14 18 14v30h12V70q-2-18 6-30q8 12 6 30v58h20V100l22-18 22 18v28z'],
+  ['Lantern Bazaar', 'LANTERN NIGHT BOARD', 3, '500', '1,000', ['#3B1D7A', '#FF9A4D'], '#FFE7A8', 40, '#5A2A7A', '#2A1450', 'M0 128V90h18V74h8v16h14V78a16 16 0 0 1 32 0v12h12V58l6-12 6 12v32h16V68a26 26 0 0 1 52 0v22h14V76h10v14h18V74a13 13 0 0 1 26 0v16h16V56l5-10 5 10v34h22V78a15 15 0 0 1 30 0v12h16v38z'],
+  ['Monsoon Garden', 'MONSOON BOARD', 6, '1,000', '2,000', ['#1E5B6E', '#A8E6CF'], '#E0FFF4', 120, '#2F8C6A', '#1A5440', 'M0 128V96q20-20 40 0q10-26 40-14q14-20 40 0q20-14 36 6q16-24 46-8q14-16 36 0q20-18 44 4q24-12 48 12V128z'],
+  ['Desert Carnival', 'SANDSTONE BOARD', 9, '2,500', '5,000', ['#FF9A4D', '#FFE7A8'], '#FFF6C2', 40, '#E0A060', '#9A5E28', 'M0 128V104l30-30 30 30v-20h12l16-26 16 26h12v20l30-30 30 30V90h24v38z'],
+  ['Royal Palace', 'ROYAL BOARD', 12, '5,000', '10,000', ['#5A0F2E', '#FFB347'], '#FFE7A8', 120, '#7A1E3A', '#3A0A1E', 'M0 128V98h30V82h10v16h40V70h-6l20-26 20 26h-6v28h24V64a51 51 0 0 1 102 0v34h24V70h-6l20-26 20 26h-6v58z'],
+  ['Ocean Pier', 'OCEAN REEF BOARD', 16, '8,000', '16,000', ['#0E6FB8', '#7FE0FF'], '#FFFFFF', 40, '#1A8CC8', '#0A4A7A', 'M0 128V108h40V80h8v28h20V96l14-8 14 8v12h30V70l10-16 10 16v38h40V100h20v28z'],
+  ['Snow Festival', 'FROST BOARD', 20, '10,000', '20,000', ['#8AB8E8', '#E8F6FF'], '#FFFFFF', 120, '#DDEBF7', '#5A7FA8', 'M0 128V100l24-30 24 30 24-40 24 40 24-30 24 30 24-46 24 46 24-30 24 30 24-36 24 36v28z'],
+  ['Neon City', 'NEON BOARD', 25, '20,000', '40,000', ['#0B0630', '#FF3FA4'], '#FF8AD0', 40, '#2A0A5A', '#120430', 'M0 128V78h24V48h30v30h14V28h26v50h18V62h22V18h30v60h16V54h26v24h20V38h28v40h22V66h54v62z']
+];
+const LEVEL = 7;
+class Component extends DCLogic {
+  renderVals() {
+    const palette = ['#FFE27A', '#FF6CC0', '#7DF0E4', '#8DEB50', '#FFB02E'];
+    const venues = V.map((v, i) => {
+      const locked = v[2] > LEVEL;
+      return {
+        nm: v[0], board: v[1], entry: v[3], win: v[4], locked, current: i === 2,
+        gid: 'vsky' + i, gurl: 'url(#vsky' + i + ')', s0: v[5][0], s1: v[5][1], sun: v[6], sunX: v[7], far: v[8], nearFill: v[9], near: v[10],
+        ring: i === 2 ? '#FFC61F' : '#3F86EA',
+        bulbs: Array.from({ length: 7 }, (_, k) => { const t = (k + 0.5) / 7; return { x: (t * 160).toFixed(1), y: (18 + 4 * 14 * t * (1 - t)).toFixed(1), c: palette[(k + i) % 5], d: (k % 3) * 0.4 + 's' }; }),
+        href: locked ? 'MelaRoad.dc.html' : 'VsIntro.dc.html',
+        cta: locked ? 'LV ' + v[2] : 'PLAY', cls: locked ? 'g-grey' : 'g-green',
+        delay: (i * 60) + 'ms'
+      };
+    });
+    return { venues };
+  }
+}
+</script>
+</body>
+</html>

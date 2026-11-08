@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ludo Mela — You won</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#FFE27A}a:hover{color:#FFF3B8}
+:root{--e:cubic-bezier(.2,.8,.2,1);--b:cubic-bezier(.34,1.56,.64,1)}
+button,a{-webkit-tap-highlight-color:transparent;transition:transform 150ms var(--b),filter 160ms var(--e),box-shadow 160ms var(--e),opacity 160ms var(--e)}
+button:focus-visible,a:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
+.ttl{font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-shadow:0 -1.5px 0 #0A2A6B,1.5px 0 0 #0A2A6B,0 1.5px 0 #0A2A6B,-1.5px 0 0 #0A2A6B,1.2px 1.2px 0 #0A2A6B,-1.2px 1.2px 0 #0A2A6B,1.2px -1.2px 0 #0A2A6B,-1.2px -1.2px 0 #0A2A6B,0 3px 0 #0A2A6B}
+.gl{position:relative;border:0;cursor:pointer;font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;text-shadow:0 2px 0 rgba(0,0,0,.3);box-sizing:border-box}
+.gl::after{content:'';position:absolute;left:8%;right:8%;top:3px;height:42%;border-radius:999px;background:linear-gradient(rgba(255,255,255,.6),rgba(255,255,255,0));pointer-events:none}
+.gl:active{transform:translateY(3px) scale(.98)}
+.g-green{background:linear-gradient(#8DEB50,#47BA2B 55%,#2E9A1B);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 5px 0 #1D6B0F,0 9px 14px rgba(0,20,60,.35)}
+.g-blue{background:linear-gradient(#6DCEFF,#2F95F2 55%,#1C72DA);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 5px 0 #0D4A9E,0 9px 14px rgba(0,20,60,.35)}
+.g-gold{color:#5A2E00;text-shadow:0 1px 0 rgba(255,255,255,.55);background:linear-gradient(#FFEC8F,#FFC61F 55%,#F59E00);box-shadow:inset 0 -3px 0 rgba(0,0,0,.1),0 5px 0 #B26400,0 9px 14px rgba(0,20,60,.35)}
+.pnl{background:linear-gradient(#2064CC,#1549A6);border-radius:24px;box-shadow:inset 0 0 0 3px #3F86EA,inset 0 5px 0 rgba(255,255,255,.16),0 6px 0 #0A2E70,0 12px 22px rgba(0,10,40,.4)}
+.well{background:#0D3680;border-radius:14px;box-shadow:inset 0 3px 6px rgba(0,0,0,.4),inset 0 -1px 0 rgba(255,255,255,.14)}
+.lm-rays{animation:lmRays 24s linear infinite;transform-origin:50% 50%}
+.lm-slam{animation:lmSlam 700ms var(--b) backwards}
+.lm-grow{animation:lmGrow 700ms var(--b) backwards;transform-origin:50% 100%}
+.lm-drop{animation:lmDrop 700ms var(--b) backwards}
+.lm-fall{animation:lmFall linear infinite}
+.lm-rise{animation:lmRise 460ms var(--e) backwards}
+.lm-bar{transition:width 900ms cubic-bezier(.2,.8,.2,1)}
+.lm-wobble{animation:lmWobble 1.4s ease-in-out infinite}
+.lm-pop{animation:lmPop 520ms var(--b) backwards}
+.lm-float{animation:lmFloat 2.6s ease-in-out infinite}
+@keyframes lmRays{to{transform:rotate(360deg)}}
+@keyframes lmSlam{0%{opacity:0;transform:scale(2.6) rotate(-8deg)}60%{opacity:1;transform:scale(.92)}100%{transform:scale(1)}}
+@keyframes lmGrow{from{transform:scaleY(0)}}
+@keyframes lmDrop{from{opacity:0;transform:translateY(-60px)}}
+@keyframes lmFall{from{transform:translateY(-40px) rotate(0)}to{transform:translateY(900px) rotate(540deg)}}
+@keyframes lmRise{from{opacity:0;transform:translateY(16px)}}
+@keyframes lmWobble{0%,70%,100%{transform:rotate(0) scale(1)}76%{transform:rotate(-8deg) scale(1.06)}82%{transform:rotate(7deg) scale(1.06)}88%{transform:rotate(-4deg)}94%{transform:rotate(3deg)}}
+@keyframes lmPop{from{opacity:0;transform:scale(.3)}}
+@keyframes lmFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@media (prefers-reduced-motion: reduce){*{animation-duration:1ms !important;animation-delay:0ms !important;animation-iteration-count:1 !important;transition-duration:1ms !important}}
+.av-blink,.av-earl,.av-earr{transform-box:view-box}.av-blink{animation:avBlink 4.2s infinite}.av-earl{animation:avEarL 5s infinite}.av-earr{animation:avEarR 5s 1.4s infinite}@keyframes avBlink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}@keyframes avEarL{0%,84%,100%{transform:rotate(0)}88%{transform:rotate(-9deg)}93%{transform:rotate(5deg)}}@keyframes avEarR{0%,84%,100%{transform:rotate(0)}88%{transform:rotate(9deg)}93%{transform:rotate(-5deg)}}
+</style>
+</helmet>
+<div style="width:390px;height:844px;position:relative;overflow:hidden;background:#1250C2;font-family:'Baloo 2',system-ui,sans-serif;color:#FFFFFF">
+  <div style="position:absolute;inset:0;background:radial-gradient(90% 45% at 50% 26%,#9AD6FF 0%,#2F8BF0 35%,#1250C2 65%,#0A2C80 100%)"></div>
+  <svg class="lm-rays" width="900" height="900" viewBox="-450 -450 900 900" aria-hidden="true" style="position:absolute;left:-255px;top:-230px"><sc-for list="{{rays}}" as="r" hint-placeholder-count="16"><path d="M0 0L-38 -450L38 -450z" fill="#FFFFFF" fill-opacity=".08" transform="rotate({{r}})"></path></sc-for></svg>
+  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;z-index:3">
+    <sc-for list="{{confetti}}" as="c" hint-placeholder-count="24"><span class="lm-fall" style="position:absolute;left:{{c.x}}px;top:0;width:{{c.w}}px;height:{{c.h}}px;border-radius:2px;background:{{c.c}};animation-duration:{{c.t}};animation-delay:{{c.d}}"></span></sc-for>
+  </div>
+
+  <div style="position:relative;z-index:2;height:100%;display:flex;flex-direction:column;align-items:center">
+    <div style="height:54px;flex:none"></div>
+    <div class="lm-slam" style="width:330px;height:92px;flex:none" role="img" aria-label="You won">
+      <svg width="330" height="92" viewBox="0 0 330 92" aria-hidden="true"><defs><linearGradient id="wg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF6B0"></stop><stop offset=".5" stop-color="#FFC61F"></stop><stop offset="1" stop-color="#F08A00"></stop></linearGradient></defs><text x="165" y="72" text-anchor="middle" font-family="Lilita One" font-size="68" fill="#5A2E00" stroke="#5A2E00" stroke-width="12" stroke-linejoin="round" transform="translate(0 5)">YOU WON!</text><text x="165" y="72" text-anchor="middle" font-family="Lilita One" font-size="68" fill="url(#wg)" stroke="#7A3A00" stroke-width="5" stroke-linejoin="round" paint-order="stroke">YOU WON!</text></svg>
+    </div>
+    <span class="ttl lm-rise" style="font-size:15px;color:#DDEEFF;animation-delay:300ms">Lantern Bazaar · 4 players · 21 turns</span>
+
+    <div style="position:relative;width:340px;height:236px;flex:none;margin-top:8px">
+      <svg class="lm-float" width="70" height="70" viewBox="0 0 70 80" aria-hidden="true" style="position:absolute;left:135px;top:0"><path d="M18 6h34v22a17 17 0 0 1-34 0z" fill="#FFD34D" stroke="#8A5300" stroke-width="3"></path><path d="M18 12H6v6a12 12 0 0 0 12 12M52 12h12v6a12 12 0 0 1-12 12" fill="none" stroke="#8A5300" stroke-width="3"></path><path d="M30 44h10v14H30z" fill="#E0A800" stroke="#8A5300" stroke-width="3"></path><rect x="18" y="58" width="34" height="12" rx="3" fill="#B5651D" stroke="#6B3A0E" stroke-width="3"></rect><path d="M35 14l3 6 6.5.6-5 4.4 1.5 6.4L35 28l-6 3.4 1.5-6.4-5-4.4 6.5-.6z" fill="#FFF6E6"></path></svg>
+      <sc-for list="{{podium}}" as="p" hint-placeholder-count="3">
+        <div style="position:absolute;left:{{p.x}}px;bottom:0;width:104px;display:flex;flex-direction:column;align-items:center">
+          <span class="lm-drop" style="position:relative;width:{{p.size}}px;height:{{p.size}}px;border-radius:18px;overflow:hidden;box-shadow:0 0 0 3px #FFFFFF,0 0 0 6px {{p.ring}},0 8px 12px rgba(0,0,0,.35);margin-bottom:12px;animation-delay:{{p.dropDelay}}">
+            <svg width="{{p.size}}" height="{{p.size}}" viewBox="0 0 48 48" aria-hidden="true"><sc-for list="{{p.av}}" as="q" hint-placeholder-count="10"><path class="{{q.c}}" style="transform-origin:{{q.o}}" d="{{q.d}}" fill="{{q.f}}" stroke="{{q.s}}" stroke-width="{{q.w}}" stroke-linecap="round" stroke-linejoin="round"></path></sc-for></svg>
+          </span>
+          <div class="lm-grow" style="position:relative;width:104px;height:{{p.h}}px;animation-delay:{{p.growDelay}}">
+            <div style="position:absolute;left:6px;right:6px;top:0;height:14px;border-radius:8px 8px 2px 2px;background:{{p.top}};transform:perspective(200px) rotateX(40deg);transform-origin:50% 100%"></div>
+            <div style="position:absolute;left:0;right:0;top:10px;bottom:0;border-radius:10px 10px 0 0;background:linear-gradient({{p.face}},{{p.faceDark}});box-shadow:inset 0 3px 0 rgba(255,255,255,.45),inset 0 -4px 0 rgba(0,0,0,.18);display:grid;place-items:center">
+              <span class="ttl" style="font-size:38px">{{p.place}}</span>
+            </div>
+          </div>
+          <span class="ttl" style="position:absolute;bottom:{{p.nameY}}px;font-size:14px">{{p.nm}}</span>
+        </div>
+      </sc-for>
+    </div>
+    <span class="lm-rise" style="font:800 12px 'Baloo 2',sans-serif;color:#CFE3FF;margin-top:8px;animation-delay:900ms">4th · Mitu — every puck but one home</span>
+
+    <div class="pnl lm-rise" style="width:358px;flex:none;margin-top:12px;padding:12px;box-sizing:border-box;display:flex;flex-direction:column;gap:10px;animation-delay:500ms">
+      <div style="display:flex;gap:10px">
+        <div class="well" style="flex:1;height:56px;display:flex;align-items:center;justify-content:center;gap:8px">
+          <svg width="34" height="28" viewBox="0 0 40 30" aria-hidden="true"><circle cx="13" cy="17" r="8" fill="#B86E00"></circle><circle cx="13" cy="15.5" r="8" fill="#FFC928"></circle><circle cx="27" cy="17" r="8" fill="#B86E00"></circle><circle cx="27" cy="15.5" r="8" fill="#FFC928"></circle><circle cx="20" cy="11" r="8" fill="#B86E00"></circle><circle cx="20" cy="9.5" r="8" fill="#FFC928"></circle></svg>
+          <span class="ttl" style="font-size:24px;color:#FFE27A;font-variant-numeric:tabular-nums">+{{coins}}</span>
+        </div>
+        <button type="button" onClick="{{openChest}}" aria-label="{{chestLabel}}" class="well" style="width:120px;height:56px;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;padding:0;color:#FFFFFF">
+          <sc-if value="{{closed}}" hint-placeholder-val="{{ true }}">
+            <svg class="lm-wobble" width="40" height="36" viewBox="0 0 64 56" aria-hidden="true"><path d="M20 14q12-3 24 0l-2 5q11 5 11 17q0 14-21 16q-21-2-21-16q0-12 11-17z" fill="#C9D3E2" stroke="#4A5670" stroke-width="3"></path><path d="M18 5q14-5 28 0l-2 9q-12-3-24 0z" fill="#2F95F2" stroke="#4A5670" stroke-width="2.5"></path><path d="M19 14q13-3 26 0" fill="none" stroke="#FFD34D" stroke-width="3"></path><path d="M13 34q19 6 38 0" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-dasharray="4 4"></path></svg>
+            <span class="ttl" style="font-size:14px;line-height:1.05;text-align:left">Silver<br>pot</span>
+          </sc-if>
+          <sc-if value="{{opened}}" hint-placeholder-val="{{ false }}">
+            <span class="lm-pop" style="display:flex;align-items:center;gap:4px"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12l4.5 6L12 21.5 1.5 9.5z" fill="#C2186D"></path><path d="M6 3.5h12l4.5 6H1.5z" fill="#FF6CC0"></path><path d="M12 21.5L1.5 9.5h21z" fill="#F0328F"></path></svg><span class="ttl" style="font-size:20px;color:#FF9AD6">+5</span></span>
+          </sc-if>
+        </button>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <svg width="34" height="34" viewBox="0 0 28 28" aria-hidden="true"><path d="M14 1.5l3.6 7.4 8.1 1.2-5.9 5.7 1.4 8.1L14 20.1l-7.2 3.8 1.4-8.1-5.9-5.7 8.1-1.2z" fill="#FFC61F" stroke="#B26400" stroke-width="2" stroke-linejoin="round"></path><text x="14" y="18.5" text-anchor="middle" font-family="Lilita One" font-size="11" fill="#FFFFFF" stroke="#8A4B00" stroke-width="2.4" paint-order="stroke">{{lv}}</text></svg>
+        <div class="well" style="flex:1;height:22px;border-radius:11px;overflow:hidden;position:relative">
+          <div class="lm-bar" style="height:22px;width:{{xpPct}}%;border-radius:11px;background:linear-gradient(#A3F06A,#47BA2B);box-shadow:inset 0 3px 0 rgba(255,255,255,.35)"></div>
+          <span class="ttl" style="position:absolute;inset:0;text-align:center;font-size:13px;line-height:22px">{{xpText}}</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center">
+        <sc-for list="{{story}}" as="s" hint-placeholder-count="3"><span style="height:26px;border-radius:13px;background:rgba(255,255,255,.14);font:800 12px/26px 'Baloo 2',sans-serif;padding:0 10px">{{s}}</span></sc-for>
+      </div>
+    </div>
+
+    <div style="flex:1"></div>
+    <div style="width:358px;display:flex;gap:10px;flex:none">
+      <a href="Main.dc.html" aria-label="Back to lobby" class="gl g-blue" style="width:58px;height:58px;border-radius:18px;flex:none"><svg width="28" height="28" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true" style="position:relative;z-index:1"><path d="M12 3l9 8h-3v9h-4.5v-6h-3v6H6v-9H3z"></path></svg></a>
+      <a href="MatchReport.dc.html" class="gl g-blue" style="flex:1;height:58px;border-radius:18px;font-size:17px"><span style="position:relative;z-index:1">INSIGHTS</span></a>
+      <a href="VsIntro.dc.html" class="gl g-green" style="flex:1.4;height:58px;border-radius:18px;font-size:20px"><span style="position:relative;z-index:1">PLAY AGAIN</span></a>
+    </div>
+    <div style="height:40px;flex:none"></div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+// Animal avatars (shared set — see the design system board). Parts: [d, fill, stroke, width, anim, origin].
+const ANIMALS = {"cat":["#FFB02E",[["M0 30Q24 18 48 30V48H0z","rgba(0,0,0,.12)"],["M8 48c2-7 8-10 16-10s14 3 16 10z","#DDE2EC","#6B7389",0.8],["M15 40q9 4 18 0l-.5 2.5q-8.5 3.5-17 0z","#E8322B"],["M22.4 43.6a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0 -3.2 0z","#FFC61F","#B26400",0.5],["M10.5 22L12 7.5l9.5 7z","#F2F4F8","#6B7389",1.2,"earl","15px 20px"],["M12.6 18.5l.8-7.6 4.6 3.6z","#FFB3C7",0,0,"earl","15px 20px"],["M37.5 22L36 7.5l-9.5 7z","#F2F4F8","#6B7389",1.2,"earr","33px 20px"],["M35.4 18.5l-.8-7.6-4.6 3.6z","#FFB3C7",0,0,"earr","33px 20px"],["M9.5 27a14.5 12.5 0 1 0 29 0a14.5 12.5 0 1 0 -29 0z","#F2F4F8","#6B7389",1.2],["M24 14.6q6 .3 8.5 5q-4.5 1.6-8.5-1.2z","#F59A23"],["M16.1 26a2.4 2.9 0 1 0 4.8 0a2.4 2.9 0 1 0 -4.8 0zM27.1 26a2.4 2.9 0 1 0 4.8 0a2.4 2.9 0 1 0 -4.8 0z","#3FAE5A",0,0,"blink","24px 26px"],["M17.5 26a1 2.2 0 1 0 2 0a1 2.2 0 1 0 -2 0zM28.5 26a1 2.2 0 1 0 2 0a1 2.2 0 1 0 -2 0z","#1B1B1B",0,0,"blink","24px 26px"],["M18.6 25a0.7 0.7 0 1 0 1.4 0a0.7 0.7 0 1 0 -1.4 0zM29.6 25a0.7 0.7 0 1 0 1.4 0a0.7 0.7 0 1 0 -1.4 0z","#FFFFFF",0,0,"blink","24px 26px"],["M22.7 30.3h2.6l-1.3 1.5z","#FF7A9A"],["M24 31.8v1M22 33.4q1 1 2 0q1 1 2 0",0,"#6B7389",1.1],["M8 29.5l6 .8M8.5 32.5l5.5-.6M40 29.5l-6 .8M39.5 32.5l-5.5-.6",0,"#9AA2B5",0.9],["M12.6 31a2.2 1.4 0 1 0 4.4 0a2.2 1.4 0 1 0 -4.4 0zM31 31a2.2 1.4 0 1 0 4.4 0a2.2 1.4 0 1 0 -4.4 0z","rgba(255,110,130,.45)"]]],"tiger":["#47BA2B",[["M0 30Q24 18 48 30V48H0z","rgba(0,0,0,.12)"],["M8 48c2-7 8-10 16-10s14 3 16 10z","#E07A10","#7A3E0E",0.8],["M19 48q1-6 5-7q4 1 5 7z","#FFF3E0"],["M7.5 14a5.5 5.5 0 1 0 11 0a5.5 5.5 0 1 0 -11 0z","#F59A23","#7A3E0E",1.2,"earl","13px 19px"],["M10.2 14.4a2.8 2.8 0 1 0 5.6 0a2.8 2.8 0 1 0 -5.6 0z","#FFD9B0",0,0,"earl","13px 19px"],["M29.5 14a5.5 5.5 0 1 0 11 0a5.5 5.5 0 1 0 -11 0z","#F59A23","#7A3E0E",1.2,"earr","35px 19px"],["M32.2 14.4a2.8 2.8 0 1 0 5.6 0a2.8 2.8 0 1 0 -5.6 0z","#FFD9B0",0,0,"earr","35px 19px"],["M9 27a15 12.5 0 1 0 30 0a15 12.5 0 1 0 -30 0z","#F59A23","#7A3E0E",1.2],["M24 15.5v4.5M19.5 16.5l1.2 3.5M28.5 16.5l-1.2 3.5",0,"#3A2006",2],["M9.5 25.5h4M10 30l3.5-1.2M38.5 25.5h-4M38 30l-3.5-1.2",0,"#3A2006",1.8],["M16.5 32a7.5 5.5 0 1 0 15 0a7.5 5.5 0 1 0 -15 0z","#FFF3E0"],["M16.4 25.5a2.1 2.5 0 1 0 4.2 0a2.1 2.5 0 1 0 -4.2 0zM27.4 25.5a2.1 2.5 0 1 0 4.2 0a2.1 2.5 0 1 0 -4.2 0z","#1B1B1B",0,0,"blink","24px 25.5px"],["M18.48 24.625a0.75 0.75 0 1 0 1.5 0a0.75 0.75 0 1 0 -1.5 0zM29.48 24.625a0.75 0.75 0 1 0 1.5 0a0.75 0.75 0 1 0 -1.5 0z","#FFFFFF",0,0,"blink","24px 25.5px"],["M21.6 29.6h4.8l-2.4 2.6z","#E0607A","#7A3E0E",0.6],["M24 32.2v1.6M21.3 34.2q1.35 1.4 2.7 0q1.35 1.4 2.7 0",0,"#3A2006",1.2]]],"parrot":["#FFC61F",[["M0 30Q24 18 48 30V48H0z","rgba(0,0,0,.12)"],["M8 48c2-8 8-11 16-11s14 3 16 11z","#2E9A1B"],["M30 41q6 1 9 7h-7z","#1F7A12"],["M21 13q-1-7 3-9q0 4 2 6q1-4 5-4q-2 3-2 7z","#FF3FA4","#B0125E",0.8,"earl","24px 13px"],["M11 25a13 13.5 0 1 0 26 0a13 13.5 0 1 0 -26 0z","#47BA2B","#1D6B0F",1.2],["M13.4 24a4.6 5 0 1 0 9.2 0a4.6 5 0 1 0 -9.2 0zM25.4 24a4.6 5 0 1 0 9.2 0a4.6 5 0 1 0 -9.2 0z","#FFFFFF"],["M16 24a2 2.4 0 1 0 4 0a2 2.4 0 1 0 -4 0zM28 24a2 2.4 0 1 0 4 0a2 2.4 0 1 0 -4 0z","#1B1B1B",0,0,"blink","24px 24px"],["M17.95 23.16a0.75 0.75 0 1 0 1.5 0a0.75 0.75 0 1 0 -1.5 0zM29.95 23.16a0.75 0.75 0 1 0 1.5 0a0.75 0.75 0 1 0 -1.5 0z","#FFFFFF",0,0,"blink","24px 24px"],["M11.5 29.5a2 1.4 0 1 0 4 0a2 1.4 0 1 0 -4 0zM32.5 29.5a2 1.4 0 1 0 4 0a2 1.4 0 1 0 -4 0z","#FF5A4E"],["M19.5 29q4.5-4 9 0q-.5 4.5-4.5 6.5q-4-2-4.5-6.5z","#FF8A1F","#A84A00",1],["M21 31.5q3 1.2 6 0",0,"#A84A00",1]]],"hare":["#2F95F2",[["M0 30Q24 18 48 30V48H0z","rgba(0,0,0,.12)"],["M8 48c2-7 8-10 16-10s14 3 16 10z","#E2DED8","#8E8A9A",0.8],["M13.5 11a4 10 0 1 0 8 0a4 10 0 1 0 -8 0z","#F4F1EE","#8E8A9A",1.2,"earl","17.5px 20px"],["M15.5 11.5a2 7 0 1 0 4 0a2 7 0 1 0 -4 0z","#FFB3C7",0,0,"earl","17.5px 20px"],["M26.5 11a4 10 0 1 0 8 0a4 10 0 1 0 -8 0z","#F4F1EE","#8E8A9A",1.2,"earr","30.5px 20px"],["M28.5 11.5a2 7 0 1 0 4 0a2 7 0 1 0 -4 0z","#FFB3C7",0,0,"earr","30.5px 20px"],["M10.5 29a13.5 12 0 1 0 27 0a13.5 12 0 1 0 -27 0z","#F4F1EE","#8E8A9A",1.2],["M11.3 24q12.7-6 25.4 0l-.6 3.2q-12.1-5.4-24.2 0z","#FF3FA4"],["M17 29.5a2 2.4 0 1 0 4 0a2 2.4 0 1 0 -4 0zM27 29.5a2 2.4 0 1 0 4 0a2 2.4 0 1 0 -4 0z","#1B1B1B",0,0,"blink","24px 29.5px"],["M18.95 28.66a0.75 0.75 0 1 0 1.5 0a0.75 0.75 0 1 0 -1.5 0zM28.95 28.66a0.75 0.75 0 1 0 1.5 0a0.75 0.75 0 1 0 -1.5 0z","#FFFFFF",0,0,"blink","24px 29.5px"],["M22.6 33h2.8l-1.4 1.6z","#FF7A9A"],["M23 36h2v1.8h-2z","#FFFFFF","#8E8A9A",0.5],["M24 34.6v1.2M22 35.8q1 .8 2 0q1 .8 2 0",0,"#6B6676",1],["M12.8 33a2.2 1.4 0 1 0 4.4 0a2.2 1.4 0 1 0 -4.4 0zM30.8 33a2.2 1.4 0 1 0 4.4 0a2.2 1.4 0 1 0 -4.4 0z","rgba(255,110,130,.45)"]]],"fox":["#FF7AA8",[["M0 30Q24 18 48 30V48H0z","rgba(0,0,0,.12)"],["M8 48c2-7 8-10 16-10s14 3 16 10z","#E8661E"],["M18 48q2-7 6-8q4 1 6 8z","#FFF3E8"],["M10 22L12 6l9 9z","#F0782A","#8A3A0A",1.2,"earl","15px 19px"],["M11.2 12.5L12 6l3.6 3.6z","#3A2006",0,0,"earl","15px 19px"],["M38 22L36 6l-9 9z","#F0782A","#8A3A0A",1.2,"earr","33px 19px"],["M36.8 12.5L36 6l-3.6 3.6z","#3A2006",0,0,"earr","33px 19px"],["M9 24q0-11 15-11t15 11q-2 10-15 14q-13-4-15-14z","#F0782A","#8A3A0A",1.2],["M9.5 25q6 0 9 4q2 4 5.5 7.5q-11-1-14.5-11.5zM38.5 25q-6 0-9 4q-2 4-5.5 7.5q11-1 14.5-11.5z","#FFF3E8"],["M16.6 24a1.9 2.4 0 1 0 3.8 0a1.9 2.4 0 1 0 -3.8 0zM27.6 24a1.9 2.4 0 1 0 3.8 0a1.9 2.4 0 1 0 -3.8 0z","#1B1B1B",0,0,"blink","24px 24px"],["M18.41 23.16a0.75 0.75 0 1 0 1.5 0a0.75 0.75 0 1 0 -1.5 0zM29.41 23.16a0.75 0.75 0 1 0 1.5 0a0.75 0.75 0 1 0 -1.5 0z","#FFFFFF",0,0,"blink","24px 24px"],["M22 33a2 1.5 0 1 0 4 0a2 1.5 0 1 0 -4 0z","#2A1A12"],["M22.3 35q1.7 1.2 3.4 0",0,"#8A3A0A",1]]],"panda":["#FF8A3D",[["M0 30Q24 18 48 30V48H0z","rgba(0,0,0,.12)"],["M8 48c2-7 8-10 16-10s14 3 16 10z","#2A2A33"],["M17 48q2-6 7-7q5 1 7 7z","#FFFFFF"],["M7.5 15a5 5 0 1 0 10 0a5 5 0 1 0 -10 0z","#2A2A33",0,0,"earl","12.5px 20px"],["M30.5 15a5 5 0 1 0 10 0a5 5 0 1 0 -10 0z","#2A2A33",0,0,"earr","35.5px 20px"],["M9.5 27a14.5 12.5 0 1 0 29 0a14.5 12.5 0 1 0 -29 0z","#FFFFFF","#5E5E6B",1.2],["M14.5 24.5q2-4.5 6-3q2 2-.5 6.5q-3 3-5 1q-1.5-1.5-.5-4.5zM33.5 24.5q-2-4.5-6-3q-2 2 .5 6.5q3 3 5 1q1.5-1.5.5-4.5z","#2A2A33"],["M16.6 25.5a1.7 1.7 0 1 0 3.4 0a1.7 1.7 0 1 0 -3.4 0zM28 25.5a1.7 1.7 0 1 0 3.4 0a1.7 1.7 0 1 0 -3.4 0z","#FFFFFF",0,0,"blink","24px 25.5px"],["M17.6 25.7a1 1 0 1 0 2 0a1 1 0 1 0 -2 0zM29 25.7a1 1 0 1 0 2 0a1 1 0 1 0 -2 0z","#1B1B1B",0,0,"blink","24px 25.5px"],["M21.8 30.5a2.2 1.5 0 1 0 4.4 0a2.2 1.5 0 1 0 -4.4 0z","#2A2A33"],["M24 32v1.4M22.2 34q.9 1 1.8 0q.9 1 1.8 0",0,"#2A2A33",1.1],["M11.6 31a2.2 1.4 0 1 0 4.4 0a2.2 1.4 0 1 0 -4.4 0zM32 31a2.2 1.4 0 1 0 4.4 0a2.2 1.4 0 1 0 -4.4 0z","rgba(255,110,130,.45)"]]],"elephant":["#9B6BFF",[["M0 30Q24 18 48 30V48H0z","rgba(0,0,0,.12)"],["M8 48c2-7 8-10 16-10s14 3 16 10z","#8F9BB3"],["M10 46q14-8 28 0v2H10z","#FF3FA4"],["M3.5 26a7.5 10 0 1 0 15 0a7.5 10 0 1 0 -15 0z","#A9B4C8","#5E6C88",1.2,"earl","17px 26px"],["M7 26a4.5 7 0 1 0 9 0a4.5 7 0 1 0 -9 0z","#F2B8C6",0,0,"earl","17px 26px"],["M29.5 26a7.5 10 0 1 0 15 0a7.5 10 0 1 0 -15 0z","#A9B4C8","#5E6C88",1.2,"earr","31px 26px"],["M32 26a4.5 7 0 1 0 9 0a4.5 7 0 1 0 -9 0z","#F2B8C6",0,0,"earr","31px 26px"],["M12.5 24a11.5 11 0 1 0 23 0a11.5 11 0 1 0 -23 0z","#A9B4C8","#5E6C88",1.2],["M21 29q0 6 1 9q1 3 3.5 2.5q2-.5 1.5-2.5q-1.5-.5-1.5-3q0-3 .5-6z","#A9B4C8","#5E6C88",1.1],["M17.9 22.5a1.6 2 0 1 0 3.2 0a1.6 2 0 1 0 -3.2 0zM26.9 22.5a1.6 2 0 1 0 3.2 0a1.6 2 0 1 0 -3.2 0z","#1B1B1B",0,0,"blink","24px 22.5px"],["M19.31 21.8a0.75 0.75 0 1 0 1.5 0a0.75 0.75 0 1 0 -1.5 0zM28.31 21.8a0.75 0.75 0 1 0 1.5 0a0.75 0.75 0 1 0 -1.5 0z","#FFFFFF",0,0,"blink","24px 22.5px"],["M14.7 28a1.8 1.2 0 1 0 3.6 0a1.8 1.2 0 1 0 -3.6 0zM29.7 28a1.8 1.2 0 1 0 3.6 0a1.8 1.2 0 1 0 -3.6 0z","rgba(255,110,130,.45)"],["M15.8 22.5a3.7 3.7 0 1 0 7.4 0a3.7 3.7 0 1 0-7.4 0zM24.8 22.5a3.7 3.7 0 1 0 7.4 0a3.7 3.7 0 1 0-7.4 0zM23.2 22.3h1.6",0,"#3A2416",1.2]]],"owl":["#14B8C8",[["M0 30Q24 18 48 30V48H0z","rgba(0,0,0,.12)"],["M9 48c1-8 7-11 15-11s14 3 15 11z","#8A5A3A"],["M17 48q1-7 7-8q6 1 7 8z","#E8C9A0"],["M11 16L10 6l7 6z","#8A5A3A",0,0,"earl","13px 15px"],["M37 16l1-10-7 6z","#8A5A3A",0,0,"earr","35px 15px"],["M10 25a14 13 0 1 0 28 0a14 13 0 1 0 -28 0z","#A0704A","#5A3A20",1.2],["M12 25a6 6.2 0 1 0 12 0a6 6.2 0 1 0 -12 0zM24 25a6 6.2 0 1 0 12 0a6 6.2 0 1 0 -12 0z","#F3E3C8"],["M14.6 25a3.4 3.4 0 1 0 6.8 0a3.4 3.4 0 1 0 -6.8 0zM26.6 25a3.4 3.4 0 1 0 6.8 0a3.4 3.4 0 1 0 -6.8 0z","#FFB800",0,0,"blink","24px 25px"],["M16.1 25a1.9 1.9 0 1 0 3.8 0a1.9 1.9 0 1 0 -3.8 0zM28.1 25a1.9 1.9 0 1 0 3.8 0a1.9 1.9 0 1 0 -3.8 0z","#1B1B1B",0,0,"blink","24px 25px"],["M18.1 24.1a0.7 0.7 0 1 0 1.4 0a0.7 0.7 0 1 0 -1.4 0zM30.1 24.1a0.7 0.7 0 1 0 1.4 0a0.7 0.7 0 1 0 -1.4 0z","#FFFFFF",0,0,"blink","24px 25px"],["M22.4 29l1.6 3.6 1.6-3.6z","#FF8A1F"],["M12.5 19q5.5-3 10 1.5M35.5 19q-5.5-3-10 1.5",0,"#5A3A20",1.4]]],"photo":["#8FC9F0",[["M33 11a4 4 0 1 0 8 0a4 4 0 1 0 -8 0z","#FFE27A"],["M0 34q12-8 24-2t24-4V48H0z","#6AB04C"],["M10 48q2-12 14-12t14 12z","#3D86E0"],["M17 23a7 7 0 1 0 14 0a7 7 0 1 0 -14 0z","#E8B48A"],["M17 22q0-9 7-9t7 9q-3-4-7-4t-7 4z","#3A2416"],["M20.6 24a0.9 1.1 0 1 0 1.8 0a0.9 1.1 0 1 0 -1.8 0zM25.6 24a0.9 1.1 0 1 0 1.8 0a0.9 1.1 0 1 0 -1.8 0z","#2A1A12",0,0,"blink","24px 24px"],["M21.07 23.615a0.75 0.75 0 1 0 1.5 0a0.75 0.75 0 1 0 -1.5 0zM26.07 23.615a0.75 0.75 0 1 0 1.5 0a0.75 0.75 0 1 0 -1.5 0z","#FFFFFF",0,0,"blink","24px 24px"],["M22 27.2q2 1.6 4 0",0,"#7A2E1A",1]]]};
+const AV_OF = {"you":"cat","raja":"tiger","mitu":"parrot","tara":"hare","bot":"hare","nadia":"fox","rafi":"panda","nani":"elephant","golu":"owl"};
+const AV_NAMES = {"cat":"Mishti the cat","tiger":"Bagha the tiger","parrot":"Mitu the parrot","hare":"Tara the hare","fox":"Lali the fox","panda":"Golu the panda","elephant":"Haati the elephant","owl":"Pecha the owl","photo":"Your photo"};
+function avatar(kind) {
+  const a = ANIMALS[AV_OF[kind || 'you'] || kind] || ANIMALS.cat;
+  return [{ d: 'M0 0h48v48H0z', f: a[0], s: 'none', w: 0, c: '', o: '24px 24px' }].concat(a[1].map((p) => ({ d: p[0], f: p[1] || 'none', s: p[2] || 'none', w: p[3] || 0, c: p[4] ? 'av-' + p[4] : '', o: p[5] || '24px 24px' })));
+}
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { coins: 0, xp: 340, lv: 7, chest: false };
+  }
+  componentDidMount() {
+    this.t0 = setTimeout(() => {
+      this.tick = setInterval(() => {
+        const c = Math.min(1000, this.state.coins + 50);
+        this.setState({ coins: c });
+        if (c >= 1000) clearInterval(this.tick);
+      }, 40);
+      this.setState({ xp: 400 });
+      this.t1 = setTimeout(() => this.setState({ lv: 8, xp: 20 }), 1100);
+    }, 900);
+  }
+  componentWillUnmount() { clearTimeout(this.t0); clearTimeout(this.t1); clearInterval(this.tick); }
+  renderVals() {
+    const st = this.state;
+    const colors = ['#FFC61F', '#FF3FA4', '#47BA2B', '#2F95F2', '#FFFFFF', '#F2463B'];
+    const confetti = Array.from({ length: 24 }, (_, i) => ({
+      x: (i * 61) % 380, w: 6 + (i % 3) * 2, h: 10 + (i % 4) * 3, c: colors[i % 6],
+      t: (3 + (i % 5) * 0.6).toFixed(1) + 's', d: ((i * 0.37) % 3).toFixed(2) + 's'
+    }));
+    const need = st.lv === 7 ? 400 : 450;
+    const podium = [
+      { nm: 'Raja', av: avatar('raja'), x: 4, h: 92, place: '2', ring: '#C9D3E0', size: 60, face: '#E8EEF6', faceDark: '#9AA8BC', top: '#FFFFFF', nameY: 4, growDelay: '250ms', dropDelay: '600ms' },
+      { nm: 'You', av: avatar('you'), x: 118, h: 124, place: '1', ring: '#FFC61F', size: 72, face: '#FFE27A', faceDark: '#E89A00', top: '#FFF3B8', nameY: 4, growDelay: '100ms', dropDelay: '450ms' },
+      { nm: 'Tara', av: avatar('tara'), x: 232, h: 70, place: '3', ring: '#E39A5A', size: 56, face: '#F2B27A', faceDark: '#B8692A', top: '#FFD9B8', nameY: 4, growDelay: '400ms', dropDelay: '750ms' }
+    ];
+    return {
+      rays: Array.from({ length: 16 }, (_, i) => i * 22.5),
+      confetti, podium,
+      coins: st.coins.toLocaleString('en-US'),
+      lv: st.lv,
+      xpPct: Math.round((st.xp / need) * 100),
+      xpText: st.lv === 8 ? 'LEVEL 8! New puck unlocked' : '+80 XP · ' + st.xp + ' / ' + need,
+      closed: !st.chest, opened: st.chest,
+      chestLabel: st.chest ? 'Pot opened: 5 gems' : 'Open your silver pot',
+      openChest: () => this.setState({ chest: true }),
+      story: ['3 captures', '2 sixes in a row', 'First puck home on turn 9', 'Never captured twice']
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ludo Mela — Daily gift</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#FFE27A}a:hover{color:#FFF3B8}
+:root{--e:cubic-bezier(.2,.8,.2,1);--b:cubic-bezier(.34,1.56,.64,1)}
+button,a{-webkit-tap-highlight-color:transparent;transition:transform 150ms var(--b),filter 160ms var(--e),box-shadow 160ms var(--e),opacity 160ms var(--e)}
+button:focus-visible,a:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
+button:disabled{cursor:default}
+.ttl{font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-shadow:0 -1.5px 0 #0A2A6B,1.5px 0 0 #0A2A6B,0 1.5px 0 #0A2A6B,-1.5px 0 0 #0A2A6B,1.2px 1.2px 0 #0A2A6B,-1.2px 1.2px 0 #0A2A6B,1.2px -1.2px 0 #0A2A6B,-1.2px -1.2px 0 #0A2A6B,0 3px 0 #0A2A6B}
+.gl{position:relative;border:0;cursor:pointer;font-family:'Lilita One',sans-serif;font-weight:400;color:#FFFFFF;letter-spacing:.4px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;text-shadow:0 2px 0 rgba(0,0,0,.3);box-sizing:border-box}
+.gl::after{content:'';position:absolute;left:8%;right:8%;top:3px;height:42%;border-radius:999px;background:linear-gradient(rgba(255,255,255,.6),rgba(255,255,255,0));pointer-events:none}
+.gl:active{transform:translateY(3px) scale(.98)}
+.g-green{background:linear-gradient(#8DEB50,#47BA2B 55%,#2E9A1B);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 5px 0 #1D6B0F,0 9px 14px rgba(0,20,60,.35)}
+.g-pink{background:linear-gradient(#FF92D4,#FF3FA4 55%,#DB1F7C);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 5px 0 #8E0F4D,0 9px 14px rgba(0,20,60,.35)}
+.g-red{background:linear-gradient(#FF9384,#F2463B 55%,#D22A21);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 4px 0 #8A1410,0 8px 12px rgba(0,20,60,.35)}
+.g-grey{background:linear-gradient(#C3CDDD,#8E9BB3 55%,#76849E);box-shadow:inset 0 -3px 0 rgba(0,0,0,.14),0 5px 0 #4A5670,0 9px 14px rgba(0,20,60,.35)}
+.well{background:#0D3680;border-radius:14px;box-shadow:inset 0 3px 6px rgba(0,0,0,.4),inset 0 -1px 0 rgba(255,255,255,.14)}
+.lm-in{animation:lmIn 520ms var(--b) backwards}
+.lm-rise{animation:lmRise 420ms var(--e) backwards}
+.lm-glow{animation:lmGlow 1.3s ease-in-out infinite}
+.lm-bob{animation:lmBob 1.1s ease-in-out infinite}
+.lm-pop{animation:lmPop 460ms var(--b) backwards}
+.lm-fly{animation:lmFly 1200ms var(--e) forwards}
+.lm-rays{animation:lmRays 10s linear infinite;transform-origin:50% 50%}
+@keyframes lmIn{from{opacity:0;transform:scale(.7)}}
+@keyframes lmRise{from{opacity:0;transform:translateY(14px)}}
+@keyframes lmGlow{0%,100%{box-shadow:inset 0 0 0 3px rgba(255,255,255,.5),0 5px 0 #9A5600,0 0 0 4px #FFFFFF,0 0 0 4px rgba(255,255,255,.6)}50%{box-shadow:inset 0 0 0 3px rgba(255,255,255,.5),0 5px 0 #9A5600,0 0 0 4px #FFFFFF,0 0 0 14px rgba(255,255,255,0)}}
+@keyframes lmBob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-5px) rotate(4deg)}}
+@keyframes lmPop{from{opacity:0;transform:scale(.4)}}
+@keyframes lmFly{0%{opacity:0;transform:translateY(0) scale(.5)}20%{opacity:1;transform:translateY(-20px) scale(1.2)}100%{opacity:0;transform:translateY(-420px) scale(.6)}}
+@keyframes lmRays{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){*{animation-duration:1ms !important;animation-delay:0ms !important;animation-iteration-count:1 !important;transition-duration:1ms !important}}
+</style>
+</helmet>
+<div style="width:390px;height:844px;position:relative;overflow:hidden;background:#0A2C80;font-family:'Baloo 2',system-ui,sans-serif;color:#FFFFFF">
+  <div style="position:absolute;inset:0;background:radial-gradient(90% 50% at 50% 40%,#2F8BF0 0%,#1250C2 50%,#071F5E 100%)"></div>
+  <div style="position:absolute;inset:0;background:rgba(3,12,40,.35)"></div>
+
+  <div class="lm-in" style="position:absolute;left:14px;right:14px;top:84px;bottom:58px;border-radius:28px;background:linear-gradient(#2064CC,#1549A6);box-shadow:inset 0 0 0 4px #3F86EA,inset 0 6px 0 rgba(255,255,255,.18),0 8px 0 #0A2E70,0 20px 40px rgba(0,0,0,.5);display:flex;flex-direction:column">
+    <div style="height:64px;flex:none;border-radius:28px 28px 0 0;background:linear-gradient(#5ED8FF,#1FA2EE);box-shadow:inset 0 4px 0 rgba(255,255,255,.5),inset 0 -5px 0 #0E78C2;display:flex;align-items:center;justify-content:center;position:relative">
+      <h1 class="ttl" style="margin:0;font-size:30px;letter-spacing:1px">DAILY GIFT</h1>
+      <a href="Main.dc.html" aria-label="Close" class="gl g-red" style="position:absolute;right:-8px;top:-10px;width:46px;height:46px;border-radius:23px;box-shadow:0 0 0 3px #FFFFFF,inset 0 -3px 0 rgba(0,0,0,.14),0 4px 0 3px #8A1410"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" aria-hidden="true" style="position:relative;z-index:1"><path d="M6 6l12 12M18 6L6 18"></path></svg></a>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 0 6px">
+      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c1 4 6 6 6 12a6 6 0 0 1-12 0c0-3 2-5 3-6 0 2 1 3 2 3 0-4 0-6 1-9z" fill="#FF8A1F" stroke="#B84A00" stroke-width="1.2"></path><path d="M12 12c.5 2 3 3 3 5.5a3 3 0 0 1-6 0c0-1.5 1-2.5 1.5-3 0 1 .5 1.5 1 1.5 0-2 0-3 .5-4z" fill="#FFE27A"></path></svg>
+      <span class="ttl" style="font-size:17px">{{streakText}}</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:10px;padding:6px 14px 0">
+      <sc-for list="{{days}}" as="d" hint-placeholder-count="6">
+        <div class="lm-rise {{d.glow}}" style="position:relative;height:118px;border-radius:18px;background:{{d.bg}};box-shadow:inset 0 0 0 3px rgba(255,255,255,.35),inset 0 4px 0 rgba(255,255,255,.22),0 5px 0 {{d.edge}};display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:8px 4px 8px;box-sizing:border-box;animation-delay:{{d.delay}}">
+          <span class="ttl" style="font-size:14px">{{d.label}}</span>
+          <span class="{{d.bob}}" style="height:46px;display:flex;align-items:center;justify-content:center;gap:2px">
+            <svg width="44" height="36" viewBox="0 0 40 30" aria-hidden="true"><circle cx="13" cy="19" r="8" fill="#B86E00"></circle><circle cx="13" cy="17.5" r="8" fill="#FFC928"></circle><circle cx="27" cy="19" r="8" fill="#B86E00"></circle><circle cx="27" cy="17.5" r="8" fill="#FFC928"></circle><circle cx="20" cy="12" r="8" fill="#B86E00"></circle><circle cx="20" cy="10.5" r="8" fill="#FFC928"></circle><circle cx="20" cy="10.5" r="5.5" fill="#FFAE00" stroke="#FFE680" stroke-width="1.2"></circle></svg>
+            <sc-if value="{{d.hasGem}}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true" style="margin-left:-12px;margin-top:14px"><path d="M6 3.5h12l4.5 6L12 21.5 1.5 9.5z" fill="#C2186D"></path><path d="M6 3.5h12l4.5 6H1.5z" fill="#FF6CC0"></path><path d="M12 21.5L1.5 9.5h21z" fill="#F0328F"></path></svg></sc-if>
+          </span>
+          <span class="ttl" style="font-size:13px;color:#FFE27A">{{d.amount}}</span>
+          <sc-if value="{{d.done}}" hint-placeholder-val="{{ false }}"><span class="lm-pop" style="position:absolute;inset:0;border-radius:18px;background:rgba(10,60,20,.45);display:grid;place-items:center" aria-label="Claimed"><span style="width:44px;height:44px;border-radius:22px;background:linear-gradient(#8DEB50,#2E9A1B);box-shadow:0 0 0 3px #FFFFFF,0 4px 0 3px #1D6B0F;display:grid;place-items:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span></span></sc-if>
+        </div>
+      </sc-for>
+    </div>
+
+    <div class="lm-rise" style="margin:12px 14px 0;height:104px;border-radius:20px;background:linear-gradient(135deg,#B98BFF,#6A35D6);box-shadow:inset 0 0 0 3px rgba(255,255,255,.35),inset 0 4px 0 rgba(255,255,255,.22),0 5px 0 #3E1A8E;display:flex;align-items:center;gap:12px;padding:0 14px;position:relative;overflow:hidden;animation-delay:320ms">
+      <svg class="lm-rays" width="220" height="220" viewBox="-110 -110 220 220" aria-hidden="true" style="position:absolute;left:-62px;top:-58px"><path d="M0 0L-12 -110L12 -110zM0 0L110 -12L110 12zM0 0L12 110L-12 110zM0 0L-110 12L-110 -12zM0 0L70 -86L86 -70zM0 0L86 70L70 86zM0 0L-70 86L-86 70zM0 0L-86 -70L-70 -86z" fill="#FFFFFF" fill-opacity=".2"></path></svg>
+      <svg class="lm-bob" width="78" height="70" viewBox="0 0 64 56" aria-hidden="true" style="position:relative;flex:none"><rect x="4" y="22" width="56" height="30" rx="5" fill="#B5651D" stroke="#5A2E05" stroke-width="3"></rect><path d="M4 26q0-18 28-18t28 18z" fill="#E08A2E" stroke="#5A2E05" stroke-width="3"></path><path d="M4 34h56M32 8v44" stroke="#FFD34D" stroke-width="4"></path><rect x="26" y="19" width="12" height="15" rx="2.5" fill="#FFD34D" stroke="#5A2E05" stroke-width="2.5"></rect></svg>
+      <span style="position:relative;display:flex;flex-direction:column;gap:2px">
+        <span class="ttl" style="font-size:20px">DAY 7 · MELA POT</span>
+        <span style="font:700 12px/1.35 'Baloo 2',sans-serif;color:#F2EAFF">1,500 coins + 15 gems + a Rare dice, puck or board you don't own yet</span>
+      </span>
+    </div>
+
+    <div style="flex:1"></div>
+    <div style="padding:0 18px 18px;display:flex;flex-direction:column;gap:12px;position:relative">
+      <sc-if value="{{flying}}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;left:0;right:0;top:-20px;display:flex;justify-content:center;gap:16px;pointer-events:none;z-index:5">
+          <span class="lm-fly ttl" style="font-size:24px;color:#FFE27A">+{{gotCoins}}</span>
+          <span class="lm-fly ttl" style="font-size:24px;color:#FF9AD6;animation-delay:120ms">+{{gotGems}} gems</span>
+        </div>
+      </sc-if>
+      <sc-if value="{{canClaim}}" hint-placeholder-val="{{ true }}">
+        <button type="button" onClick="{{claim}}" class="gl g-green" style="height:60px;border-radius:20px;font-size:26px"><span style="position:relative;z-index:1">CLAIM</span></button>
+      </sc-if>
+      <sc-if value="{{claimed}}" hint-placeholder-val="{{ false }}">
+        <div class="well lm-pop" role="timer" aria-label="{{countLabel}}" style="height:60px;border-radius:20px;display:flex;align-items:center;justify-content:center;gap:10px">
+          <span style="font:800 14px 'Baloo 2',sans-serif;color:#9CC2FF">NEXT GIFT IN</span>
+          <span class="ttl" style="font-size:26px;font-variant-numeric:tabular-nums;letter-spacing:1px">{{countdown}}</span>
+        </div>
+      </sc-if>
+      <button type="button" onClick="{{double}}" disabled="{{doubleOff}}" class="gl {{dblCls}}" style="height:52px;border-radius:18px;font-size:18px">
+        <sc-if value="{{showAd}}" hint-placeholder-val="{{ true }}"><span style="position:relative;z-index:1;font:800 11px/1 'Baloo 2',sans-serif;color:#3A2200;background:#FFC61F;border-radius:4px;padding:4px 6px 2px;text-shadow:none">Ad</span></sc-if>
+        <span style="position:relative;z-index:1">{{doubleText}}</span>
+      </button>
+      <span style="text-align:center;font:700 11.5px/1.4 'Baloo 2',sans-serif;color:#CFE3FF">New gift 24 h after you claim. Miss 48 h and the streak restarts. <a href="Terms.dc.html" style="color:#FFE27A;font-weight:800">Gift rules</a></span>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { claimed: false, doubled: false, left: 86400, flying: false };
+  }
+  componentWillUnmount() { clearInterval(this.tick); clearTimeout(this.fly); }
+  startClock() {
+    clearInterval(this.tick);
+    this.tick = setInterval(() => this.setState({ left: Math.max(0, this.state.left - 1) }), 1000);
+  }
+  burst() {
+    this.setState({ flying: true });
+    clearTimeout(this.fly);
+    this.fly = setTimeout(() => this.setState({ flying: false }), 1300);
+  }
+  renderVals() {
+    const st = this.state;
+    const rewards = [['200', false], ['300 +2', true], ['400', false], ['500 +3', true], ['600 +spin', false], ['800 +5', true]];
+    const days = rewards.map((r, i) => {
+      const n = i + 1;
+      const done = n < 4 || (n === 4 && st.claimed);
+      const today = n === 4 && !st.claimed;
+      return {
+        label: today ? 'TODAY' : 'DAY ' + n, amount: r[0], hasGem: r[1], done,
+        bg: today ? 'linear-gradient(#FFE27A,#F29A00)' : 'linear-gradient(#5CC2FF,#1F86E6)', edge: today ? '#9A5600' : '#0D4A9E',
+        glow: today ? 'lm-glow' : '', bob: today ? 'lm-bob' : '', delay: (i * 50) + 'ms'
+      };
+    });
+    const h = Math.floor(st.left / 3600);
+    const m = Math.floor((st.left % 3600) / 60);
+    const s = st.left % 60;
+    const pad = (x) => (x < 10 ? '0' : '') + x;
+    return {
+      days,
+      streakText: (st.claimed ? 4 : 3) + '-DAY STREAK',
+      canClaim: !st.claimed, claimed: st.claimed,
+      claim: () => { this.setState({ claimed: true, left: 86400 }); this.startClock(); this.burst(); },
+      countdown: pad(h) + ':' + pad(m) + ':' + pad(s), countLabel: 'Next gift in ' + h + ' hours ' + m + ' minutes',
+      flying: st.flying, gotCoins: st.doubled ? 1000 : 500, gotGems: st.doubled ? 6 : 3,
+      doubleOff: st.doubled, showAd: !st.doubled,
+      dblCls: st.doubled ? 'g-grey' : 'g-pink',
+      doubleText: st.doubled ? 'DOUBLED!' : 'WATCH AD · DOUBLE IT',
+      double: () => { if (!this.state.claimed) { this.setState({ claimed: true, left: 86400 }); this.startClock(); } this.setState({ doubled: true }); this.burst(); }
+    };
+  }
+}
+</script>
+</body>
+</html>
